@@ -67,6 +67,7 @@ export function TabelaTestes({
           <Select
             className=""
             styles={selectStyles}
+            isSearchable={false}
             menuPlacement="bottom"
             options={[
               { value: "recente", label: "Mais recentes" },

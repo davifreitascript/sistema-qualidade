@@ -81,6 +81,7 @@ export function FormularioTeste({
           <Select
             options={opcoesTurma}
             styles={selectStyles}
+            isSearchable={false}
             placeholder="Turma"
             value={opcoesTurma.find((opcao) => opcao.value === form.turma) || null}
             onChange={(opcao) =>
@@ -127,6 +128,7 @@ export function FormularioTeste({
         <Select
           options={opcoesTear}
           styles={selectStyles}
+          isSearchable={false}
           placeholder="Tear"
           value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
           onChange={(opcao) =>
@@ -140,6 +142,7 @@ export function FormularioTeste({
         <Select
           options={opcoesTipoTecido}
           styles={selectStyles}
+          isSearchable={false}
           placeholder="Tipo de tecido"
           value={
             opcoesTipoTecido.find((opcao) => opcao.value === form.tipoTecido) || null
@@ -156,6 +159,7 @@ export function FormularioTeste({
         <Select
           options={opcoesArtigo}
           styles={selectStyles}
+          isSearchable={false}
           placeholder="Artigo"
           isDisabled={!form.tipoTecido}
           value={opcoesArtigo.find((opcao) => opcao.value === form.artigo) || null}
@@ -252,8 +256,8 @@ export function FormularioTeste({
           value={form.observacoes}
           onChange={atualizarCampo} />
 
-        <div className="flex w-full justify-center items-center ">
-          <button className="rounded-lg bg-blue-700 px-5 py-2 font-medium text-white hover:bg-blue-800">
+        <div className="flex w-full justify-center items-center rounded-lg overflow-x-hidden">
+          <button className="bg-blue-700 min-h-16 min-w-60 font-medium text-white hover:bg-blue-800">
             {testeEditandoId ? "Salvar alterações" : "Salvar teste"}
           </button>
         </div>
