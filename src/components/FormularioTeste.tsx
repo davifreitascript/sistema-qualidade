@@ -1,8 +1,8 @@
 import type { FormTesteTecido, TipoTecido } from "../types/teste";
 import { artigosPorTipo } from "../data/artigos";
 import { teares } from "../data/teares";
-/* import { avaliarBatida } from "../utils/avaliarBatida"; */
 import { gerarLotePorData } from "../utils/gerarLote";
+import Select from "react-select";
 
 type Props = {
   form: FormTesteTecido;
@@ -31,118 +31,147 @@ export function FormularioTeste({
     }));
   }
 
+  const opcoesTear = teares.map((tear) => ({
+    value: tear,
+    label: tear,
+  }));
+
+  const opcoesTurma = [
+    { value: "A", label: "Turma A" },
+    { value: "B", label: "Turma B" },
+  ];
+
+  const opcoesTipoTecido = [
+    { value: "leve", label: "Tecido leve" },
+    { value: "pesado", label: "Tecido pesado" },
+  ];
+
+  const opcoesArtigo = form.tipoTecido
+    ? artigosPorTipo[form.tipoTecido as TipoTecido].map((artigo) => ({
+      value: artigo.codigo,
+      label: artigo.nome,
+    }))
+    : [];
+
+  const selectStyles = {
+    control: (base: any) => ({
+      ...base,
+      minHeight: "52px",
+      borderRadius: "0.5rem",
+      borderColor: "#cbd5e1",
+      boxShadow: "none",
+    }),
+    menu: (base: any) => ({
+      ...base,
+      borderRadius: "0.75rem",
+      overflow: "hidden",
+    }),
+  };
+
   return (
     <form
       onSubmit={salvarTeste}
-      className="mb-8 rounded-xl bg-white p-6 shadow"
-    >
-      <h2 className="mb-4 text-xl font-semibold">Novo lançamento</h2>
+      className="mb-8 rounded-xl bg-white p-6 shadow">
+
+      <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <h2 className="mb-6 text-3xl font-semibold tracking-tight text-slate-900">Novo lançamento</h2>
+
+        <div className="md:flex md:items-center gap-4 grid grid-cols-1">
+
+          <Select
+            options={opcoesTurma}
+            styles={selectStyles}
+            placeholder="Turma"
+            value={opcoesTurma.find((opcao) => opcao.value === form.turma) || null}
+            onChange={(opcao) =>
+              setForm((prev) => ({
+                ...prev,
+                turma: opcao?.value || "",
+              }))
+            }
+          />
+
+          <input
+            type="date"
+            name="data"
+            value={form.data}
+            onChange={(event) => {
+              const data = event.target.value;
+
+              const ano = data.split("-")[0];
+
+              if (ano.length > 4) return;
+
+              setForm((prev) => ({
+                ...prev,
+                data,
+                lote: gerarLotePorData(data),
+              }));
+            }}
+            className="input"
+            required
+          />
+
+          <div className="input rounded-lg border border-slate-300 bg-slate-50 min-w-44 px-4 py-2 text-left">
+            <span className="block text-xs font-medium text-slate-500 select-none">Lote</span>
+
+            <strong className="block text-lg text-slate-800">
+              {form.lote || ""}
+            </strong>
+          </div>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
 
-        <input
-          type="date"
-          name="data"
-          value={form.data}
-          onChange={(event) => {
-            const data = event.target.value;
-
+        <Select
+          options={opcoesTear}
+          styles={selectStyles}
+          placeholder="Tear"
+          value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
+          onChange={(opcao) =>
             setForm((prev) => ({
               ...prev,
-              data,
-              lote: gerarLotePorData(data),
-            }));
-          }}
-          className="input"
-          required
+              tear: opcao?.value || "",
+            }))
+          }
         />
 
-        <input
-          className="input"
-          name="lote"
-          placeholder="Lote"
-          value={form.lote}
-          onChange={atualizarCampo}
-          readOnly
-          required
-        />
-
-        <select
-          className="input"
-          name="tear"
-          value={form.tear}
-          onChange={atualizarCampo}
-          required
-        >
-          <option value="" disabled hidden>
-            Tear
-          </option>
-
-          {teares.map((tear) => (
-            <option key={tear} value={tear}>
-              {tear}
-            </option>
-          ))}
-        </select>
-
-        <select
-          className="input"
-          name="turma"
-          value={form.turma}
-          onChange={atualizarCampo}
-          required
-        >
-          <option value="" disabled hidden>
-            Turma
-          </option>
-
-          <option value="A">Turma A</option>
-          <option value="B">Turma B</option>
-        </select>
-
-        <select
-          className="input"
-          name="tipoTecido"
-          value={form.tipoTecido}
-          onChange={(event) =>
+        <Select
+          options={opcoesTipoTecido}
+          styles={selectStyles}
+          placeholder="Tipo de tecido"
+          value={
+            opcoesTipoTecido.find((opcao) => opcao.value === form.tipoTecido) || null
+          }
+          onChange={(opcao) =>
             setForm((prev) => ({
               ...prev,
-              tipoTecido: event.target.value as TipoTecido,
+              tipoTecido: (opcao?.value || "") as "" | TipoTecido,
               artigo: "",
             }))
           }
-          required
-        >
-          <option value="" disabled hidden>
-            Tipo de tecido
-          </option>
+        />
 
-          <option value="leve">Tecido leve</option>
-          <option value="pesado">Tecido pesado</option>
-        </select>
-
-        <select
-          className="input"
-          name="artigo"
-          value={form.artigo}
-          onChange={atualizarCampo}
-          disabled={!form.tipoTecido}
-          required
-        >
-          <option value="" disabled hidden>
-            Artigo
-          </option>
-
-          {form.tipoTecido &&
-            artigosPorTipo[form.tipoTecido as TipoTecido].map((artigo) => (
-              <option key={artigo.codigo} value={artigo.codigo}>
-                {artigo.nome}
-              </option>
-            ))}
-        </select>
+        <Select
+          options={opcoesArtigo}
+          styles={selectStyles}
+          placeholder="Artigo"
+          isDisabled={!form.tipoTecido}
+          value={opcoesArtigo.find((opcao) => opcao.value === form.artigo) || null}
+          onChange={(opcao) =>
+            setForm((prev) => ({
+              ...prev,
+              artigo: opcao?.value || "",
+            }))
+          }
+        />
 
         <input
           className="input"
+          type="number"
+          min="0"
+          step="0.01"
           name="gramatura"
           placeholder="Gramatura"
           value={form.gramatura}
@@ -152,8 +181,11 @@ export function FormularioTeste({
         <div>
           <input
             className="input w-full"
+            type="number"
+            min="0"
+            step="0.01"
             name="batidaTrama"
-            placeholder="BT Trama"
+            placeholder="Batida de Trama"
             value={form.batidaTrama}
             onChange={atualizarCampo}
           />
@@ -162,8 +194,11 @@ export function FormularioTeste({
         <div>
           <input
             className="input w-full"
+            type="number"
+            min="0"
+            step="0.01"
             name="batidaUrdume"
-            placeholder="BT Urdume"
+            placeholder="Batida de Urdume"
             value={form.batidaUrdume}
             onChange={atualizarCampo}
           />
@@ -172,6 +207,7 @@ export function FormularioTeste({
         <input
           className="input"
           type="number"
+          min="0"
           step="0.01"
           name="resistenciaTrama"
           placeholder="Resistência da trama"
@@ -182,6 +218,7 @@ export function FormularioTeste({
         <input
           className="input"
           type="number"
+          min="0"
           step="0.01"
           name="resistenciaUrdume"
           placeholder="Resistência do urdume"
@@ -192,6 +229,7 @@ export function FormularioTeste({
         <input
           className="input"
           type="number"
+          min="0"
           step="0.01"
           name="resistenciaReforco"
           placeholder="Resistência do reforço"
@@ -207,19 +245,18 @@ export function FormularioTeste({
           onChange={atualizarCampo}
         />
 
-      </div>
-
-      <div className="my-4 flex flex-col justify-between gap-4 md:flex-row">
         <textarea
-          className="input  resize-none md:flex-1 col-span-3"
+          className="input resize-none"
           name="observacoes"
           placeholder="Observações"
           value={form.observacoes}
           onChange={atualizarCampo} />
 
-        <button className="rounded-lg bg-blue-700 px-5 py-2 font-medium text-white hover:bg-blue-800">
-          {testeEditandoId ? "Salvar alterações" : "Salvar teste"}
-        </button>
+        <div className="flex w-full justify-center items-center ">
+          <button className="rounded-lg bg-blue-700 px-5 py-2 font-medium text-white hover:bg-blue-800">
+            {testeEditandoId ? "Salvar alterações" : "Salvar teste"}
+          </button>
+        </div>
       </div>
     </form>
   );

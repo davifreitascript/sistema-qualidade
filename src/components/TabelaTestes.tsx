@@ -2,6 +2,7 @@ import type { TesteTecido } from "../types/teste";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
+import Select from "react-select";
 
 type Props = {
   testes: TesteTecido[];
@@ -24,41 +25,75 @@ export function TabelaTestes({
   editarTeste,
   solicitarExclusao,
 }: Props) {
+
+  const selectStyles = {
+    container: (base: any) => ({
+      ...base,
+      position: "relative",
+    }),
+
+    control: (base: any) => ({
+      ...base,
+      minHeight: "52px",
+      borderRadius: "0.5rem",
+      borderColor: "#cbd5e1",
+      boxShadow: "none",
+    }),
+
+    menu: (base: any) => ({
+      ...base,
+      position: "absolute",
+      top: "100%",
+      marginTop: "4px",
+      borderRadius: "0.75rem",
+      overflow: "hidden",
+      zIndex: 9999,
+    }),
+  };
+
   return (
     <div className="rounded-xl bg-white p-6 shadow">
       <h2 className="mb-4 text-2xl font-semibold">Testes lançados</h2>
 
       <div className="flex flex-col justify-between gap-3 md:flex-row">
-        <div className="flex gap-4 w-60 md:w-full">
+        <div className="relative z-30 flex gap-4 mb-4 items-center">
           <input
-            className="input mb-4 w-30"
+            className="input w-30"
             placeholder="Buscar lote..."
             value={filtroLote}
             onChange={(event) => setFiltroLote(event.target.value)}
           />
 
-          <select
-            className="input mb-4 min-w-55"
-            value={ordemAdicao}
-            onChange={(event) =>
-              setOrdemAdicao(event.target.value as "recente" | "antigo")
+          <Select
+            className=""
+            styles={selectStyles}
+            menuPlacement="bottom"
+            options={[
+              { value: "recente", label: "Mais recentes" },
+              { value: "antigo", label: "Mais antigos" },
+            ]}
+            value={
+              [
+                { value: "recente", label: "Mais recentes" },
+                { value: "antigo", label: "Mais antigos" },
+              ].find((opcao) => opcao.value === ordemAdicao) || null
             }
-          >
-            <option value="recente">Mais recentes primeiro</option>
-            <option value="antigo">Mais antigos primeiro</option>
-          </select>
+            onChange={(opcao) =>
+              setOrdemAdicao((opcao?.value || "recente") as "recente" | "antigo")
+            }
+          />
         </div>
 
         <div className="flex gap-2">
           <button
-            onClick={() => exportarCSV(testes)}
+            onClick={() => exportarCSV(testesFiltrados)}
             className="mb-4 rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
           >
             CSV
           </button>
 
           <button
-            onClick={() => exportarPDF(testes)}
+            onClick={() => exportarPDF(testesFiltrados)}
             className="mb-4 rounded-lg bg-red-700 px-4 py-2 text-white hover:bg-red-800"
           >
             PDF
@@ -66,10 +101,11 @@ export function TabelaTestes({
         </div>
       </div>
 
-      <div className="max-h-105 overflow-auto rounded-lg">
+      <div className="relative z-10 max-h-105 overflow-auto rounded-lg border border-slate-300">
         <table className="min-w-375 w-full border-collapse text-center align-middle">
           <thead className="sticky top-0 z-10">
             <tr className="bg-slate-300">
+              <th className="px-8 py-8 whitespace-nowrap">N°</th>
               <th className="px-8 py-8 whitespace-nowrap">Lote</th>
               <th className="px-8 py-8 whitespace-nowrap">Data</th>
               <th className="px-8 py-8 whitespace-nowrap">Tear</th>
@@ -88,8 +124,9 @@ export function TabelaTestes({
           </thead>
 
           <tbody>
-            {testesFiltrados.map((teste) => (
+            {testesFiltrados.map((teste, index) => (
               <tr key={teste.id}>
+                <td className="border border-slate-300 p-2">{index + 1}</td>
                 <td className="border border-slate-300 p-2">{teste.lote}</td>
                 <td className="border border-slate-300 p-2">
                   {formatarData(teste.data)}

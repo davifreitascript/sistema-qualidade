@@ -21,6 +21,7 @@ export function exportarPDF(testes: TesteTecido[]) {
     autoTable(doc, {
         startY: 22,
         head: [[
+            "N°",
             "Data",
             "Lote",
             "Tear",
@@ -36,7 +37,8 @@ export function exportarPDF(testes: TesteTecido[]) {
             "Observações",
         ]],
 
-        body: testes.map((teste) => [
+        body: testes.map((teste, index) => [
+            index + 1,
             teste.lote,
             formatarData(teste.data),
             teste.tear,

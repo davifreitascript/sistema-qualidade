@@ -27,17 +27,21 @@ export default function Home() {
   }, [testes]);
 
   const testesFiltrados = testes
-  .filter((teste) =>
-    teste.lote.toLowerCase().includes(filtroLote.toLowerCase())
-  )
-  .sort((a, b) =>
-  ordemAdicao === "recente"
-    ? new Date(b.data).getTime() - new Date(a.data).getTime()
-    : new Date(a.data).getTime() - new Date(b.data).getTime()
-);
+    .filter((teste) =>
+      teste.lote.toLowerCase().includes(filtroLote.toLowerCase())
+    )
+    .sort((a, b) =>
+      ordemAdicao === "recente"
+        ? new Date(b.data).getTime() - new Date(a.data).getTime()
+        : new Date(a.data).getTime() - new Date(b.data).getTime()
+    );
 
   function salvarTeste(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const turmaAtual = form.turma;
+    const dataAtual = form.data;
+    const loteAtual = form.lote;
 
     if (testeEditandoId) {
       setTestes(
@@ -47,7 +51,12 @@ export default function Home() {
       );
 
       setTesteEditandoId(null);
-      setForm(formInicial);
+      setForm({
+        ...formInicial,
+        data: dataAtual,
+        lote: loteAtual,
+        turma: turmaAtual,
+      });
       return;
     }
 
@@ -57,15 +66,20 @@ export default function Home() {
     };
 
     setTestes([novoTeste, ...testes]);
-    setForm(formInicial);
+    setForm({
+      ...formInicial,
+      data: dataAtual,
+      lote: loteAtual,
+      turma: turmaAtual,
+    });
   }
 
   function editarTeste(teste: TesteTecido) {
-  setTesteEditandoId(teste.id);
+    setTesteEditandoId(teste.id);
 
-  const { id, ...dadosFormulario } = teste;
-  setForm(dadosFormulario);
-}
+    const { id, ...dadosFormulario } = teste;
+    setForm(dadosFormulario);
+  }
 
   function confirmarExclusao() {
     if (!testeParaExcluir) return;
@@ -87,15 +101,15 @@ export default function Home() {
           testeEditandoId={testeEditandoId} />
 
         <TabelaTestes
-  testes={testes}
-  testesFiltrados={testesFiltrados}
-  filtroLote={filtroLote}
-  setFiltroLote={setFiltroLote}
-  ordemAdicao={ordemAdicao}
-  setOrdemAdicao={setOrdemAdicao}
-  editarTeste={editarTeste}
-  solicitarExclusao={setTesteParaExcluir}
-/>
+          testes={testes}
+          testesFiltrados={testesFiltrados}
+          filtroLote={filtroLote}
+          setFiltroLote={setFiltroLote}
+          ordemAdicao={ordemAdicao}
+          setOrdemAdicao={setOrdemAdicao}
+          editarTeste={editarTeste}
+          solicitarExclusao={setTesteParaExcluir}
+        />
       </div>
 
       {testeParaExcluir && (
@@ -104,6 +118,10 @@ export default function Home() {
           cancelar={() => setTesteParaExcluir(null)}
           confirmar={confirmarExclusao} />
       )}
+
+      <footer className="mt-8 text-center text-sm text-slate-500 select-none">
+        © {new Date().getFullYear()} Alçatec Produtos Sintéticos
+      </footer>
     </div>
   );
 }
