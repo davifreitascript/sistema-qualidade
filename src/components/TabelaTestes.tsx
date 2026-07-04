@@ -58,14 +58,14 @@ export function TabelaTestes({
       <div className="flex flex-col justify-between gap-3 md:flex-row">
         <div className="relative z-30 flex gap-4 mb-4 items-center">
           <input
-            className="input w-30"
+          type="number"
+            className="input w-35"
             placeholder="Buscar lote..."
             value={filtroLote}
             onChange={(event) => setFiltroLote(event.target.value)}
           />
 
           <Select
-            className=""
             styles={selectStyles}
             isSearchable={false}
             menuPlacement="bottom"

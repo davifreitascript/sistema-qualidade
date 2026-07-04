@@ -256,8 +256,8 @@ export function FormularioTeste({
           value={form.observacoes}
           onChange={atualizarCampo} />
 
-        <div className="flex w-full justify-center items-center rounded-lg overflow-x-hidden">
-          <button className="bg-blue-700 min-h-16 min-w-60 font-medium text-white hover:bg-blue-800">
+        <div className="flexs justify-center items-center rounded-lg">
+          <button className="rounded-lg flex justify-center items-center w-full py-5 bg-blue-700 font-medium text-white hover:bg-blue-800">
             {testeEditandoId ? "Salvar alterações" : "Salvar teste"}
           </button>
         </div>
