@@ -74,10 +74,11 @@ export function FormularioTeste({
       className="mb-8 rounded-xl bg-white p-6 shadow">
 
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <h2 className="mb-6 text-3xl font-semibold text-center md:text-left tracking-tight text-slate-900">Novo lançamento</h2>
+        <h2 className="mb-6 text-2xl font-semibold text-center md:text-left tracking-tight text-slate-900">Novo lançamento</h2>
 
-        <div className="md:flex md:items-center gap-4 grid grid-cols-1">
+        <div className="md:flex gap-4 grid grid-cols-1">
           <Select
+          className="min-w-35"
             options={opcoesTurma}
             styles={selectStyles}
             isSearchable={false}

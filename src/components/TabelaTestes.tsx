@@ -53,10 +53,12 @@ export function TabelaTestes({
 
   return (
     <div className="rounded-xl bg-white p-6 shadow">
-      <h2 className="mb-4 text-2xl font-semibold">Testes lançados</h2>
+      
 
       <div className="flex flex-col justify-between gap-3 md:flex-row">
-        <div className="relative z-30 flex gap-4 mb-4 items-center">
+        <h2 className="mb-4 md:text-left text-center text-3xl font-semibold">Testes lançados</h2>
+
+        <div className="relative z-30 flex gap-4 mb-4 justify-center items-center">
           <input
             type="number"
             className="inputLote"
@@ -83,22 +85,6 @@ export function TabelaTestes({
               setOrdemAdicao((opcao?.value || "recente") as "recente" | "antigo")
             }
           />
-        </div>
-
-        <div className="flex gap-2">
-          <button
-            onClick={() => exportarCSV(testesFiltrados)}
-            className="mb-4 rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
-          >
-            CSV
-          </button>
-
-          <button
-            onClick={() => exportarPDF(testesFiltrados)}
-            className="mb-4 rounded-lg bg-red-700 px-4 py-2 text-white hover:bg-red-800"
-          >
-            PDF
-          </button>
         </div>
       </div>
 
@@ -173,6 +159,22 @@ export function TabelaTestes({
       {testes.length === 0 && (
         <p className="mt-4 text-slate-500">Nenhum teste lançado ainda.</p>
       )}
+
+      <div className="flex mt-6 justify-end items-center gap-4">
+          <button
+            onClick={() => exportarCSV(testesFiltrados)}
+            className="mb-4 rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
+          >
+            CSV
+          </button>
+
+          <button
+            onClick={() => exportarPDF(testesFiltrados)}
+            className="mb-4 rounded-lg bg-red-700 px-4 py-2 text-white hover:bg-red-800"
+          >
+            PDF
+          </button>
+        </div>
     </div>
   );
 }
