@@ -90,9 +90,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-100 p-3 md:p-6">
-      <div className="mx-auto max-w-5xl">
-        <h1 className="my-8 text-center text-2xl font-bold text-slate-800 md:text-4xl">
-          Alçatec - Lançamento de tecido</h1>
+      <div className="mx-auto my-10 md:my-30 max-w-5xl">
+        <h1 className="my-8 text-center text-2xl font-bold text-slate-800 md:text-4xl">Alçatec - Lançamento de tecido</h1>
 
         <FormularioTeste
           form={form}

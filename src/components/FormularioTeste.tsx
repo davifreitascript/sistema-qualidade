@@ -123,7 +123,7 @@ export function FormularioTeste({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
 
         <div>
           <Select
@@ -255,7 +255,7 @@ export function FormularioTeste({
           />
         </div>
 
-        <div>
+        <div className="md:col-span-2">
           <input
             className="input col-span-2"
             name="controlista"
@@ -272,7 +272,7 @@ export function FormularioTeste({
           value={form.observacoes}
           onChange={atualizarCampo} /> */}
 
-        <div className="flex justify-center items-center rounded-lg">
+        <div className="flex justify-center items-center rounded-lg md:col-start-4">
           <button className="flex justify-center items-center w-full h-13 py-5 rounded-lg bg-blue-700 font-medium text-white hover:bg-blue-800">
             {testeEditandoId ? "Salvar alterações" : "Salvar teste"}
           </button>
