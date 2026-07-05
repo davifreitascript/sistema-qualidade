@@ -71,7 +71,7 @@ export function FormularioTeste({
   return (
     <form
       onSubmit={salvarTeste}
-      className="mb-8 rounded-xl bg-white p-6 shadow">
+      className="md:mt-15 md:mb-70 mb-24 rounded-xl bg-white p-6 shadow">
 
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <h2 className="mb-6 text-2xl font-semibold text-center md:text-left tracking-tight text-slate-900">Novo lançamento</h2>
