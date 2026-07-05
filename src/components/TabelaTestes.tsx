@@ -119,7 +119,6 @@ export function TabelaTestes({
               <th className="px-8 py-8 whitespace-nowrap">Res. Urdume</th>
               <th className="px-8 py-8 whitespace-nowrap">Res. Reforço</th>
               <th className="px-8 py-8 whitespace-nowrap">Controlista</th>
-              <th className="px-8 py-8 whitespace-nowrap">Observações</th>
               <th className="px-8 py-8" colSpan={2}>Ações</th>
             </tr>
           </thead>
@@ -150,10 +149,6 @@ export function TabelaTestes({
                 <td className="border border-slate-300 p-2">
                   {teste.controlista}
                 </td>
-                <td className="border border-slate-300 p-2">
-                  {teste.observacoes || "-"}
-                </td>
-
                 <td className="p-2">
                   <button
                     onClick={() => editarTeste(teste)}

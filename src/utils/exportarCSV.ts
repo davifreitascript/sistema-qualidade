@@ -11,8 +11,8 @@ export function exportarCSV(testes: TesteTecido[]) {
     valor === undefined || valor === null ? "" : String(valor);
 
   const cabecalho = [
-    "Lote",
     "Data",
+    "Lote",
     "Tear",
     "Turma",
     "Artigo",
@@ -23,12 +23,11 @@ export function exportarCSV(testes: TesteTecido[]) {
     "Resis. Urdume",
     "Resis. Reforco",
     "Controlista",
-    "Observacoes",
   ];
 
   const linhas = testes.map((teste) => [
-    limpar(teste.lote),
     formatarData(teste.data),
+    limpar(teste.lote),
     limpar(teste.tear),
     limpar(teste.turma),
     limpar(teste.artigo),
@@ -39,7 +38,6 @@ export function exportarCSV(testes: TesteTecido[]) {
     limpar(teste.resistenciaUrdume),
     limpar(teste.resistenciaReforco),
     limpar(teste.controlista),
-    limpar(teste.observacoes),
   ]);
 
   const conteudoCSV = [cabecalho, ...linhas]

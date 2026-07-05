@@ -113,8 +113,8 @@ export function FormularioTeste({
             required
           />
 
-          <div className="input rounded-lg border border-slate-300 bg-slate-50 min-w-44 px-4 py-2 text-left">
-            <span className="block text-xs font-medium text-slate-500 select-none">Lote</span>
+          <div className="input flex justify-between items-center rounded-lg border border-slate-300 bg-slate-50 min-w-44 text-left">
+            <span className="block text-xs font-medium text-slate-500 select-none">Lote:</span>
 
             <strong className="block text-lg text-slate-800">
               {form.lote || ""}
@@ -182,9 +182,8 @@ export function FormularioTeste({
           onChange={atualizarCampo}
         />
 
-        <div>
           <input
-            className="input w-full"
+            className="input"
             type="number"
             min="0"
             step="0.01"
@@ -193,11 +192,9 @@ export function FormularioTeste({
             value={form.batidaTrama}
             onChange={atualizarCampo}
           />
-        </div>
-
-        <div>
+      
           <input
-            className="input w-full"
+            className="input"
             type="number"
             min="0"
             step="0.01"
@@ -206,7 +203,6 @@ export function FormularioTeste({
             value={form.batidaUrdume}
             onChange={atualizarCampo}
           />
-        </div>
 
         <input
           className="input"
@@ -242,22 +238,22 @@ export function FormularioTeste({
         />
 
         <input
-          className="input"
+          className="input col-span-2"
           name="controlista"
           placeholder="Controlista"
           value={form.controlista}
           onChange={atualizarCampo}
         />
 
-        <textarea
+        {/* <textarea
           className="input resize-none"
           name="observacoes"
           placeholder="Observações"
           value={form.observacoes}
-          onChange={atualizarCampo} />
+          onChange={atualizarCampo} /> */}
 
-        <div className="flexs justify-center items-center rounded-lg">
-          <button className="rounded-lg flex justify-center items-center w-full py-5 bg-blue-700 font-medium text-white hover:bg-blue-800">
+        <div className="flex justify-center items-center rounded-lg">
+          <button className="flex justify-center items-center w-full h-13 py-5 rounded-lg bg-blue-700 font-medium text-white hover:bg-blue-800">
             {testeEditandoId ? "Salvar alterações" : "Salvar teste"}
           </button>
         </div>

@@ -34,7 +34,6 @@ export function exportarPDF(testes: TesteTecido[]) {
             "Res. Urdume",
             "Res. Reforço",
             "Controlista",
-            "Observações",
         ]],
 
         body: testes.map((teste, index) => [
@@ -51,7 +50,6 @@ export function exportarPDF(testes: TesteTecido[]) {
             teste.resistenciaUrdume,
             teste.resistenciaReforco,
             teste.controlista,
-            teste.observacoes || "-",
         ]),
         styles: {
             fontSize: 8,
@@ -67,5 +65,5 @@ export function exportarPDF(testes: TesteTecido[]) {
         },
     });
 
-    doc.save("relatorio-testes-tecido.pdf");
+    doc.save("relatorio testes de tecido.pdf");
 }

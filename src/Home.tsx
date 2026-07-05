@@ -91,7 +91,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-100 p-3 md:p-6">
       <div className="mx-auto max-w-5xl">
-        <h1 className="mb-6 text-2xl font-bold text-slate-800 md:text-3xl">
+        <h1 className="mb-6 text-3xl font-bold text-slate-800 md:text-3xl">
           Alçatec - Lançamento de tecido</h1>
 
         <FormularioTeste
