@@ -74,10 +74,9 @@ export function FormularioTeste({
       className="mb-8 rounded-xl bg-white p-6 shadow">
 
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <h2 className="mb-6 text-3xl font-semibold tracking-tight text-slate-900">Novo lançamento</h2>
+        <h2 className="mb-6 text-3xl font-semibold text-center md:text-left tracking-tight text-slate-900">Novo lançamento</h2>
 
         <div className="md:flex md:items-center gap-4 grid grid-cols-1">
-
           <Select
             options={opcoesTurma}
             styles={selectStyles}
@@ -125,63 +124,72 @@ export function FormularioTeste({
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
 
-        <Select
-          options={opcoesTear}
-          styles={selectStyles}
-          isSearchable={false}
-          placeholder="Tear"
-          value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
-          onChange={(opcao) =>
-            setForm((prev) => ({
-              ...prev,
-              tear: opcao?.value || "",
-            }))
-          }
-        />
+        <div>
+          <Select
+            options={opcoesTear}
+            styles={selectStyles}
+            isSearchable={false}
+            placeholder="Tear"
+            value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
+            onChange={(opcao) =>
+              setForm((prev) => ({
+                ...prev,
+                tear: opcao?.value || "",
+              }))
+            }
+          />
+        </div>
 
-        <Select
-          options={opcoesTipoTecido}
-          styles={selectStyles}
-          isSearchable={false}
-          placeholder="Tipo de tecido"
-          value={
-            opcoesTipoTecido.find((opcao) => opcao.value === form.tipoTecido) || null
-          }
-          onChange={(opcao) =>
-            setForm((prev) => ({
-              ...prev,
-              tipoTecido: (opcao?.value || "") as "" | TipoTecido,
-              artigo: "",
-            }))
-          }
-        />
+        <div>
+          <Select
+            options={opcoesTipoTecido}
+            styles={selectStyles}
+            isSearchable={false}
+            placeholder="Tipo de tecido"
+            value={
+              opcoesTipoTecido.find((opcao) => opcao.value === form.tipoTecido) || null
+            }
+            onChange={(opcao) =>
+              setForm((prev) => ({
+                ...prev,
+                tipoTecido: (opcao?.value || "") as "" | TipoTecido,
+                artigo: "",
+              }))
+            }
+          />
+        </div>
 
-        <Select
-          options={opcoesArtigo}
-          styles={selectStyles}
-          isSearchable={false}
-          placeholder="Artigo"
-          isDisabled={!form.tipoTecido}
-          value={opcoesArtigo.find((opcao) => opcao.value === form.artigo) || null}
-          onChange={(opcao) =>
-            setForm((prev) => ({
-              ...prev,
-              artigo: opcao?.value || "",
-            }))
-          }
-        />
+        <div>
+          <Select
+            options={opcoesArtigo}
+            styles={selectStyles}
+            isSearchable={false}
+            placeholder="Artigo"
+            isDisabled={!form.tipoTecido}
+            value={opcoesArtigo.find((opcao) => opcao.value === form.artigo) || null}
+            onChange={(opcao) =>
+              setForm((prev) => ({
+                ...prev,
+                artigo: opcao?.value || "",
+              }))
+            }
+          />
+        </div>
 
-        <input
-          className="input"
-          type="number"
-          min="0"
-          step="0.01"
-          name="gramatura"
-          placeholder="Gramatura"
-          value={form.gramatura}
-          onChange={atualizarCampo}
-        />
+        <div>
+          <input
+            className="input"
+            type="number"
+            min="0"
+            step="0.01"
+            name="gramatura"
+            placeholder="Gramatura"
+            value={form.gramatura}
+            onChange={atualizarCampo}
+          />
+        </div>
 
+        <div>
           <input
             className="input"
             type="number"
@@ -192,7 +200,9 @@ export function FormularioTeste({
             value={form.batidaTrama}
             onChange={atualizarCampo}
           />
-      
+        </div>
+
+        <div>
           <input
             className="input"
             type="number"
@@ -203,47 +213,56 @@ export function FormularioTeste({
             value={form.batidaUrdume}
             onChange={atualizarCampo}
           />
+        </div>
 
-        <input
-          className="input"
-          type="number"
-          min="0"
-          step="0.01"
-          name="resistenciaTrama"
-          placeholder="Resistência da trama"
-          value={form.resistenciaTrama}
-          onChange={atualizarCampo}
-        />
+        <div>
+          <input
+            className="input"
+            type="number"
+            min="0"
+            step="0.01"
+            name="resistenciaTrama"
+            placeholder="Resistência da trama"
+            value={form.resistenciaTrama}
+            onChange={atualizarCampo}
+          />
+        </div>
 
-        <input
-          className="input"
-          type="number"
-          min="0"
-          step="0.01"
-          name="resistenciaUrdume"
-          placeholder="Resistência do urdume"
-          value={form.resistenciaUrdume}
-          onChange={atualizarCampo}
-        />
+        <div>
+          <input
+            className="input"
+            type="number"
+            min="0"
+            step="0.01"
+            name="resistenciaUrdume"
+            placeholder="Resistência do urdume"
+            value={form.resistenciaUrdume}
+            onChange={atualizarCampo}
+          />
+        </div>
 
-        <input
-          className="input"
-          type="number"
-          min="0"
-          step="0.01"
-          name="resistenciaReforco"
-          placeholder="Resistência do reforço"
-          value={form.resistenciaReforco}
-          onChange={atualizarCampo}
-        />
+        <div>
+          <input
+            className="input"
+            type="number"
+            min="0"
+            step="0.01"
+            name="resistenciaReforco"
+            placeholder="Resistência do reforço"
+            value={form.resistenciaReforco}
+            onChange={atualizarCampo}
+          />
+        </div>
 
-        <input
-          className="input col-span-2"
-          name="controlista"
-          placeholder="Controlista"
-          value={form.controlista}
-          onChange={atualizarCampo}
-        />
+        <div>
+          <input
+            className="input col-span-2"
+            name="controlista"
+            placeholder="Controlista"
+            value={form.controlista}
+            onChange={atualizarCampo}
+          />
+        </div>
 
         {/* <textarea
           className="input resize-none"
