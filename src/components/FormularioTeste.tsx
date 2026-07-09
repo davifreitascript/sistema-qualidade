@@ -5,7 +5,6 @@ import { gerarLotePorData } from "../utils/gerarLote";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 
-
 type Props = {
   form: FormTesteTecido;
   setForm: React.Dispatch<React.SetStateAction<FormTesteTecido>>;
