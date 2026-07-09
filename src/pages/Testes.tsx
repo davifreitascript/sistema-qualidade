@@ -37,7 +37,7 @@ export default function Testes() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-100 p-6">
+    <main className="min-h-screen flex flex-col justify-center bg-slate-100 p-10">
       <TabelaTestes
         testes={testes}
         testesFiltrados={testesFiltrados}
