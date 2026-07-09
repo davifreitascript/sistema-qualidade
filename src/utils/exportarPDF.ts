@@ -38,8 +38,8 @@ export function exportarPDF(testes: TesteTecido[]) {
 
         body: testes.map((teste, index) => [
             index + 1,
-            teste.lote,
             formatarData(teste.data),
+             teste.lote,
             teste.tear,
             teste.turma,
             teste.artigo,

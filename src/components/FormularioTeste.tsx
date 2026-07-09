@@ -72,10 +72,9 @@ export function FormularioTeste({
   return (
     <form
       onSubmit={salvarTeste}
-      className="md:mt-15  rounded-xl bg-white p-6 shadow">
+      className="md:mt-15 rounded-xl bg-white p-6 shadow">
 
-      <div className="mb-28 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        {/* <h2 className="my-4 text-2xl md:text-3xl font-semibold text-center md:text-left tracking-tight text-slate-900">Novo lançamento</h2> */}
+      <div className="md:mb-20 mb-4 flex gap-4 md:flex-row justify-between flex-col-reverse w-full p-2">
 
         <div className="md:flex gap-4 grid grid-cols-1">
           <Select
@@ -123,7 +122,7 @@ export function FormularioTeste({
           </div>
         </div>
 
-        <div>
+        <div className="flex justify-center items-center">
           <Link
             to="/testes"
             className="rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"

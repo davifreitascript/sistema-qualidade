@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Home from './Home.tsx'
 import Testes from "./pages/Testes.tsx";
 import './index.css'
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function RotaProtegida({ children }: { children: React.ReactNode }) {
   const [carregando, setCarregando] = useState(true);
@@ -74,5 +75,6 @@ createRoot(document.getElementById("root")!).render(
         />
       </Routes>
     </BrowserRouter>
+    <SpeedInsights/>
   </StrictMode>
 );
