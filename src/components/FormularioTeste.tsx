@@ -74,7 +74,7 @@ export function FormularioTeste({
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 
-      <div className="md:mb-20 mb-4 flex gap-4 md:flex-row justify-between flex-col-reverse w-full p-2">
+      <div className="md:mb-20 mb-4 flex gap-4 md:flex-row justify-between flex-col-reverse w-full">
 
         <div className="md:flex gap-4 grid grid-cols-1">
           <Select
