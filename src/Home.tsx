@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-
 import type { FormTesteTecido, TesteTecido } from "./types/teste";
 import { formInicial } from "./types/teste";
-
 import { FormularioTeste } from "./components/FormularioTeste";
-import { TabelaTestes } from "./components/TabelaTestes";
 import { ModalExcluir } from "./components/ModalExcluir";
 
 export default function Home() {
-
-  const [ordemAdicao, setOrdemAdicao] = useState<"recente" | "antigo">("recente");
 
   const [testes, setTestes] = useState<TesteTecido[]>(() => {
     const dadosSalvos = localStorage.getItem("testes-tecido");
@@ -17,7 +12,6 @@ export default function Home() {
   });
 
   const [form, setForm] = useState<FormTesteTecido>(formInicial);
-  const [filtroLote, setFiltroLote] = useState("");
   const [testeEditandoId, setTesteEditandoId] = useState<number | null>(null);
   const [testeParaExcluir, setTesteParaExcluir] =
     useState<TesteTecido | null>(null);
@@ -25,16 +19,6 @@ export default function Home() {
   useEffect(() => {
     localStorage.setItem("testes-tecido", JSON.stringify(testes));
   }, [testes]);
-
-  const testesFiltrados = testes
-    .filter((teste) =>
-      teste.lote.toLowerCase().includes(filtroLote.toLowerCase())
-    )
-    .sort((a, b) =>
-      ordemAdicao === "recente"
-        ? new Date(b.data).getTime() - new Date(a.data).getTime()
-        : new Date(a.data).getTime() - new Date(b.data).getTime()
-    );
 
   function salvarTeste(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -74,13 +58,6 @@ export default function Home() {
     });
   }
 
-  function editarTeste(teste: TesteTecido) {
-    setTesteEditandoId(teste.id);
-
-    const { id, ...dadosFormulario } = teste;
-    setForm(dadosFormulario);
-  }
-
   function confirmarExclusao() {
     if (!testeParaExcluir) return;
 
@@ -89,26 +66,15 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 p-3 md:p-6">
-      <div className="mx-auto my-10 md:my-15 max-w-5xl">
-        <h1 className="my-8 text-center text-2xl font-bold text-slate-800 md:text-4xl">Alçatec - Lançamento de tecido</h1>
+    <div className="min-h-screen flex flex-col bg-slate-100 p-3 md:p-6">
+      <div className="mx-auto max-w-5xl">
+        <h1 className="my-8 text-center text-2xl font-bold text-slate-800 md:text-5xl">Alçatec - Lançamento de tecido</h1>
 
         <FormularioTeste
           form={form}
           setForm={setForm}
           salvarTeste={salvarTeste}
           testeEditandoId={testeEditandoId} />
-
-        <TabelaTestes
-          testes={testes}
-          testesFiltrados={testesFiltrados}
-          filtroLote={filtroLote}
-          setFiltroLote={setFiltroLote}
-          ordemAdicao={ordemAdicao}
-          setOrdemAdicao={setOrdemAdicao}
-          editarTeste={editarTeste}
-          solicitarExclusao={setTesteParaExcluir}
-        />
       </div>
 
       {testeParaExcluir && (
@@ -118,7 +84,7 @@ export default function Home() {
           confirmar={confirmarExclusao} />
       )}
 
-      <footer className="mt-8 text-center text-sm text-slate-500 select-none">
+      <footer className="mt-auto text-center text-sm text-slate-500 select-none">
         © {new Date().getFullYear()} Alçatec Produtos Sintéticos
       </footer>
     </div>

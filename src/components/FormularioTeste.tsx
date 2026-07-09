@@ -2,7 +2,9 @@ import type { FormTesteTecido, TipoTecido } from "../types/teste";
 import { artigosPorTipo } from "../data/artigos";
 import { teares } from "../data/teares";
 import { gerarLotePorData } from "../utils/gerarLote";
+import { Link } from "react-router-dom";
 import Select from "react-select";
+
 
 type Props = {
   form: FormTesteTecido;
@@ -71,14 +73,14 @@ export function FormularioTeste({
   return (
     <form
       onSubmit={salvarTeste}
-      className="md:mt-15 md:mb-70 mb-24 rounded-xl bg-white p-6 shadow">
+      className="md:mt-15  rounded-xl bg-white p-6 shadow">
 
       <div className="mb-28 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <h2 className="my-4 text-2xl md:text-3xl font-semibold text-center md:text-left tracking-tight text-slate-900">Novo lançamento</h2>
+        {/* <h2 className="my-4 text-2xl md:text-3xl font-semibold text-center md:text-left tracking-tight text-slate-900">Novo lançamento</h2> */}
 
         <div className="md:flex gap-4 grid grid-cols-1">
           <Select
-          className="min-w-35"
+            className="min-w-35"
             options={opcoesTurma}
             styles={selectStyles}
             isSearchable={false}
@@ -121,6 +123,16 @@ export function FormularioTeste({
             </strong>
           </div>
         </div>
+
+        <div>
+          <Link
+            to="/testes"
+            className="rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+          >
+            Ver testes lançados
+          </Link>
+        </div>
+
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-4">

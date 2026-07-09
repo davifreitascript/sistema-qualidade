@@ -7,8 +7,9 @@ import { createRoot } from 'react-dom/client'
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "./lib/supabase.ts";
-import Home from './Home.tsx'
 import Login from "./pages/Login";
+import Home from './Home.tsx'
+import Testes from "./pages/Testes.tsx";
 import './index.css'
 
 function RotaProtegida({ children }: { children: React.ReactNode }) {
@@ -58,6 +59,16 @@ createRoot(document.getElementById("root")!).render(
           element={
             <RotaProtegida>
               <Home />
+            </RotaProtegida>
+
+          }
+        />
+
+        <Route
+          path="/testes"
+          element={
+            <RotaProtegida>
+              <Testes />
             </RotaProtegida>
           }
         />
