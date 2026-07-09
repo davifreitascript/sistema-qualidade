@@ -21,30 +21,27 @@ function RotaProtegida({ children }: { children: React.ReactNode }) {
     async function verificarSessao() {
       const { data } = await supabase.auth.getSession();
 
-      setLogado(!!data.session);
+      const loginExpiraEm = Number(localStorage.getItem("loginExpiraEm"));
+      const expirou = loginExpiraEm && Date.now() > loginExpiraEm;
+
+      if (!data.session || expirou) {
+        await supabase.auth.signOut();
+        localStorage.removeItem("loginExpiraEm");
+        setLogado(false);
+        setCarregando(false);
+        return;
+      }
+
+      setLogado(true);
       setCarregando(false);
     }
 
     verificarSessao();
-
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setLogado(!!session);
-      }
-    );
-
-    return () => {
-      listener.subscription.unsubscribe();
-    };
   }, []);
 
-  if (carregando) {
-    return <div className="p-6">Carregando...</div>;
-  }
+  if (carregando) return <p>Carregando...</p>;
 
-  if (!logado) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!logado) return <Navigate to="/login" replace />;
 
   return children;
 }
@@ -75,6 +72,6 @@ createRoot(document.getElementById("root")!).render(
         />
       </Routes>
     </BrowserRouter>
-    <SpeedInsights/>
+    <SpeedInsights />
   </StrictMode>
 );

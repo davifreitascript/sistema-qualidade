@@ -24,13 +24,10 @@ export default function Login() {
       return;
     }
 
-    navigate("/", { replace: true });
-  }
+  localStorage.setItem("loginExpiraEm", String(Date.now() + 24 * 60 * 60 * 1000));
 
-  /* async function sair() {
-    await supabase.auth.signOut();
-    navigate("/login", { replace: true });
-  } */
+  navigate("/", { replace: true });
+  }
 
   return (
     <main className="min-h-screen bg-slate-100 flex items-center justify-center px-4">

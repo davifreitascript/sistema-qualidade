@@ -1,8 +1,10 @@
 import type { TesteTecido } from "../types/teste";
+import { useNavigate } from "react-router-dom";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
 import Select from "react-select";
+import { supabase } from "../lib/supabase";
 
 type Props = {
   testes: TesteTecido[];
@@ -51,9 +53,26 @@ export function TabelaTestes({
     }),
   };
 
+    const navigate = useNavigate();
+
+  async function sair() {
+    await supabase.auth.signOut();
+    localStorage.removeItem("loginExpiraEm");
+    navigate("/login", { replace: true });
+  }
+
   return (
     <div className="flex flex-col gap-6 rounded-xl bg-white p-6 shadow">
-      
+
+      <div>
+        <button
+          onClick={sair}
+          className="rounded-md bg-red-600 px-4 py-2 absolute top-6 right-10 text-sm font-semibold text-white hover:bg-red-700"
+        >
+          Sair
+        </button>
+      </div>
+
       <div className="flex flex-col justify-between gap-3 md:flex-row">
         <h2 className="mb-4 md:text-left text-center text-3xl font-semibold">Testes lançados</h2>
 
@@ -160,20 +179,20 @@ export function TabelaTestes({
       )}
 
       <div className="flex mt-6 justify-end items-center gap-4">
-          <button
-            onClick={() => exportarCSV(testesFiltrados)}
-            className="rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
-          >
-            CSV
-          </button>
+        <button
+          onClick={() => exportarCSV(testesFiltrados)}
+          className="rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
+        >
+          CSV
+        </button>
 
-          <button
-            onClick={() => exportarPDF(testesFiltrados)}
-            className="rounded-lg bg-red-700 px-4 py-2 text-white hover:bg-red-800"
-          >
-            PDF
-          </button>
-        </div>
+        <button
+          onClick={() => exportarPDF(testesFiltrados)}
+          className="rounded-lg bg-red-700 px-4 py-2 text-white hover:bg-red-800"
+        >
+          PDF
+        </button>
+      </div>
     </div>
   );
 }

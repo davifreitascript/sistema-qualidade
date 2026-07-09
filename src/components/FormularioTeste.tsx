@@ -2,7 +2,6 @@ import type { FormTesteTecido, TipoTecido } from "../types/teste";
 import { artigosPorTipo } from "../data/artigos";
 import { teares } from "../data/teares";
 import { gerarLotePorData } from "../utils/gerarLote";
-import { Link } from "react-router-dom";
 import Select from "react-select";
 
 type Props = {
@@ -120,15 +119,6 @@ export function FormularioTeste({
               {form.lote || ""}
             </strong>
           </div>
-        </div>
-
-        <div className="flex justify-center items-center">
-          <Link
-            to="/testes"
-            className="rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
-          >
-            Ver testes lançados
-          </Link>
         </div>
 
       </div>
