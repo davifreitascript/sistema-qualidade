@@ -1,7 +1,6 @@
 export type TipoTecido = "leve" | "pesado";
 
-export type TesteTecido = {
-  id: number;
+export type FormTesteTecido = {
   lote: string;
   data: string;
   tear: string;
@@ -15,10 +14,14 @@ export type TesteTecido = {
   resistenciaUrdume: string;
   resistenciaReforco: string;
   controlista: string;
-  sincronizado: boolean;
 };
 
-export type FormTesteTecido = Omit<TesteTecido, "id">;
+export type TesteTecido = FormTesteTecido & {
+  id: number;
+  uuid: string;
+  sincronizado: boolean;
+  excluido?: boolean;
+};
 
 export const formInicial: FormTesteTecido = {
   lote: "",
@@ -34,5 +37,4 @@ export const formInicial: FormTesteTecido = {
   resistenciaUrdume: "",
   resistenciaReforco: "",
   controlista: "",
-  sincronizado: false,
 };

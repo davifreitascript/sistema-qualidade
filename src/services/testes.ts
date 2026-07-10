@@ -1,10 +1,8 @@
-/* import test from "node:test"; */
 import { supabase } from "../lib/supabase";
 import type { FormTesteTecido, TesteTecido, TipoTecido } from "../types/teste";
 
-type NovoTeste = FormTesteTecido;
-
 type TesteBanco = {
+    uuid: string;
     id: number;
     data: string;
     lote: string;
@@ -20,7 +18,6 @@ type TesteBanco = {
     resistencia_reforco: number | null;
     controlista: string;
     observacoes: string | null;
-    created_at: string;
 };
 
 function numeroOuNull(valor: string | number | null | undefined) {
@@ -35,6 +32,7 @@ function numeroOuNull(valor: string | number | null | undefined) {
 
 function converterTesteDoBanco(teste: TesteBanco): TesteTecido {
     return {
+        uuid: teste.uuid,
         id: teste.id,
         data: teste.data,
         lote: teste.lote,
@@ -53,7 +51,7 @@ function converterTesteDoBanco(teste: TesteBanco): TesteTecido {
     };
 }
 
-export async function criarTeste(teste: NovoTeste): Promise<TesteTecido> {
+export async function criarTeste(teste: TesteTecido): Promise<TesteTecido> {
     const { data: usuarioData, error: usuarioError } =
         await supabase.auth.getUser();
 
@@ -64,6 +62,7 @@ export async function criarTeste(teste: NovoTeste): Promise<TesteTecido> {
     const { data, error } = await supabase
         .from("testes")
         .insert({
+            uuid: teste.uuid,
             data: teste.data,
             lote: teste.lote,
             tear: teste.tear,
@@ -77,7 +76,6 @@ export async function criarTeste(teste: NovoTeste): Promise<TesteTecido> {
             resistencia_urdume: numeroOuNull(teste.resistenciaUrdume),
             resistencia_reforco: numeroOuNull(teste.resistenciaReforco),
             controlista: teste.controlista,
-            criado_por: usuarioData.user.id,
         })
         .select()
         .single();
@@ -89,11 +87,16 @@ export async function criarTeste(teste: NovoTeste): Promise<TesteTecido> {
     return converterTesteDoBanco(data as TesteBanco);
 }
 
-export async function sincronizarTestes(
-    testes: TesteTecido[]
-): Promise<number[]> {
+export async function sincronizarTestes(testes: TesteTecido[]): Promise<number[]> {
 
     const enviados: number[] = [];
+
+    const { data: usuarioData, error: usuarioError } =
+        await supabase.auth.getUser();
+
+    if (usuarioError || !usuarioData.user) {
+        throw new Error("Usuário não autenticado.");
+    }
 
     for (const teste of testes) {
 
@@ -102,6 +105,7 @@ export async function sincronizarTestes(
         const { error } = await supabase
             .from("testes")
             .insert({
+                uuid: teste.uuid,
                 data: teste.data,
                 lote: teste.lote,
                 tear: teste.tear,
@@ -115,9 +119,13 @@ export async function sincronizarTestes(
                 resistencia_urdume: numeroOuNull(teste.resistenciaUrdume),
                 resistencia_reforco: numeroOuNull(teste.resistenciaReforco),
                 controlista: teste.controlista,
+                criado_por: usuarioData.user.id,
             });
 
-        if (!error) {
+        if (error) {
+            console.error("Erro ao inserir:", error);
+        } else {
+            console.log("Inserido com sucesso:", teste.id);
             enviados.push(teste.id);
         }
     }
@@ -136,4 +144,66 @@ export async function buscarTestes(): Promise<TesteTecido[]> {
     }
 
     return (data as TesteBanco[]).map(converterTesteDoBanco);
+}
+
+export function salvarTesteLocal(
+    form: FormTesteTecido
+): TesteTecido {
+
+    const novoTeste: TesteTecido = {
+        id: Date.now(),
+        uuid: crypto.randomUUID(),
+        ...form,
+        sincronizado: false,
+    };
+
+    const testesSalvos: TesteTecido[] = JSON.parse(
+        localStorage.getItem("testes-tecido") || "[]"
+    );
+
+    testesSalvos.unshift(novoTeste);
+
+    localStorage.setItem(
+        "testes-tecido",
+        JSON.stringify(testesSalvos)
+    );
+
+    return novoTeste;
+}
+
+export function excluirTesteLocal(uuid: string) {
+    const testes: TesteTecido[] = JSON.parse(
+        localStorage.getItem("testes-tecido") || "[]"
+    );
+
+    const novosTestes = testes.filter(
+        (teste) => teste.uuid !== uuid
+    );
+
+    localStorage.setItem(
+        "testes-tecido",
+        JSON.stringify(novosTestes)
+    );
+}
+
+export async function excluirTesteBanco(uuid: string) {
+
+    const { data, error } = await supabase
+        .from("testes")
+        .delete()
+        .eq("uuid", uuid)
+        .select();
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    if (!data || data.length === 0) {
+        throw new Error("Teste não encontrado no banco.");
+    }
+}
+
+export async function excluirTeste(uuid: string) {
+    await excluirTesteBanco(uuid);
+    excluirTesteLocal(uuid);
 }

@@ -12,10 +12,10 @@ export default function Login() {
 
   const VINTE_E_QUATRO_HORAS = 24 * 60 * 60 * 1000;
 
-localStorage.setItem(
-  "loginExpiraEm",
-  String(Date.now() + VINTE_E_QUATRO_HORAS)
-);
+  localStorage.setItem(
+    "loginExpiraEm",
+    String(Date.now() + VINTE_E_QUATRO_HORAS)
+  );
 
   async function entrar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,9 +42,7 @@ localStorage.setItem(
   return (
     <main className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
       <section className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
-        <h1 className="text-2xl font-bold text-center text-slate-900">
-          Sistema de Qualidade
-        </h1>
+        <h1 className="text-2xl font-bold text-center text-slate-900">Sistema de Qualidade</h1>
 
         <p className="mt-2 text-sm text-center text-slate-500">
           Acesse sua conta para continuar
@@ -56,25 +54,24 @@ localStorage.setItem(
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-          />
+            className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" />
 
           <input
             type="password"
             placeholder="Senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
-            className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-          />
+            className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" />
 
           {erro && <p className="text-sm text-red-600">{erro}</p>}
 
-          <button
-            type="submit"
-            className="w-full h-12 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
-          >
-            Entrar
-          </button>
+          <div className="flex justify-center items-center w-full">
+            <button
+              type="submit"
+              className="w-30 btn btn-blue">
+              Entrar
+            </button>
+          </div>
         </form>
 
         <p className="mt-8 text-center text-xs text-slate-400 select-none">

@@ -1,12 +1,11 @@
 import type { TesteTecido } from "../types/teste";
-import { useNavigate } from "react-router-dom";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
+
+
+import { Loader2, Check, Database, Table, File, CheckCircle2, Clock3 } from "lucide-react";
 import Select from "react-select";
-import { supabase } from "../lib/supabase";
-import { CheckCircle2, Clock3 } from "lucide-react";
-import { Loader2, Check, Database } from "lucide-react";
 
 type Props = {
   testes: TesteTecido[];
@@ -59,25 +58,8 @@ export function TabelaTestes({
     }),
   };
 
-  const navigate = useNavigate();
-
-  async function sair() {
-    await supabase.auth.signOut();
-    localStorage.removeItem("loginExpiraEm");
-    navigate("/login", { replace: true });
-  }
-
   return (
-    <div className="flex flex-col gap-6 rounded-xl bg-white p-6 shadow">
-
-      <div>
-        <button
-          onClick={sair}
-          className="rounded-md bg-red-600 px-4 py-2 absolute top-6 right-10 text-sm text-white hover:bg-red-700"
-        >
-          Sair
-        </button>
-      </div>
+    <div className="flex flex-col gap-6 p-6 rounded-xl bg-white shadow">
 
       <div className="flex flex-col justify-between gap-3 md:flex-row">
         <h2 className="mb-4 md:text-left text-center text-3xl font-semibold">Testes lançados</h2>
@@ -136,7 +118,7 @@ export function TabelaTestes({
 
           <tbody>
             {testesFiltrados.map((teste, index) => (
-              <tr key={teste.id}>
+              <tr key={teste.uuid}>
                 <td className="border border-slate-300 p-2">{index + 1}</td>
                 <td className="border border-slate-300 p-2">{teste.lote}</td>
                 <td className="border border-slate-300 p-2">{formatarData(teste.data)}</td>
@@ -162,7 +144,7 @@ export function TabelaTestes({
                   {teste.sincronizado ? (
                     <span className="inline-flex items-center gap-2 font-medium text-green-600">
                       <CheckCircle2 size={18} />
-                      Enviado
+                      Sincronizado
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-2 font-medium text-amber-600">
@@ -196,92 +178,55 @@ export function TabelaTestes({
         <p className="mt-4 text-slate-500">Nenhum teste lançado ainda.</p>
       )}
 
-      <div className="flex flex-col-reverse md:flex-row justify-center md:justify-end items-center gap-4">
-        <div>
+      <div className="flex justify-center md:justify-end items-center gap-4">
 
-          {/* AJUSTAR AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+        <div className="flex">
           <button
             onClick={sincronizarBanco}
             disabled={statusSync === "loading"}
-            className="
-    relative
-    w-60
-    h-11
-    overflow-hidden
-    rounded-lg
-    bg-emerald-600
-    text-white
-    hover:bg-emerald-700
-    transition-colors
-    duration-300
-    disabled:cursor-not-allowed
-  "
-          >
-            <div className="relative flex h-full items-center justify-center">
+            className="w-12 h-10 btn btn-green">
 
-              {/* Estado normal */}
+            <div className="flex h-full items-center justify-center">
+
               <span
-                className={`
-      absolute flex items-center gap-2
-      transition-all duration-300
-      ${statusSync === "idle"
-                    ? "opacity-100 scale-100"
-                    : "opacity-0 scale-95"
-                  }
-    `}
-              >
+                className={`absolute flex items-center gap-2 transition-all duration-300 ${statusSync === "idle"
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-95"}`}>
                 <Database size={18} />
-                Sincronizar
               </span>
 
-              {/* Carregando */}
               <span
-                className={`
-      absolute flex items-center gap-2
-      transition-all duration-300
-      ${statusSync === "loading"
-                    ? "opacity-100 scale-100"
-                    : "opacity-0 scale-95"
-                  }
-    `}
-              >
+                className={`absolute flex items-center gap-2 transition-all duration-300 ${statusSync === "loading"
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-95"}`}>
                 <Loader2 className="animate-spin" size={18} />
-                Sincronizando...
               </span>
 
-              {/* Sucesso */}
               <span
-                className={`
-      absolute flex items-center gap-2
-      transition-all duration-300
-      ${statusSync === "success"
-                    ? "opacity-100 scale-100"
-                    : "opacity-0 scale-95"
-                  }
-    `}
-              >
+                className={`absolute flex items-center gap-2 transition-all duration-300 ${statusSync === "success"
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-95"}`}>
                 <Check size={18} />
-                Sincronizado
               </span>
 
             </div>
           </button>
         </div>
-        <div className="flex gap-4">
-          <button
-            onClick={() => exportarCSV(testesFiltrados)}
-            className="rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
-          >
-            CSV
-          </button>
 
-          <button
-            onClick={() => exportarPDF(testesFiltrados)}
-            className="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-          >
-            PDF
-          </button>
-        </div>
+        <button
+          onClick={() => exportarCSV(testesFiltrados)}
+          className="btn btn-blue">
+            <Table size={18} />
+          CSV
+        </button>
+
+        <button
+          onClick={() => exportarPDF(testesFiltrados)}
+          className="btn btn-red">
+            <File size={18} />
+          PDF
+        </button>
+
       </div>
     </div>
   );

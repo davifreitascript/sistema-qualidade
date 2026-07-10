@@ -7,11 +7,12 @@ import { createRoot } from 'react-dom/client'
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "./lib/supabase.ts";
+import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Home from './Home.tsx'
 import Testes from "./pages/Testes.tsx";
-import './index.css'
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import './index.css'
 
 function RotaProtegida({ children }: { children: React.ReactNode }) {
   const [carregando, setCarregando] = useState(true);
@@ -109,8 +110,31 @@ createRoot(document.getElementById("root")!).render(
         />
 
         <Route path="*" element={<Navigate to="/" replace />} />
-        
+
       </Routes>
+      <Toaster
+        position="top-left"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            borderRadius: "12px",
+            background: "#fff",
+            color: "#0f172a",
+          },
+          success: {
+            iconTheme: {
+              primary: "#2563eb", // azul
+              secondary: "#ffffff",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#dc2626", // vermelho
+              secondary: "#ffffff",
+            },
+          },
+        }}
+      />
     </BrowserRouter>
     <SpeedInsights />
   </StrictMode>

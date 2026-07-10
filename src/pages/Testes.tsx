@@ -1,6 +1,12 @@
-import { useMemo, useState } from "react";
 import type { TesteTecido } from "../types/teste";
+import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TabelaTestes } from "../components/TabelaTestes";
+import { sincronizarTestes } from "../services/testes";
+import { excluirTeste } from "../services/testes";
+import { supabase } from "../lib/supabase";
+import { LogOut } from "lucide-react"
+import toast from "react-hot-toast";
 
 export default function Testes() {
 
@@ -13,7 +19,7 @@ export default function Testes() {
     return dadosSalvos ? JSON.parse(dadosSalvos) : [];
   });
 
-    const [statusSync, setStatusSync] = useState<
+  const [statusSync, setStatusSync] = useState<
     "idle" | "loading" | "success"
   >("idle");
 
@@ -31,31 +37,45 @@ export default function Testes() {
     console.log("Editar teste:", teste);
   }
 
-  function solicitarExclusao(teste: TesteTecido) {
+  async function solicitarExclusao(teste: TesteTecido) {
     const confirmar = confirm(`Deseja excluir o lote ${teste.lote}?`);
+
     if (!confirmar) return;
 
-    const novosTestes = testes.filter((item) => item.id !== teste.id);
-    setTestes(novosTestes);
-    localStorage.setItem("testes-tecido", JSON.stringify(novosTestes));
+    try {
+      await excluirTeste(teste.uuid);
+
+      const novosTestes = testes.filter(
+        (item) => item.uuid !== teste.uuid
+      );
+
+      setTestes(novosTestes);
+
+      toast.success("Teste excluído com sucesso.");
+
+    } catch (erro) {
+      console.error("Erro ao excluir teste:", erro);
+      toast.error("Não foi possível excluir o teste.");
+    }
   }
 
   async function sincronizarBanco() {
     const pendentes = testes.filter((t) => !t.sincronizado);
 
     if (pendentes.length === 0) {
-      alert("Não existem testes pendentes.");
+      toast("Não existem testes pendentes.");
       return;
     }
 
     setStatusSync("loading");
 
     try {
-      
+      const enviados = await sincronizarTestes(pendentes);
 
       const atualizados = testes.map((teste) => ({
         ...teste,
-        sincronizado: teste.sincronizado || pendentes.some(p => p.id === teste.id),
+        sincronizado:
+          teste.sincronizado || enviados.includes(teste.id),
       }));
 
       setTestes(atualizados);
@@ -66,19 +86,39 @@ export default function Testes() {
       );
 
       setStatusSync("success");
+      toast.success(`${enviados.length} teste(s) sincronizado(s).`);
 
       setTimeout(() => {
         setStatusSync("idle");
       }, 2000);
 
     } catch (err) {
+      console.error(err);
       setStatusSync("idle");
-      alert("Erro ao sincronizar.");
+      toast("Erro ao sincronizar.");
     }
+  }
+
+  const navigate = useNavigate();
+
+  async function sair() {
+    await supabase.auth.signOut();
+    localStorage.removeItem("loginExpiraEm");
+    navigate("/login", { replace: true });
   }
 
   return (
     <main className="min-h-screen flex flex-col justify-center bg-slate-100 p-10">
+
+      <div className="flex justify-end items-center">
+        <button
+          onClick={sair}
+          className="mb-4 btn btn-red">
+          <LogOut size={18} />
+          Sair
+        </button>
+      </div>
+
       <TabelaTestes
         testes={testes}
         testesFiltrados={testesFiltrados}
@@ -91,6 +131,7 @@ export default function Testes() {
         sincronizarBanco={sincronizarBanco}
         statusSync={statusSync}
       />
+
       <footer className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-sm text-slate-500 select-none">
         © {new Date().getFullYear()} Grupo Procópio
       </footer>

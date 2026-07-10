@@ -3,7 +3,10 @@ import { useState } from "react";
 import { formInicial } from "./types/teste";
 import { FormularioTeste } from "./components/FormularioTeste";
 import { supabase } from "./lib/supabase";
+import { salvarTesteLocal } from "./services/testes";
 import { Link, useNavigate } from "react-router-dom";
+import { Table2, LogOut } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -11,73 +14,56 @@ export default function Home() {
   const [form, setForm] = useState<FormTesteTecido>(formInicial);
   const [salvando, setSalvando] = useState(false);
   const [erroSalvar, setErroSalvar] = useState("");
-  const [mensagemSucesso, setMensagemSucesso] = useState("");
 
   async function salvarTeste(event: React.FormEvent<HTMLFormElement>) {
-  event.preventDefault();
+    event.preventDefault();
 
-  setSalvando(true);
-  setErroSalvar("");
-  setMensagemSucesso("");
+    setSalvando(true);
+    setErroSalvar("");
 
-  const turmaAtual = form.turma;
-  const dataAtual = form.data;
-  const loteAtual = form.lote;
+    const turmaAtual = form.turma;
+    const dataAtual = form.data;
+    const loteAtual = form.lote;
 
-  try {
-    const novoTeste: TesteTecido = {
-      id: Date.now(),
-      ...form,
-      sincronizado: false,
-    };
+    try {
+      salvarTesteLocal(form);
 
-    const testesSalvos: TesteTecido[] = JSON.parse(
-      localStorage.getItem("testes-tecido") || "[]"
-    );
+      toast.success("Teste salvo localmente.");
 
-    testesSalvos.unshift(novoTeste);
-
-    localStorage.setItem(
-      "testes-tecido",
-      JSON.stringify(testesSalvos)
-    );
-
-    setMensagemSucesso("Teste salvo localmente.");
-
-    setForm({
-      ...formInicial,
-      data: dataAtual,
-      lote: loteAtual,
-      turma: turmaAtual,
-    });
-  } catch {
-    setErroSalvar("Não foi possível salvar o teste.");
-  } finally {
-    setSalvando(false);
+      setForm({
+        ...formInicial,
+        data: dataAtual,
+        lote: loteAtual,
+        turma: turmaAtual,
+      });
+    } catch {
+      setErroSalvar("Não foi possível salvar o teste.");
+    } finally {
+      setSalvando(false);
+    }
   }
-}
 
-async function sair() {
-  await supabase.auth.signOut();
-  localStorage.removeItem("loginExpiraEm");
-  navigate("/login", { replace: true });
-}
+  async function sair() {
+    await supabase.auth.signOut();
+    localStorage.removeItem("loginExpiraEm");
+    navigate("/login", { replace: true });
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-100 p-3 md:p-6">
       <div className="flex items-center justify-end gap-4">
+
         <Link
           to="/testes"
-          className="rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
-        >
-          Ver testes lançados
+          className="flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800 transition">
+          <Table2 size={18} />
+          Testes
         </Link>
 
         <button
-          type="button"
           onClick={sair}
-          className="rounded-md bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700"
-        >
+          className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700 transition cursor-pointer">
+          <LogOut size={18} />
           Sair
         </button>
       </div>
@@ -87,11 +73,7 @@ async function sair() {
           Alçatec - Lançamento de tecido
         </h1>
 
-        {mensagemSucesso && (
-          <p className="mb-4 rounded-lg bg-green-100 px-4 py-3 text-sm text-green-800">
-            {mensagemSucesso}
-          </p>
-        )}
+
 
         {erroSalvar && (
           <p className="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-800">

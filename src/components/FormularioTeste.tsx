@@ -20,11 +20,7 @@ export function FormularioTeste({
   salvando,
 }: Props) {
 
-  function atualizarCampo(
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) {
+  function atualizarCampo(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = event.target;
 
     setForm((prev) => ({
@@ -84,6 +80,7 @@ export function FormularioTeste({
             styles={selectStyles}
             isSearchable={false}
             placeholder="Turma"
+            required
             value={opcoesTurma.find((opcao) => opcao.value === form.turma) || null}
             onChange={(opcao) =>
               setForm((prev) => ({
@@ -94,8 +91,10 @@ export function FormularioTeste({
           />
 
           <input
+            className="input"
             type="date"
             name="data"
+            required
             value={form.data}
             onChange={(event) => {
               const data = event.target.value;
@@ -110,8 +109,6 @@ export function FormularioTeste({
                 lote: gerarLotePorData(data),
               }));
             }}
-            className="input"
-            required
           />
 
           <div className="input flex justify-between items-center rounded-lg border border-slate-300 bg-slate-50 min-w-44 text-left">
@@ -133,6 +130,7 @@ export function FormularioTeste({
             styles={selectStyles}
             isSearchable={false}
             placeholder="Tear"
+            required
             value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
             onChange={(opcao) =>
               setForm((prev) => ({
@@ -149,9 +147,8 @@ export function FormularioTeste({
             styles={selectStyles}
             isSearchable={false}
             placeholder="Tipo de tecido"
-            value={
-              opcoesTipoTecido.find((opcao) => opcao.value === form.tipoTecido) || null
-            }
+            required
+            value={opcoesTipoTecido.find((opcao) => opcao.value === form.tipoTecido) || null}
             onChange={(opcao) =>
               setForm((prev) => ({
                 ...prev,
@@ -168,6 +165,7 @@ export function FormularioTeste({
             styles={selectStyles}
             isSearchable={false}
             placeholder="Artigo"
+            required
             isDisabled={!form.tipoTecido}
             value={opcoesArtigo.find((opcao) => opcao.value === form.artigo) || null}
             onChange={(opcao) =>
@@ -188,6 +186,7 @@ export function FormularioTeste({
             name="gramatura"
             placeholder="Gramatura"
             value={form.gramatura}
+            required
             onChange={atualizarCampo}
           />
         </div>
@@ -202,6 +201,7 @@ export function FormularioTeste({
             placeholder="Batida de Trama"
             value={form.batidaTrama}
             onChange={atualizarCampo}
+            required
           />
         </div>
 
@@ -215,6 +215,7 @@ export function FormularioTeste({
             placeholder="Batida de Urdume"
             value={form.batidaUrdume}
             onChange={atualizarCampo}
+            required
           />
         </div>
 
@@ -271,13 +272,8 @@ export function FormularioTeste({
           <button
             type="submit"
             disabled={salvando}
-            className="flex h-13 w-full items-center justify-center rounded-lg bg-blue-700 py-5 font-medium text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {salvando
-              ? "Salvando..."
-              : testeEditandoId
-                ? "Salvar alterações"
-                : "Salvar teste"}
+            className="btn btn-blue">
+            {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
           </button>
         </div>
       </div>
