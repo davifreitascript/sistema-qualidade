@@ -7,8 +7,9 @@ import Select from "react-select";
 type Props = {
   form: FormTesteTecido;
   setForm: React.Dispatch<React.SetStateAction<FormTesteTecido>>;
-  salvarTeste: (event: React.FormEvent<HTMLFormElement>) => void;
+  salvarTeste: (event: React.FormEvent<HTMLFormElement>) => void | Promise<void>;
   testeEditandoId: number | null;
+  salvando: boolean;
 };
 
 export function FormularioTeste({
@@ -16,6 +17,7 @@ export function FormularioTeste({
   setForm,
   salvarTeste,
   testeEditandoId,
+  salvando,
 }: Props) {
 
   function atualizarCampo(
@@ -265,16 +267,17 @@ export function FormularioTeste({
           />
         </div>
 
-        {/* <textarea
-          className="input resize-none"
-          name="observacoes"
-          placeholder="Observações"
-          value={form.observacoes}
-          onChange={atualizarCampo} /> */}
-
         <div className="flex justify-center items-center rounded-lg md:col-start-4">
-          <button className="flex justify-center items-center w-full h-13 py-5 rounded-lg bg-blue-700 font-medium text-white hover:bg-blue-800">
-            {testeEditandoId ? "Salvar alterações" : "Salvar teste"}
+          <button
+            type="submit"
+            disabled={salvando}
+            className="flex h-13 w-full items-center justify-center rounded-lg bg-blue-700 py-5 font-medium text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {salvando
+              ? "Salvando..."
+              : testeEditandoId
+                ? "Salvar alterações"
+                : "Salvar teste"}
           </button>
         </div>
       </div>

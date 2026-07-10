@@ -5,6 +5,8 @@ import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
 import Select from "react-select";
 import { supabase } from "../lib/supabase";
+import { CheckCircle2, Clock3 } from "lucide-react";
+import { Loader2, Check, Database } from "lucide-react";
 
 type Props = {
   testes: TesteTecido[];
@@ -15,6 +17,8 @@ type Props = {
   setOrdemAdicao: React.Dispatch<React.SetStateAction<"recente" | "antigo">>;
   editarTeste: (teste: TesteTecido) => void;
   solicitarExclusao: (teste: TesteTecido) => void;
+  sincronizarBanco: () => Promise<void>;
+  statusSync: "idle" | "loading" | "success";
 };
 
 export function TabelaTestes({
@@ -26,6 +30,8 @@ export function TabelaTestes({
   setFiltroLote,
   editarTeste,
   solicitarExclusao,
+  sincronizarBanco,
+  statusSync,
 }: Props) {
 
   const selectStyles = {
@@ -53,7 +59,7 @@ export function TabelaTestes({
     }),
   };
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   async function sair() {
     await supabase.auth.signOut();
@@ -67,7 +73,7 @@ export function TabelaTestes({
       <div>
         <button
           onClick={sair}
-          className="rounded-md bg-red-600 px-4 py-2 absolute top-6 right-10 text-sm font-semibold text-white hover:bg-red-700"
+          className="rounded-md bg-red-600 px-4 py-2 absolute top-6 right-10 text-sm text-white hover:bg-red-700"
         >
           Sair
         </button>
@@ -123,6 +129,7 @@ export function TabelaTestes({
               <th className="px-8 py-8 whitespace-nowrap">Res. Urdume</th>
               <th className="px-8 py-8 whitespace-nowrap">Res. Reforço</th>
               <th className="px-8 py-8 whitespace-nowrap">Controlista</th>
+              <th className="px-8 py-8 whitespace-nowrap">Status</th>
               <th className="px-8 py-8" colSpan={2}>Ações</th>
             </tr>
           </thead>
@@ -132,9 +139,7 @@ export function TabelaTestes({
               <tr key={teste.id}>
                 <td className="border border-slate-300 p-2">{index + 1}</td>
                 <td className="border border-slate-300 p-2">{teste.lote}</td>
-                <td className="border border-slate-300 p-2">
-                  {formatarData(teste.data)}
-                </td>
+                <td className="border border-slate-300 p-2">{formatarData(teste.data)}</td>
                 <td className="border border-slate-300 p-2">{teste.tear}</td>
                 <td className="border border-slate-300 p-2">{teste.turma}</td>
                 <td className="border border-slate-300 p-2">{teste.artigo}</td>
@@ -152,6 +157,19 @@ export function TabelaTestes({
                 </td>
                 <td className="border border-slate-300 p-2">
                   {teste.controlista}
+                </td>
+                <td className="border border-slate-300 p-2">
+                  {teste.sincronizado ? (
+                    <span className="inline-flex items-center gap-2 font-medium text-green-600">
+                      <CheckCircle2 size={18} />
+                      Enviado
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 font-medium text-amber-600">
+                      <Clock3 size={18} />
+                      Pendente
+                    </span>
+                  )}
                 </td>
                 <td className="p-2">
                   <button
@@ -178,20 +196,92 @@ export function TabelaTestes({
         <p className="mt-4 text-slate-500">Nenhum teste lançado ainda.</p>
       )}
 
-      <div className="flex mt-6 justify-end items-center gap-4">
-        <button
-          onClick={() => exportarCSV(testesFiltrados)}
-          className="rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
-        >
-          CSV
-        </button>
+      <div className="flex flex-col-reverse md:flex-row justify-center md:justify-end items-center gap-4">
+        <div>
 
-        <button
-          onClick={() => exportarPDF(testesFiltrados)}
-          className="rounded-lg bg-red-700 px-4 py-2 text-white hover:bg-red-800"
-        >
-          PDF
-        </button>
+          {/* AJUSTAR AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+          <button
+            onClick={sincronizarBanco}
+            disabled={statusSync === "loading"}
+            className="
+    relative
+    w-60
+    h-11
+    overflow-hidden
+    rounded-lg
+    bg-emerald-600
+    text-white
+    hover:bg-emerald-700
+    transition-colors
+    duration-300
+    disabled:cursor-not-allowed
+  "
+          >
+            <div className="relative flex h-full items-center justify-center">
+
+              {/* Estado normal */}
+              <span
+                className={`
+      absolute flex items-center gap-2
+      transition-all duration-300
+      ${statusSync === "idle"
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-95"
+                  }
+    `}
+              >
+                <Database size={18} />
+                Sincronizar
+              </span>
+
+              {/* Carregando */}
+              <span
+                className={`
+      absolute flex items-center gap-2
+      transition-all duration-300
+      ${statusSync === "loading"
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-95"
+                  }
+    `}
+              >
+                <Loader2 className="animate-spin" size={18} />
+                Sincronizando...
+              </span>
+
+              {/* Sucesso */}
+              <span
+                className={`
+      absolute flex items-center gap-2
+      transition-all duration-300
+      ${statusSync === "success"
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-95"
+                  }
+    `}
+              >
+                <Check size={18} />
+                Sincronizado
+              </span>
+
+            </div>
+          </button>
+        </div>
+        <div className="flex gap-4">
+          <button
+            onClick={() => exportarCSV(testesFiltrados)}
+            className="rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800"
+          >
+            CSV
+          </button>
+
+          <button
+            onClick={() => exportarPDF(testesFiltrados)}
+            className="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+          >
+            PDF
+          </button>
+        </div>
       </div>
     </div>
   );

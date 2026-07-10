@@ -15,7 +15,7 @@ export type TesteTecido = {
   resistenciaUrdume: string;
   resistenciaReforco: string;
   controlista: string;
-  observacoes: string;
+  sincronizado: boolean;
 };
 
 export type FormTesteTecido = Omit<TesteTecido, "id">;
@@ -34,5 +34,5 @@ export const formInicial: FormTesteTecido = {
   resistenciaUrdume: "",
   resistenciaReforco: "",
   controlista: "",
-  observacoes: "",
+  sincronizado: false,
 };
