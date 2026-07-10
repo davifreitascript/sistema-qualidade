@@ -1,4 +1,4 @@
-import type { FormTesteTecido, TesteTecido } from "./types/teste";
+import type { FormTesteTecido } from "./types/teste";
 import { useState } from "react";
 import { formInicial } from "./types/teste";
 import { FormularioTeste } from "./components/FormularioTeste";
