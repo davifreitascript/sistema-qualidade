@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import type { TesteTecido } from "../types/teste";
 import { TabelaTestes } from "../components/TabelaTestes";
-import { sincronizarTestes } from "../services/testes";
 
 export default function Testes() {
 
