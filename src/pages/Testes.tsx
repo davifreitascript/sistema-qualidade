@@ -52,7 +52,7 @@ export default function Testes() {
     setStatusSync("loading");
 
     try {
-      const enviados = await sincronizarTestes(pendentes);
+      
 
       const atualizados = testes.map((teste) => ({
         ...teste,
