@@ -2,9 +2,8 @@ import type { TesteTecido } from "../types/teste";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
-
-
 import { Loader2, Check, Database, Table, File, CheckCircle2, Clock3 } from "lucide-react";
+import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
 
 type Props = {
@@ -62,7 +61,7 @@ export function TabelaTestes({
     <div className="flex flex-col gap-6 p-6 rounded-xl bg-white shadow">
 
       <div className="flex flex-col justify-between gap-3 md:flex-row">
-        <h2 className="mb-4 md:text-left text-center text-3xl font-semibold">Testes lançados</h2>
+        <h2 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Testes lançados</h2>
 
         <div className="relative z-30 flex gap-4 justify-center items-center">
           <input
@@ -216,15 +215,15 @@ export function TabelaTestes({
         <button
           onClick={() => exportarCSV(testesFiltrados)}
           className="btn btn-blue">
-            <Table size={18} />
-          CSV
+            <FaFileCsv size={18} />
+
         </button>
 
         <button
           onClick={() => exportarPDF(testesFiltrados)}
           className="btn btn-red">
-            <File size={18} />
-          PDF
+            <FaFilePdf size={18} />
+
         </button>
 
       </div>

@@ -1,5 +1,6 @@
 import type { TesteTecido } from "../types/teste";
-import { formatarData } from "./formatarData";
+/* import { formatarData } from "./formatarData"; */
+
 
 export function exportarCSV(testes: TesteTecido[]) {
   if (testes.length === 0) {
@@ -26,7 +27,6 @@ export function exportarCSV(testes: TesteTecido[]) {
   ];
 
   const linhas = testes.map((teste) => [
-    formatarData(teste.data),
     limpar(teste.lote),
     limpar(teste.tear),
     limpar(teste.turma),

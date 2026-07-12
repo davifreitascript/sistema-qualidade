@@ -1,8 +1,11 @@
 import type { FormTesteTecido, TipoTecido } from "../types/teste";
+import { useEffect } from "react";
 import { artigosPorTipo } from "../data/artigos";
 import { teares } from "../data/teares";
 import { gerarLotePorData } from "../utils/gerarLote";
 import Select from "react-select";
+import { obterDataAtual } from "../utils/formatarData"
+
 
 type Props = {
   form: FormTesteTecido;
@@ -19,6 +22,18 @@ export function FormularioTeste({
   testeEditandoId,
   salvando,
 }: Props) {
+
+  useEffect(() => {
+    if (!form.data) {
+      const data = obterDataAtual();
+
+      setForm((prev) => ({
+        ...prev,
+        data,
+        lote: gerarLotePorData(data),
+      }));
+    }
+  }, [form.data, setForm]);
 
   function atualizarCampo(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = event.target;
@@ -89,35 +104,8 @@ export function FormularioTeste({
               }))
             }
           />
+          
 
-          <input
-            className="input"
-            type="date"
-            name="data"
-            required
-            value={form.data}
-            onChange={(event) => {
-              const data = event.target.value;
-
-              const ano = data.split("-")[0];
-
-              if (ano.length > 4) return;
-
-              setForm((prev) => ({
-                ...prev,
-                data,
-                lote: gerarLotePorData(data),
-              }));
-            }}
-          />
-
-          <div className="input flex justify-between items-center rounded-lg border border-slate-300 bg-slate-50 min-w-44 text-left">
-            <span className="block text-xs font-medium text-slate-500 select-none">Lote:</span>
-
-            <strong className="block text-lg text-slate-800">
-              {form.lote || ""}
-            </strong>
-          </div>
         </div>
 
       </div>
@@ -272,7 +260,7 @@ export function FormularioTeste({
           <button
             type="submit"
             disabled={salvando}
-            className="btn btn-blue">
+            className="w-full h-full rounded-lg text-white font-semibold cursor-pointer btn-blue">
             {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
           </button>
         </div>

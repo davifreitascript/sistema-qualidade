@@ -1,7 +1,6 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import type { TesteTecido } from "../types/teste";
-import { formatarData } from "./formatarData";
 
 export function exportarPDF(testes: TesteTecido[]) {
     if (testes.length === 0) {
@@ -38,7 +37,6 @@ export function exportarPDF(testes: TesteTecido[]) {
 
         body: testes.map((teste, index) => [
             index + 1,
-            formatarData(teste.data),
              teste.lote,
             teste.tear,
             teste.turma,

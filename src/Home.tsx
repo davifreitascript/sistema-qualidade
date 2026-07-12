@@ -2,6 +2,8 @@ import type { FormTesteTecido } from "./types/teste";
 import { useState } from "react";
 import { formInicial } from "./types/teste";
 import { FormularioTeste } from "./components/FormularioTeste";
+import { obterDataAtual } from "./utils/formatarData";
+import { formatarData } from "./utils/formatarData"
 import { supabase } from "./lib/supabase";
 import { salvarTesteLocal } from "./services/testes";
 import { Link, useNavigate } from "react-router-dom";
@@ -51,21 +53,41 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-100 p-3 md:p-6">
-      <div className="flex items-center justify-end gap-4">
+      <div className="flex items-center justify-between gap-4 py-2 px-6">
 
-        <Link
-          to="/testes"
-          className="flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 text-white hover:bg-blue-800 transition">
-          <Table2 size={18} />
-          Testes
-        </Link>
+        <div className="flex gap-2">
+          <div className="input flex justify-between items-center rounded-lg border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
+            <span className="block text-xs font-medium text-slate-500 select-none">
+              Data:
+            </span>
 
-        <button
-          onClick={sair}
-          className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700 transition cursor-pointer">
-          <LogOut size={18} />
-          Sair
-        </button>
+            <strong className="block text-base text-slate-800">
+              {formatarData(obterDataAtual())}
+            </strong>
+          </div>
+
+          <div className="input flex justify-between items-center rounded-lg border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
+            <span className="block text-xs font-medium text-slate-500 select-none">Lote:</span>
+
+            <strong className="block text-base text-slate-800">
+              {form.lote || ""}
+            </strong>
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <Link
+            to="/testes"
+            className="btn btn-blue">
+            <Table2 size={18} />
+          </Link>
+
+          <button
+            onClick={sair}
+            className="btn btn-red">
+            <LogOut size={18} />
+          </button>
+        </div>
       </div>
 
       <div className="mx-auto w-full max-w-5xl">
