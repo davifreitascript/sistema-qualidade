@@ -1,6 +1,4 @@
 import type { TesteTecido } from "../types/teste";
-/* import { formatarData } from "./formatarData"; */
-
 
 export function exportarCSV(testes: TesteTecido[]) {
   if (testes.length === 0) {
