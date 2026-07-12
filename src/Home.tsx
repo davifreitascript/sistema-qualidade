@@ -53,10 +53,11 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-100 p-3 md:p-6">
-      <div className="flex items-center justify-between gap-4 py-2 px-6">
 
-        <div className="flex gap-2">
-          <div className="input flex justify-between items-center rounded-lg border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
+      <div className="flex md:flex-row flex-col-reverse items-center justify-between gap-4 py-2 px-6">
+
+        <div className="flex gap-2 w-full md:w-fit">
+          <div className="input flex md:flex-row flex-col justify-center md:justify-between rounded-md border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
             <span className="block text-xs font-medium text-slate-500 select-none">
               Data:
             </span>
@@ -66,7 +67,7 @@ export default function Home() {
             </strong>
           </div>
 
-          <div className="input flex justify-between items-center rounded-lg border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
+          <div className="input flex md:flex-row flex-col md:justify-between justify-center rounded-md border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
             <span className="block text-xs font-medium text-slate-500 select-none">Lote:</span>
 
             <strong className="block text-base text-slate-800">
@@ -75,7 +76,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 md:justify-center justify-between w-full md:w-fit">
           <Link
             to="/testes"
             className="btn btn-blue">
@@ -91,7 +92,7 @@ export default function Home() {
       </div>
 
       <div className="mx-auto w-full max-w-5xl">
-        <h1 className="my-8 text-center text-2xl font-bold text-slate-800 md:text-5xl">
+        <h1 className="my-8 text-center text-2xl font-bold text-slate-800 md:text-5xl select-none">
           Alçatec - Lançamento de tecido
         </h1>
 

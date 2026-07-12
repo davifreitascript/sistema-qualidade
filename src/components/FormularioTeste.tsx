@@ -260,7 +260,7 @@ export function FormularioTeste({
           <button
             type="submit"
             disabled={salvando}
-            className="w-full h-full rounded-lg text-white font-semibold cursor-pointer btn-blue">
+            className="btn-blue w-full h-full py-2 rounded-md font-semibold text-white cursor-pointer">
             {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
           </button>
         </div>

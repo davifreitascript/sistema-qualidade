@@ -6,19 +6,19 @@ body {
 
 @layer components {
   .btn {
-    @apply flex justify-center items-center gap-2 px-4 py-2 font-medium rounded-lg text-white cursor-pointer;
+    @apply flex justify-center items-center gap-2 px-4 py-2 font-medium rounded-md text-white cursor-pointer;
   }
 
   .btn-blue {
-    @apply bg-blue-700 hover:bg-blue-800;
+    @apply bg-blue-600 hover:bg-blue-700;
   }
 
   .btn-red {
-    @apply bg-red-700 hover:bg-red-800;
+    @apply bg-red-600 hover:bg-red-700;
   }
 
   .btn-green {
-    @apply bg-green-700 hover:bg-green-800;
+    @apply bg-green-600 hover:bg-green-700;
   }
 
   .btn-amber {
@@ -26,10 +26,10 @@ body {
   }
 
   .input {
-    @apply h-13 w-full px-3 py-2 rounded-lg border border-slate-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
+    @apply h-13 w-full px-3 py-2 rounded-md border border-slate-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
   }
 
   .inputLote {
-    @apply h-13 w-35 px-3 py-2 rounded-lg border border-slate-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
+    @apply h-13 w-35 px-3 py-2 rounded-md border border-slate-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
   }
 }

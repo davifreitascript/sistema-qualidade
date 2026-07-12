@@ -58,7 +58,7 @@ export function TabelaTestes({
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6 rounded-xl bg-white shadow">
+    <div className="flex flex-col gap-6 p-6 min-h-90 max-h-130 rounded-xl bg-white shadow">
 
       <div className="flex flex-col justify-between gap-3 md:flex-row">
         <h2 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Testes lançados</h2>

@@ -125,7 +125,6 @@ export async function sincronizarTestes(testes: TesteTecido[]): Promise<number[]
         if (error) {
             console.error("Erro ao inserir:", error);
         } else {
-            console.log("Inserido com sucesso:", teste.id);
             enviados.push(teste.id);
         }
     }
