@@ -19,56 +19,26 @@ function RotaProtegida({ children }: { children: React.ReactNode }) {
   const [logado, setLogado] = useState(false);
 
   useEffect(() => {
+    async function verificarSessao() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
-    let componenteAtivo = true;
+      const sessaoAtiva = sessionStorage.getItem("sessaoAtiva");
 
-    async function encerrarSessao() {
-      await supabase.auth.signOut();
-      localStorage.removeItem("loginExpiraEm");
+      if (!session || !sessaoAtiva) {
+        await supabase.auth.signOut();
 
-      if (componenteAtivo) {
         setLogado(false);
         setCarregando(false);
-      }
-    }
-
-    async function verificarSessao() {
-      const { data, error } = await supabase.auth.getSession();
-
-      if (!componenteAtivo) return;
-
-      const loginExpiraEm = Number(localStorage.getItem("loginExpiraEm"));
-
-      if (error || !data.session || !loginExpiraEm) {
-        await encerrarSessao();
-        return;
-      }
-      const tempoRestante = loginExpiraEm - Date.now();
-
-      if (tempoRestante <= 0) {
-        await encerrarSessao();
         return;
       }
 
       setLogado(true);
       setCarregando(false);
-
-      timeoutId = setTimeout(() => {
-        void encerrarSessao();
-      }, tempoRestante);
     }
 
     void verificarSessao();
-
-    return () => {
-      componenteAtivo = false;
-
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    }
-
   }, []);
 
   if (carregando) {
@@ -79,7 +49,9 @@ function RotaProtegida({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!logado) return <Navigate to="/login" replace />;
+  if (!logado) {
+    return <Navigate to="/login" replace />;
+  }
 
   return children;
 }

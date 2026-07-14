@@ -10,13 +10,6 @@ export default function Login() {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
 
-  const VINTE_E_QUATRO_HORAS = 24 * 60 * 60 * 1000;
-
-  localStorage.setItem(
-    "loginExpiraEm",
-    String(Date.now() + VINTE_E_QUATRO_HORAS)
-  );
-
   async function entrar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErro("");
@@ -31,10 +24,7 @@ export default function Login() {
       return;
     }
 
-    localStorage.setItem(
-      "loginExpiraEm",
-      String(Date.now() + VINTE_E_QUATRO_HORAS)
-    );
+    sessionStorage.setItem("sessaoAtiva", "true");
 
     navigate("/", { replace: true });
   }

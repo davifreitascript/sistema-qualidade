@@ -1,19 +1,52 @@
 import type { FormTesteTecido } from "./types/teste";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "./lib/supabase";
+import { useNavigate } from "react-router-dom";
 import { formInicial } from "./types/teste";
 import { FormularioTeste } from "./components/FormularioTeste";
-import { obterDataAtual } from "./utils/formatarData";
-import { formatarData } from "./utils/formatarData"
-import { supabase } from "./lib/supabase";
+import { obterDataAtual, formatarData } from "./utils/formatarData";
+import { gerarLotePorData } from "./utils/gerarLote";
 import { salvarTesteLocal } from "./services/testes";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Table2, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
+import { CHAVE_FORMULARIO } from "./config/auth";
 
 export default function Home() {
+
   const navigate = useNavigate();
 
-  const [form, setForm] = useState<FormTesteTecido>(formInicial);
+  const [form, setForm] = useState<FormTesteTecido>(() => {
+    const hoje = obterDataAtual();
+
+    const salvo = sessionStorage.getItem("formulario-tecido");
+
+    if (salvo) {
+      const formulario: FormTesteTecido = JSON.parse(salvo);
+
+      // Se mudou o dia, atualiza automaticamente data e lote
+      if (formulario.data !== hoje) {
+        return {
+          ...formulario,
+          data: hoje,
+          lote: gerarLotePorData(hoje),
+        };
+      }
+
+      return formulario;
+    }
+
+    return {
+      ...formInicial,
+      data: hoje,
+      lote: gerarLotePorData(hoje),
+    };
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("formulario-tecido", JSON.stringify(form));
+  }, [form]);
+
   const [salvando, setSalvando] = useState(false);
   const [erroSalvar, setErroSalvar] = useState("");
 
@@ -23,21 +56,18 @@ export default function Home() {
     setSalvando(true);
     setErroSalvar("");
 
-    const turmaAtual = form.turma;
-    const dataAtual = form.data;
-    const loteAtual = form.lote;
-
     try {
       salvarTesteLocal(form);
 
       toast.success("Teste salvo localmente.");
 
-      setForm({
+      setForm((prev) => ({
         ...formInicial,
-        data: dataAtual,
-        lote: loteAtual,
-        turma: turmaAtual,
-      });
+        turma: prev.turma,
+        data: prev.data,
+        lote: prev.lote,
+      }));
+
     } catch {
       setErroSalvar("Não foi possível salvar o teste.");
     } finally {
@@ -46,8 +76,11 @@ export default function Home() {
   }
 
   async function sair() {
+    sessionStorage.removeItem("sessaoAtiva");
+    sessionStorage.removeItem(CHAVE_FORMULARIO);
+
     await supabase.auth.signOut();
-    localStorage.removeItem("loginExpiraEm");
+
     navigate("/login", { replace: true });
   }
 
@@ -63,7 +96,7 @@ export default function Home() {
             </span>
 
             <strong className="block text-base text-slate-800">
-              {formatarData(obterDataAtual())}
+              {formatarData(form.data)}
             </strong>
           </div>
 

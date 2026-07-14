@@ -2,6 +2,7 @@ import type { TesteTecido } from "../types/teste";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
+import { ModalExcluir } from "../components/ModalExcluir";
 import { Loader2, Check, Database, CheckCircle2, Clock3 } from "lucide-react";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
@@ -14,7 +15,7 @@ type Props = {
   ordemAdicao: "recente" | "antigo";
   setOrdemAdicao: React.Dispatch<React.SetStateAction<"recente" | "antigo">>;
   editarTeste: (teste: TesteTecido) => void;
-  solicitarExclusao: (teste: TesteTecido) => void;
+  solicitarExclusao: (teste: TesteTecido, numero: number) => void;
   sincronizarBanco: () => Promise<void>;
   statusSync: "idle" | "loading" | "success";
 };
@@ -162,7 +163,7 @@ export function TabelaTestes({
 
                 <td className="p-2">
                   <button
-                    onClick={() => solicitarExclusao(teste)}
+                    onClick={() => solicitarExclusao(teste, index + 1)}
                     className="rounded bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700">
                     Excluir
                   </button>
@@ -183,10 +184,9 @@ export function TabelaTestes({
           <button
             onClick={sincronizarBanco}
             disabled={statusSync === "loading"}
-            className="w-12 h-10 btn btn-green">
+            className="w-12 h-8 btn btn-green">
 
             <div className="flex h-full items-center justify-center">
-
               <span
                 className={`absolute flex items-center gap-2 transition-all duration-300 ${statusSync === "idle"
                   ? "opacity-100 scale-100"
@@ -207,25 +207,22 @@ export function TabelaTestes({
                   : "opacity-0 scale-95"}`}>
                 <Check size={18} />
               </span>
-
             </div>
+
           </button>
         </div>
 
         <button
           onClick={() => exportarCSV(testesFiltrados)}
           className="btn btn-blue">
-            <FaFileCsv size={18} />
-
+          <FaFileCsv size={18} />
         </button>
 
         <button
           onClick={() => exportarPDF(testesFiltrados)}
           className="btn btn-red">
-            <FaFilePdf size={18} />
-
+          <FaFilePdf size={18} />
         </button>
-
       </div>
     </div>
   );
