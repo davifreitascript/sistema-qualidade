@@ -2,7 +2,6 @@ import type { TesteTecido } from "../types/teste";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
-import { ModalExcluir } from "../components/ModalExcluir";
 import { Loader2, Check, Database, CheckCircle2, Clock3 } from "lucide-react";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
