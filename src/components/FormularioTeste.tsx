@@ -6,7 +6,6 @@ import { gerarLotePorData } from "../utils/gerarLote";
 import Select from "react-select";
 import { obterDataAtual } from "../utils/formatarData"
 
-
 type Props = {
   form: FormTesteTecido;
   setForm: React.Dispatch<React.SetStateAction<FormTesteTecido>>;
@@ -104,7 +103,7 @@ export function FormularioTeste({
               }))
             }
           />
-          
+
 
         </div>
 

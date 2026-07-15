@@ -43,13 +43,32 @@ export default function Home() {
   }, [form]);
 
   const [salvando, setSalvando] = useState(false);
-  const [erroSalvar, setErroSalvar] = useState("");
+
 
   async function salvarTeste(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const obrigatorios = [
+      "turma",
+      "tear",
+      "tipoTecido",
+      "artigo",
+      "gramatura",
+      "batidaTrama",
+      "batidaUrdume",
+      "controlista"
+    ];
+
+    const invalidos = obrigatorios.filter(
+      (campo) => !form[campo as keyof FormTesteTecido]
+    );
+
+    if (invalidos.length > 0) {
+      toast.error("Preencha os campos obrigatórios.");
+      return;
+    }
+
     setSalvando(true);
-    setErroSalvar("");
 
     try {
       salvarTesteLocal(form);
@@ -64,7 +83,7 @@ export default function Home() {
       }));
 
     } catch {
-      setErroSalvar("Não foi possível salvar o teste.");
+      toast.error("Não foi possível salvar o teste.");
     } finally {
       setSalvando(false);
     }
@@ -107,6 +126,7 @@ export default function Home() {
           </Link>
 
           <button
+            type="button"
             onClick={sair}
             className="btn btn-red">
             <LogOut size={18} />
@@ -118,14 +138,6 @@ export default function Home() {
         <h1 className="my-8 text-center text-2xl font-bold text-slate-800 md:text-5xl select-none">
           Alçatec - Lançamento de tecido
         </h1>
-
-
-
-        {erroSalvar && (
-          <p className="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-800">
-            {erroSalvar}
-          </p>
-        )}
 
         <FormularioTeste
           form={form}

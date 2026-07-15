@@ -1,8 +1,8 @@
 export type TipoTecido = "leve" | "pesado";
 
 export type FormTesteTecido = {
-  lote: string;
   data: string;
+  lote: string;
   tear: string;
   turma: string;
   tipoTecido: "" | TipoTecido;
@@ -24,8 +24,8 @@ export type TesteTecido = FormTesteTecido & {
 };
 
 export const formInicial: FormTesteTecido = {
-  lote: "",
   data: "",
+  lote: "",
   tear: "",
   turma: "",
   tipoTecido: "",
@@ -36,5 +36,5 @@ export const formInicial: FormTesteTecido = {
   resistenciaTrama: "",
   resistenciaUrdume: "",
   resistenciaReforco: "",
-  controlista: "",
+  controlista: ""
 };
