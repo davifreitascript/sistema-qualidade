@@ -1,6 +1,7 @@
 import type { FormTesteTecido } from "./types/teste";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { supabase } from "./lib/supabase";
+import { Link, useNavigate } from "react-router-dom";
 import { formInicial } from "./types/teste";
 import { FormularioTeste } from "./components/FormularioTeste";
 import { obterDataAtual, formatarData } from "./utils/formatarData";
@@ -11,6 +12,7 @@ import { Table2, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function Home() {
+  const navigate = useNavigate();
 
   const [form, setForm] = useState<FormTesteTecido>(() => {
     const hoje = obterDataAtual();
@@ -90,7 +92,12 @@ export default function Home() {
   }
 
   async function sair() {
-    sessionStorage.clear();
+    sessionStorage.removeItem("sessaoAtiva");
+    sessionStorage.removeItem(CHAVE_FORMULARIO);
+
+    await supabase.auth.signOut();
+
+    navigate("/login", { replace: true });
   }
 
   return (
