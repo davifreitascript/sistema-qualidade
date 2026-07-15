@@ -22,6 +22,6 @@ export const artigosPorTipo: Record<TipoTecido,
     { codigo: "360x190", nome: "360x190" },
     { codigo: "360x200", nome: "360x200" },
     { codigo: "360x220", nome: "360x220" },
-    { codigo: "360x220", nome: "376x190" },
+    { codigo: "376x190", nome: "376x190" },
   ],
 };

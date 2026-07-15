@@ -2,7 +2,7 @@ import type { TesteTecido } from "../types/teste";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
-import { Loader2, Check, Database, CheckCircle2, Clock3 } from "lucide-react";
+import { Loader2, Check, Database, HardDrive, BadgeCheck } from "lucide-react";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
 
@@ -63,7 +63,7 @@ export function TabelaTestes({
       <div className="flex flex-col justify-between gap-3 md:flex-row">
         <h2 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Testes lançados</h2>
 
-        <div className="relative z-30 flex gap-4 justify-center items-center">
+        <div className="z-30 flex gap-4 justify-center items-center">
           <input
             type="number"
             className="inputLote"
@@ -127,28 +127,21 @@ export function TabelaTestes({
                 <td className="border border-slate-300 p-2">{teste.gramatura}</td>
                 <td className="border border-slate-300 p-2">{teste.batidaTrama}</td>
                 <td className="border border-slate-300 p-2">{teste.batidaUrdume}</td>
-                <td className="border border-slate-300 p-2">
-                  {teste.resistenciaTrama}
-                </td>
-                <td className="border border-slate-300 p-2">
-                  {teste.resistenciaUrdume}
-                </td>
-                <td className="border border-slate-300 p-2">
-                  {teste.resistenciaReforco}
-                </td>
-                <td className="border border-slate-300 p-2">
-                  {teste.controlista}
-                </td>
+                <td className="border border-slate-300 p-2">{teste.resistenciaTrama}</td>
+                <td className="border border-slate-300 p-2">{teste.resistenciaUrdume}</td>
+                <td className="border border-slate-300 p-2">{teste.resistenciaReforco}</td>
+                <td className="border border-slate-300 p-2">{teste.controlista}</td>
+                
                 <td className="border border-slate-300 p-2">
                   {teste.sincronizado ? (
                     <span className="inline-flex items-center gap-2 font-medium text-green-600">
-                      <CheckCircle2 size={18} />
+                      <BadgeCheck size={18} />
                       Sincronizado
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-2 font-medium text-amber-600">
-                      <Clock3 size={18} />
-                      Pendente
+                      <HardDrive size={18} />
+                      Local
                     </span>
                   )}
                 </td>
@@ -173,9 +166,7 @@ export function TabelaTestes({
         </table>
       </div>
 
-      {testes.length === 0 && (
-        <p className="mt-4 text-slate-500">Nenhum teste lançado ainda.</p>
-      )}
+      {testes.length === 0 && (<p className="mt-4 text-slate-500">Nenhum teste lançado ainda.</p>)}
 
       <div className="flex justify-center md:justify-end items-center gap-4">
 

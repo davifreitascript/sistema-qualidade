@@ -46,7 +46,7 @@ export default function Testes() {
     if (!testeSelecionado) return;
 
     try {
-      await excluirTeste(testeSelecionado.uuid);
+      await excluirTeste(testeSelecionado.uuid, testeSelecionado.sincronizado);
 
       setTestes((prev) =>
         prev.filter((item) => item.uuid !== testeSelecionado.uuid)

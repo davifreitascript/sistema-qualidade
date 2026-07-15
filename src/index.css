@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
-body {
-  font-family: "Inter", sans-serif;
+@layer base {
+  body {
+    font-family: "Inter", sans-serif;
+  }
 }
 
 @layer components {
@@ -26,10 +28,14 @@ body {
   }
 
   .input {
-    @apply h-13 w-full px-3 py-2 rounded-md border border-slate-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
+    @apply h-13 w-full px-3 py-2 rounded-md border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none;
   }
 
   .inputLote {
-    @apply h-13 w-35 px-3 py-2 rounded-md border border-slate-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100;
+    @apply h-13 w-35 px-3 py-2 rounded-md border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none;
+  }
+
+  .dataLote {
+    @apply h-13 w-full px-3 py-2 rounded-md border border-slate-300 select-none;
   }
 }

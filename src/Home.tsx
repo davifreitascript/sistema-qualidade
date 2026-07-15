@@ -1,30 +1,25 @@
 import type { FormTesteTecido } from "./types/teste";
 import { useState, useEffect } from "react";
-import { supabase } from "./lib/supabase";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formInicial } from "./types/teste";
 import { FormularioTeste } from "./components/FormularioTeste";
 import { obterDataAtual, formatarData } from "./utils/formatarData";
 import { gerarLotePorData } from "./utils/gerarLote";
 import { salvarTesteLocal } from "./services/testes";
-import { Link } from "react-router-dom";
+import { CHAVE_FORMULARIO } from "./config/auth";
 import { Table2, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
-import { CHAVE_FORMULARIO } from "./config/auth";
 
 export default function Home() {
-
-  const navigate = useNavigate();
 
   const [form, setForm] = useState<FormTesteTecido>(() => {
     const hoje = obterDataAtual();
 
-    const salvo = sessionStorage.getItem("formulario-tecido");
+    const salvo = sessionStorage.getItem(CHAVE_FORMULARIO);
 
     if (salvo) {
       const formulario: FormTesteTecido = JSON.parse(salvo);
 
-      // Se mudou o dia, atualiza automaticamente data e lote
       if (formulario.data !== hoje) {
         return {
           ...formulario,
@@ -44,13 +39,13 @@ export default function Home() {
   });
 
   useEffect(() => {
-    sessionStorage.setItem("formulario-tecido", JSON.stringify(form));
+    sessionStorage.setItem(CHAVE_FORMULARIO, JSON.stringify(form));
   }, [form]);
 
   const [salvando, setSalvando] = useState(false);
   const [erroSalvar, setErroSalvar] = useState("");
 
-  async function salvarTeste(event: React.FormEvent<HTMLFormElement>) {
+  async function salvarTeste(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setSalvando(true);
@@ -76,12 +71,7 @@ export default function Home() {
   }
 
   async function sair() {
-    sessionStorage.removeItem("sessaoAtiva");
-    sessionStorage.removeItem(CHAVE_FORMULARIO);
-
-    await supabase.auth.signOut();
-
-    navigate("/login", { replace: true });
+    sessionStorage.clear();
   }
 
   return (
@@ -90,7 +80,7 @@ export default function Home() {
       <div className="flex md:flex-row flex-col-reverse items-center justify-between gap-4 py-2 px-6">
 
         <div className="flex gap-2 w-full md:w-fit">
-          <div className="input flex md:flex-row flex-col justify-center md:justify-between rounded-md border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
+          <div className="dataLote">
             <span className="block text-xs font-medium text-slate-500 select-none">
               Data:
             </span>
@@ -100,7 +90,7 @@ export default function Home() {
             </strong>
           </div>
 
-          <div className="input flex md:flex-row flex-col md:justify-between justify-center rounded-md border border-slate-300 bg-slate-50 min-w-38 text-left select-none">
+          <div className="dataLote">
             <span className="block text-xs font-medium text-slate-500 select-none">Lote:</span>
 
             <strong className="block text-base text-slate-800">

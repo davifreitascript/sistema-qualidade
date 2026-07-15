@@ -186,23 +186,27 @@ export function excluirTesteLocal(uuid: string) {
 }
 
 export async function excluirTesteBanco(uuid: string) {
-
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("testes")
         .delete()
-        .eq("uuid", uuid)
-        .select();
+        .eq("uuid", uuid);
 
     if (error) {
         throw new Error(error.message);
     }
-
-    if (!data || data.length === 0) {
-        throw new Error("Teste não encontrado no banco.");
-    }
 }
 
-export async function excluirTeste(uuid: string) {
-    await excluirTesteBanco(uuid);
+export async function excluirTeste(
+    uuid: string,
+    sincronizado: boolean
+) {
+    if (sincronizado) {
+        try {
+            await excluirTesteBanco(uuid);
+        } catch (error) {
+
+        }
+    }
+
     excluirTesteLocal(uuid);
 }
