@@ -1,16 +1,18 @@
+import type { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import type { FormEvent } from "react";
 import { useState } from "react";
 import { supabase } from "../lib/supabase";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
 
-  async function entrar(e: FormEvent<HTMLFormElement>) {
+  async function entrar(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     setErro("");
 
@@ -44,14 +46,26 @@ export default function Login() {
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" />
+            className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          />
 
-          <input
-            type="password"
-            placeholder="Senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" />
+          <div className="relative">
+            <input
+              type={mostrarSenha ? "text" : "password"}
+              placeholder="Senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+            />
+
+            <button
+              type="button"
+              onClick={() => setMostrarSenha(!mostrarSenha)}
+              className="absolute inset-y-0 right-3 flex items-center text-slate-500 hover:text-slate-700">
+
+              {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
 
           {erro && <p className="text-sm text-red-600">{erro}</p>}
 

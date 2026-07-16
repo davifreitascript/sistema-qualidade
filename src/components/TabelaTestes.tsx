@@ -104,12 +104,13 @@ export function TabelaTestes({
               <th className="px-8 py-8 whitespace-nowrap">Turma</th>
               <th className="px-8 py-8 whitespace-nowrap">Artigo</th>
               <th className="px-8 py-8 whitespace-nowrap">Gramatura</th>
-              <th className="px-8 py-8 whitespace-nowrap">Batida de Trama</th>
-              <th className="px-8 py-8 whitespace-nowrap">Batida de Urdume</th>
-              <th className="px-8 py-8 whitespace-nowrap">Res. Trama</th>
-              <th className="px-8 py-8 whitespace-nowrap">Res. Urdume</th>
-              <th className="px-8 py-8 whitespace-nowrap">Res. Reforço</th>
-              <th className="px-8 py-8 whitespace-nowrap">Controlista</th>
+              <th className="px-8 py-8 whitespace-nowrap">Batida Trama</th>
+              <th className="px-8 py-8 whitespace-nowrap">Batida Urdume</th>
+              <th className="px-8 py-8 whitespace-nowrap">Resistência Trama</th>
+              <th className="px-8 py-8 whitespace-nowrap">Resistência Urdume</th>
+              <th className="px-8 py-8 whitespace-nowrap">Resistência Reforço</th>
+              <th className="px-8 py-8 whitespace-nowrap">Responsável Análise</th>
+              <th className="px-8 py-8 whitespace-nowrap">Responsável Teste</th>
               <th className="px-8 py-8 whitespace-nowrap">Status</th>
               <th className="px-8 py-8" colSpan={2}>Ações</th>
             </tr>
@@ -130,8 +131,9 @@ export function TabelaTestes({
                 <td className="border border-slate-300 p-2">{teste.resistenciaTrama}</td>
                 <td className="border border-slate-300 p-2">{teste.resistenciaUrdume}</td>
                 <td className="border border-slate-300 p-2">{teste.resistenciaReforco}</td>
-                <td className="border border-slate-300 p-2">{teste.controlista}</td>
-                
+                <td className="border border-slate-300 p-2">{teste.responsavel_analise}</td>
+                <td className="border border-slate-300 p-2">{teste.responsavel_teste}</td>
+
                 <td className="border border-slate-300 p-2">
                   {teste.sincronizado ? (
                     <span className="inline-flex items-center gap-2 font-medium text-green-600">

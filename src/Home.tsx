@@ -58,7 +58,8 @@ export default function Home() {
       "gramatura",
       "batidaTrama",
       "batidaUrdume",
-      "controlista"
+      "responsavel_analise",
+      "responsavel_teste"
     ];
 
     const invalidos = obrigatorios.filter(
@@ -103,7 +104,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-100 p-3 md:p-6">
 
-      <div className="flex md:flex-row flex-col-reverse items-center justify-between gap-4 py-2 px-6">
+      <div className="flex md:flex-row flex-col-reverse items-center justify-between gap-4 py-2">
 
         <div className="flex gap-2 w-full md:w-fit">
           <div className="dataLote">
@@ -126,6 +127,7 @@ export default function Home() {
         </div>
 
         <div className="flex gap-2 md:justify-center justify-between w-full md:w-fit">
+          
           <Link
             to="/testes"
             className="btn btn-blue">

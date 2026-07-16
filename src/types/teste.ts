@@ -13,7 +13,8 @@ export type FormTesteTecido = {
   resistenciaTrama: string;
   resistenciaUrdume: string;
   resistenciaReforco: string;
-  controlista: string;
+  responsavel_analise: string;
+  responsavel_teste: string;
 };
 
 export type TesteTecido = FormTesteTecido & {
@@ -36,5 +37,6 @@ export const formInicial: FormTesteTecido = {
   resistenciaTrama: "",
   resistenciaUrdume: "",
   resistenciaReforco: "",
-  controlista: ""
+  responsavel_analise: "",
+  responsavel_teste: ""
 };

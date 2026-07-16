@@ -115,19 +115,19 @@ export default function Testes() {
   return (
     <main className="min-h-screen flex flex-col justify-center p-10 relative bg-slate-100">
 
-      <div className="flex justify-end items-center gap-2 absolute top-10 right-12">
-        <button
-          onClick={() => navigate("/")}
-          className="btn btn-blue flex items-center gap-2">
-          <Home size={18} />
-        </button>
+        <div className="flex justify-end items-center gap-2 absolute top-10 right-6">
+          <button
+            onClick={() => navigate("/")}
+            className="btn btn-blue flex items-center gap-2">
+            <Home size={18} />
+          </button>
 
-        <button
-          onClick={sair}
-          className="btn btn-red">
-          <LogOut size={18} />
-        </button>
-      </div>
+          <button
+            onClick={sair}
+            className="btn btn-red">
+            <LogOut size={18} />
+          </button>
+        </div>
 
       <TabelaTestes
         testes={testes}

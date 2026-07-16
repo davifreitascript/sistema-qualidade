@@ -103,10 +103,7 @@ export function FormularioTeste({
               }))
             }
           />
-
-
         </div>
-
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
@@ -117,7 +114,6 @@ export function FormularioTeste({
             styles={selectStyles}
             isSearchable={false}
             placeholder="Tear"
-            required
             value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
             onChange={(opcao) =>
               setForm((prev) => ({
@@ -134,7 +130,6 @@ export function FormularioTeste({
             styles={selectStyles}
             isSearchable={false}
             placeholder="Tipo de tecido"
-            required
             value={opcoesTipoTecido.find((opcao) => opcao.value === form.tipoTecido) || null}
             onChange={(opcao) =>
               setForm((prev) => ({
@@ -152,7 +147,6 @@ export function FormularioTeste({
             styles={selectStyles}
             isSearchable={false}
             placeholder="Artigo"
-            required
             isDisabled={!form.tipoTecido}
             value={opcoesArtigo.find((opcao) => opcao.value === form.artigo) || null}
             onChange={(opcao) =>
@@ -173,7 +167,6 @@ export function FormularioTeste({
             name="gramatura"
             placeholder="Gramatura"
             value={form.gramatura}
-            required
             onChange={atualizarCampo}
           />
         </div>
@@ -188,7 +181,6 @@ export function FormularioTeste({
             placeholder="Batida de Trama"
             value={form.batidaTrama}
             onChange={atualizarCampo}
-            required
           />
         </div>
 
@@ -202,7 +194,6 @@ export function FormularioTeste({
             placeholder="Batida de Urdume"
             value={form.batidaUrdume}
             onChange={atualizarCampo}
-            required
           />
         </div>
 
@@ -245,12 +236,22 @@ export function FormularioTeste({
           />
         </div>
 
-        <div className="md:col-span-2">
+        <div>
           <input
-            className="input col-span-2"
-            name="controlista"
-            placeholder="Controlista"
-            value={form.controlista}
+            className="input"
+            name="responsavel_analise"
+            placeholder="Resp. análise"
+            value={form.responsavel_analise}
+            onChange={atualizarCampo}
+          />
+        </div>
+
+        <div>
+          <input
+            className="input"
+            name="responsavel_teste"
+            placeholder="Resp. teste"
+            value={form.responsavel_teste}
             onChange={atualizarCampo}
           />
         </div>

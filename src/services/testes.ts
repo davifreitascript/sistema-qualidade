@@ -9,14 +9,15 @@ type TesteBanco = {
     tear: string;
     turma: string;
     artigo: string;
-    tipo_tecido: TipoTecido | null;
     gramatura: number | null;
     batida_trama: number | null;
     batida_urdume: number | null;
     resistencia_trama: number | null;
     resistencia_urdume: number | null;
     resistencia_reforco: number | null;
-    controlista: string;
+    responsavel_analise: string;
+    responsavel_teste: string;
+    tipo_tecido: TipoTecido | null;
     observacoes: string | null;
 };
 
@@ -39,14 +40,15 @@ function converterTesteDoBanco(teste: TesteBanco): TesteTecido {
         tear: teste.tear,
         turma: teste.turma,
         artigo: teste.artigo,
-        tipoTecido: teste.tipo_tecido ?? "",
         gramatura: String(teste.gramatura ?? ""),
         batidaTrama: String(teste.batida_trama ?? ""),
         batidaUrdume: String(teste.batida_urdume ?? ""),
         resistenciaTrama: String(teste.resistencia_trama ?? ""),
         resistenciaUrdume: String(teste.resistencia_urdume ?? ""),
         resistenciaReforco: String(teste.resistencia_reforco ?? ""),
-        controlista: teste.controlista,
+        responsavel_analise: teste.responsavel_analise,
+        responsavel_teste: teste.responsavel_teste,
+        tipoTecido: teste.tipo_tecido ?? "",
         sincronizado: true,
     };
 }
@@ -68,14 +70,15 @@ export async function criarTeste(teste: TesteTecido): Promise<TesteTecido> {
             tear: teste.tear,
             turma: teste.turma,
             artigo: teste.artigo,
-            tipo_tecido: teste.tipoTecido,
             gramatura: numeroOuNull(teste.gramatura),
             batida_trama: numeroOuNull(teste.batidaTrama),
             batida_urdume: numeroOuNull(teste.batidaUrdume),
             resistencia_trama: numeroOuNull(teste.resistenciaTrama),
             resistencia_urdume: numeroOuNull(teste.resistenciaUrdume),
             resistencia_reforco: numeroOuNull(teste.resistenciaReforco),
-            controlista: teste.controlista,
+            responsavel_analise: teste.responsavel_analise,
+            responsavel_teste: teste.responsavel_teste,
+            tipo_tecido: teste.tipoTecido,
         })
         .select()
         .single();
@@ -111,14 +114,15 @@ export async function sincronizarTestes(testes: TesteTecido[]): Promise<number[]
                 tear: teste.tear,
                 turma: teste.turma,
                 artigo: teste.artigo,
-                tipo_tecido: teste.tipoTecido,
                 gramatura: numeroOuNull(teste.gramatura),
                 batida_trama: numeroOuNull(teste.batidaTrama),
                 batida_urdume: numeroOuNull(teste.batidaUrdume),
                 resistencia_trama: numeroOuNull(teste.resistenciaTrama),
                 resistencia_urdume: numeroOuNull(teste.resistenciaUrdume),
                 resistencia_reforco: numeroOuNull(teste.resistenciaReforco),
-                controlista: teste.controlista,
+                responsavel_analise: teste.responsavel_analise,
+                responsavel_teste: teste.responsavel_teste,
+                tipo_tecido: teste.tipoTecido,
                 criado_por: usuarioData.user.id,
             });
 
@@ -145,9 +149,7 @@ export async function buscarTestes(): Promise<TesteTecido[]> {
     return (data as TesteBanco[]).map(converterTesteDoBanco);
 }
 
-export function salvarTesteLocal(
-    form: FormTesteTecido
-): TesteTecido {
+export function salvarTesteLocal(form: FormTesteTecido): TesteTecido {
 
     const novoTeste: TesteTecido = {
         id: Date.now(),

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
 @layer base {
   body {
     font-family: "Inter", sans-serif;
