@@ -11,6 +11,8 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 import Login from "./pages/Login";
 import Home from './Home.tsx'
 import Testes from "./pages/Testes.tsx";
+import LancamentoFio from "./pages/LancamentoFio.tsx"
+import  { TestesFio } from "./pages/TestesFio";
 import './index.css'
 
 function RotaProtegida({ children }: { children: React.ReactNode }) {
@@ -60,28 +62,54 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Routes>
         <Route
-          path="/login" 
+          path="/login"
           element={
-            <Login />} />
+            <Login />
+          }
+        />
 
         <Route
           path="/"
           element={
             <RotaProtegida>
               <Home />
-            </RotaProtegida>} />
+            </RotaProtegida>
+          }
+        />
 
         <Route
           path="/testes"
           element={
             <RotaProtegida>
               <Testes />
-            </RotaProtegida>} />
+            </RotaProtegida>
+          }
+        />
 
         <Route
           path="*"
           element={
-          <Navigate to="/" replace />} />
+            <Navigate to="/" replace />
+          }
+        />
+
+        <Route
+          path="/lancamento-fios"
+          element={
+            <RotaProtegida>
+              <LancamentoFio />
+            </RotaProtegida>
+          }
+        />
+
+        <Route
+          path="/testes-fio"
+          element={
+            <RotaProtegida>
+              <TestesFio />
+            </RotaProtegida>
+          }
+        />
 
       </Routes>
 
@@ -89,7 +117,7 @@ createRoot(document.getElementById("root")!).render(
         position="top-left"
         toastOptions={{
           duration: 3000,
-            style: {
+          style: {
             borderRadius: "12px",
             background: "#fff",
             color: "#0f172a",

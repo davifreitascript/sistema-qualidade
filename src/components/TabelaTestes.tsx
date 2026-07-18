@@ -2,7 +2,7 @@ import type { TesteTecido } from "../types/teste";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
-import { Loader2, Check, Database, HardDrive, BadgeCheck } from "lucide-react";
+import { Loader2, Check, Database, HardDrive, Pencil, Trash2 } from "lucide-react";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
 
@@ -137,31 +137,31 @@ export function TabelaTestes({
                 <td className="border border-slate-300 p-2">
                   {teste.sincronizado ? (
                     <span className="inline-flex items-center gap-2 font-medium text-green-600">
-                      <BadgeCheck size={18} />
-                      Sincronizado
+                      <Check size={25} />
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-2 font-medium text-amber-600">
-                      <HardDrive size={18} />
-                      Local
+                      <HardDrive size={25} />
                     </span>
                   )}
                 </td>
-                <td className="p-2">
-                  <button
-                    onClick={() => editarTeste(teste)}
-                    className="rounded bg-amber-500 px-3 py-1 text-sm text-white hover:bg-amber-600">
-                    Editar
-                  </button>
-                </td>
 
-                <td className="p-2">
+                <div className="flex justify-center items-center gap-2 m-2">
                   <button
-                    onClick={() => solicitarExclusao(teste, index + 1)}
-                    className="rounded bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700">
-                    Excluir
+                    className="rounded-md bg-orange-400 p-2 text-white hover:bg-orange-500"
+                    title="Editar"
+                    onClick={() => editarTeste(teste)}>
+
+                    <Pencil size={16} />
                   </button>
-                </td>
+
+                  <button
+                    className="rounded-md bg-red-600 p-2 text-white hover:bg-red-700"
+                    title="Excluir"
+                    onClick={() => solicitarExclusao(teste, index + 1)}>
+                    <Trash2 size={16} />
+                  </button>
+                </div>
               </tr>
             ))}
           </tbody>
