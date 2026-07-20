@@ -10,6 +10,7 @@ export function exportarCSV(testes: TesteTecido[]) {
     valor === undefined || valor === null ? "" : String(valor);
 
   const cabecalho = [
+    "N°",
     "Data",
     "Lote",
     "Tear",
@@ -25,7 +26,9 @@ export function exportarCSV(testes: TesteTecido[]) {
     "Responsável Teste",
   ];
 
-  const linhas = testes.map((teste) => [
+  const linhas = testes.map((teste, index) => [
+    index + 1,
+    limpar(teste.data),
     limpar(teste.lote),
     limpar(teste.tear),
     limpar(teste.turma),

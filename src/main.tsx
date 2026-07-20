@@ -94,7 +94,7 @@ createRoot(document.getElementById("root")!).render(
         />
 
         <Route
-          path="/lancamento-fios"
+          path="/lancamento-fio"
           element={
             <RotaProtegida>
               <LancamentoFio />
@@ -103,7 +103,7 @@ createRoot(document.getElementById("root")!).render(
         />
 
         <Route
-          path="/testes-fio"
+          path="/tabela-fio"
           element={
             <RotaProtegida>
               <TestesFio />

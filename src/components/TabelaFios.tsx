@@ -1,37 +1,108 @@
 import type { TesteFio } from "../types/fio";
 import { formatarData } from "../utils/formatarData"
 import { Check, HardDrive, Pencil, Trash2 } from "lucide-react"
+import { exportarCSVFio } from "../utils/exportarCSVFio";
+import { exportarPDFFio } from "../utils/exportarPDFFio";
+import { FaFileCsv, FaFilePdf } from "react-icons/fa";
+import Select from "react-select";
 
 type Props = {
-    testes: TesteFio[];
+  testes: TesteFio[];
+  testesFiltrados: TesteFio[];
+  filtroLote: string;
+  setFiltroLote: React.Dispatch<React.SetStateAction<string>>;
+  ordemAdicao: "recente" | "antigo";
+  setOrdemAdicao: React.Dispatch<React.SetStateAction<"recente" | "antigo">>;
 };
 
-export function TabelaFios({ testes }: Props) {
-    return (
-    <div className="mx-auto w-full max-w-7xl rounded-xl bg-white p-1.5 md:p-6 shadow">
+const selectStyles = {
+  container: (base: any) => ({
+    ...base,
+    position: "relative",
+  }),
 
-      <h1 className="m-8 text-center text-3xl md:text-4xl font-bold text-slate-800">
-        Testes de Fios
-      </h1>
+  control: (base: any) => ({
+    ...base,
+    minHeight: "52px",
+    borderRadius: "0.5rem",
+    borderColor: "#cbd5e1",
+    boxShadow: "none",
+  }),
 
-      <div className="relative z-10 max-max-h-105 overflow-auto rounded-lg border border-slate-300 border-r-white">
-        <table className="min-w-375 w-full border-collapse text-center align-middle">
+  menu: (base: any) => ({
+    ...base,
+    position: "absolute",
+    top: "100%",
+    marginTop: "4px",
+    borderRadius: "0.75rem",
+    overflow: "hidden",
+    zIndex: 9999,
+  }),
+};
 
-          <thead className="bg-slate-300">
+export function TabelaFios({
+  testes,
+  testesFiltrados,
+  filtroLote,
+  ordemAdicao,
+  setOrdemAdicao,
+  setFiltroLote,
+}: Props) {
+
+  return (
+    <div className="flex flex-col gap-6 p-6 min-h-90 max-h-130 rounded-xl bg-white shadow">
+
+      <div className="flex flex-col justify-between gap-3 md:flex-row">
+        <h1 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Fios lançados</h1>
+
+        <div className="z-30 flex gap-4 justify-center items-center">
+          <input
+            type="text"
+            className="inputLote"
+            placeholder="Buscar lote..."
+            value={filtroLote}
+            onChange={(event) => setFiltroLote(event.target.value)}
+          />
+
+          <Select
+            styles={selectStyles}
+            isSearchable={false}
+            menuPlacement="bottom"
+            options={[
+              { value: "recente", label: "Mais recentes" },
+              { value: "antigo", label: "Mais antigos" },
+            ]}
+            value={
+              [
+                { value: "recente", label: "Mais recentes" },
+                { value: "antigo", label: "Mais antigos" },
+              ].find((opcao) => opcao.value === ordemAdicao) || null
+            }
+            onChange={(opcao) =>
+              setOrdemAdicao((opcao?.value || "recente") as "recente" | "antigo")
+            }
+          />
+        </div>
+      </div>
+
+      <div className="relative z-10 max-h-105 overflow-auto rounded-lg  border-slate-300">
+        <table className="min-w-375 w-full border-separate border-spacing-0 text-center align-middle">
+
+          <thead className="sticky top-0 z-50 shadow-sm bg-slate-300 border-slate-300">
             <tr>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">N°</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Data</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Lote</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Turma</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Extrusora</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Tipo</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Gramatura</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Resistência</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Tenacidade</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Alongamento</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Responsável</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Status</th>
-              <th className="text-lg border border-slate-300 px-8 py-8 whitespace-nowrap">Ações</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">N°</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Data</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Lote</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Turma</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Extrusora</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Tipo</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Gramatura</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Resistência</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Tenacidade</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Alongamento</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Responsável</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Status</th>
+              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Ações</th>
             </tr>
           </thead>
 
@@ -41,61 +112,27 @@ export function TabelaFios({ testes }: Props) {
               <tr>
                 <td
                   colSpan={13}
-                  className="py-10 text-center text-slate-500"
-                >
-                  Nenhum teste cadastrado.
-                </td>
+                  className="py-10 text-center text-slate-500">Nenhum teste cadastrado.</td>
               </tr>
             ) : (
 
               testes.map((teste, index) => (
                 <tr
-                  key={teste.uuid}
-                  className="border-b hover:bg-slate-50"
-                >
-                  <td className="px-8 py-2 border border-l-blue-300 whitespace-nowrap bg-blue-300 font-bold">{index + 1}</td>
+                  key={teste.uuid}>
 
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {formatarData(teste.data)}
-                  </td>
+                  <td className="tbodyFios border-l-blue-300 font-bold">{index + 1}</td>
+                  <td className="tbodyFios">{formatarData(teste.data)}</td>
+                  <td className="tbodyFios">{teste.lote}</td>
+                  <td className="tbodyFios">{teste.turma}</td>
+                  <td className="tbodyFios">{teste.extrusora}</td>
+                  <td className="tbodyFios">{teste.tipoFio}</td>
+                  <td className="tbodyFios">{teste.gramatura}</td>
+                  <td className="tbodyFios">{teste.resistenciaFio}</td>
+                  <td className="tbodyFios">{teste.tenacidadeFio}</td>
+                  <td className="tbodyFios">{teste.alongamentoFio}</td>
+                  <td className="tbodyFios border-r-blue-300">{teste.responsavel_teste}</td>
 
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.lote}
-                  </td>
-
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.turma}
-                  </td>
-
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.extrusora}
-                  </td>
-
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.tipoFio}
-                  </td>
-
-                  <td className="px-8 py-2 border  whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.gramatura}
-                  </td>
-
-                  <td className="px-8 py-2 border  whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.resistenciaFio}
-                  </td>
-
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.tenacidadeFio}
-                  </td>
-
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.alongamentoFio}
-                  </td>
-
-                  <td className="px-8 py-2 border whitespace-nowrap bg-blue-300 font-bold">
-                    {teste.responsavel_teste}
-                  </td>
-
-                  <td className="border border-white">
+                  <td>
                     <div className="flex justify-center">
                       {teste.sincronizado ? (
                         <Check
@@ -111,7 +148,7 @@ export function TabelaFios({ testes }: Props) {
                     </div>
                   </td>
 
-                  <td className="border border-white p-2">
+                  <td className="p-2">
                     <div className="flex justify-center gap-2">
 
                       <button
@@ -132,6 +169,22 @@ export function TabelaFios({ testes }: Props) {
             )}
           </tbody>
         </table>
+
+      </div>
+
+      <div className="flex justify-center md:justify-end items-center gap-4">
+
+        <button
+          onClick={() => exportarCSVFio(testesFiltrados)}
+          className="btn btn-blue">
+          <FaFileCsv size={18} />
+        </button>
+
+        <button
+          onClick={() => exportarPDFFio(testesFiltrados)}
+          className="btn btn-red">
+          <FaFilePdf size={18} />
+        </button>
       </div>
 
       {testes.length === 0 && (<p className="mt-4 text-slate-500">Nenhum teste lançado ainda.</p>)}

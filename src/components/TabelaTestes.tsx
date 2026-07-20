@@ -61,11 +61,11 @@ export function TabelaTestes({
     <div className="flex flex-col gap-6 p-6 min-h-90 max-h-130 rounded-xl bg-white shadow">
 
       <div className="flex flex-col justify-between gap-3 md:flex-row">
-        <h2 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Testes lançados</h2>
+        <h1 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Tecidos lançados</h1>
 
         <div className="z-30 flex gap-4 justify-center items-center">
           <input
-            type="number"
+            type="text"
             className="inputLote"
             placeholder="Buscar lote..."
             value={filtroLote}
@@ -97,21 +97,21 @@ export function TabelaTestes({
         <table className="min-w-375 w-full border-collapse text-center align-middle">
           <thead className="sticky top-0 z-10">
             <tr className="bg-slate-300">
-              <th className="px-8 py-8 whitespace-nowrap">N°</th>
-              <th className="px-8 py-8 whitespace-nowrap">Lote</th>
-              <th className="px-8 py-8 whitespace-nowrap">Data</th>
-              <th className="px-8 py-8 whitespace-nowrap">Tear</th>
-              <th className="px-8 py-8 whitespace-nowrap">Turma</th>
-              <th className="px-8 py-8 whitespace-nowrap">Artigo</th>
-              <th className="px-8 py-8 whitespace-nowrap">Gramatura</th>
-              <th className="px-8 py-8 whitespace-nowrap">Batida Trama</th>
-              <th className="px-8 py-8 whitespace-nowrap">Batida Urdume</th>
-              <th className="px-8 py-8 whitespace-nowrap">Resistência Trama</th>
-              <th className="px-8 py-8 whitespace-nowrap">Resistência Urdume</th>
-              <th className="px-8 py-8 whitespace-nowrap">Resistência Reforço</th>
-              <th className="px-8 py-8 whitespace-nowrap">Responsável Análise</th>
-              <th className="px-8 py-8 whitespace-nowrap">Responsável Teste</th>
-              <th className="px-8 py-8 whitespace-nowrap">Status</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">N°</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Data</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Lote</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Tear</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Turma</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Artigo</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Gramatura</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Batida Trama</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Batida Urdume</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Resistência Trama</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Resistência Urdume</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Resistência Reforço</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Responsável Análise</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Responsável Teste</th>
+              <th className="text-lg border theadTecidos px-8 py-8 whitespace-nowrap">Status</th>
               <th className="px-8 py-8" colSpan={2}>Ações</th>
             </tr>
           </thead>
@@ -119,22 +119,22 @@ export function TabelaTestes({
           <tbody>
             {testesFiltrados.map((teste, index) => (
               <tr key={teste.uuid}>
-                <td className="border border-slate-300 p-2">{index + 1}</td>
-                <td className="border border-slate-300 p-2">{teste.lote}</td>
-                <td className="border border-slate-300 p-2">{formatarData(teste.data)}</td>
-                <td className="border border-slate-300 p-2">{teste.tear}</td>
-                <td className="border border-slate-300 p-2">{teste.turma}</td>
-                <td className="border border-slate-300 p-2">{teste.artigo}</td>
-                <td className="border border-slate-300 p-2">{teste.gramatura}</td>
-                <td className="border border-slate-300 p-2">{teste.batidaTrama}</td>
-                <td className="border border-slate-300 p-2">{teste.batidaUrdume}</td>
-                <td className="border border-slate-300 p-2">{teste.resistenciaTrama}</td>
-                <td className="border border-slate-300 p-2">{teste.resistenciaUrdume}</td>
-                <td className="border border-slate-300 p-2">{teste.resistenciaReforco}</td>
-                <td className="border border-slate-300 p-2">{teste.responsavel_analise}</td>
-                <td className="border border-slate-300 p-2">{teste.responsavel_teste}</td>
+                <td className="tbodyTecidos border-l-blue-300 font-bold">{index + 1}</td>
+                <td className="tbodyTecidos">{formatarData(teste.data)}</td>
+                <td className="tbodyTecidos">{teste.lote}</td>
+                <td className="tbodyTecidos">{teste.tear}</td>
+                <td className="tbodyTecidos">{teste.turma}</td>
+                <td className="tbodyTecidos">{teste.artigo}</td>
+                <td className="tbodyTecidos">{teste.gramatura}</td>
+                <td className="tbodyTecidos">{teste.batidaTrama}</td>
+                <td className="tbodyTecidos">{teste.batidaUrdume}</td>
+                <td className="tbodyTecidos">{teste.resistenciaTrama}</td>
+                <td className="tbodyTecidos">{teste.resistenciaUrdume}</td>
+                <td className="tbodyTecidos">{teste.resistenciaReforco}</td>
+                <td className="tbodyTecidos">{teste.responsavel_analise}</td>
+                <td className="tbodyTecidos">{teste.responsavel_teste}</td>
 
-                <td className="border border-slate-300 p-2">
+                <td className="tbodyTecidos border-r-blue-300">
                   {teste.sincronizado ? (
                     <span className="inline-flex items-center gap-2 font-medium text-green-600">
                       <Check size={25} />
@@ -146,22 +146,24 @@ export function TabelaTestes({
                   )}
                 </td>
 
-                <div className="flex justify-center items-center gap-2 m-2">
-                  <button
-                    className="rounded-md bg-orange-400 p-2 text-white hover:bg-orange-500"
-                    title="Editar"
-                    onClick={() => editarTeste(teste)}>
+                <td>
+                  <div className="flex justify-center items-center gap-2 m-2">
+                    <button
+                      className="rounded-md bg-orange-400 p-2 text-white hover:bg-orange-500"
+                      title="Editar"
+                      onClick={() => editarTeste(teste)}>
 
-                    <Pencil size={16} />
-                  </button>
+                      <Pencil size={16} />
+                    </button>
 
-                  <button
-                    className="rounded-md bg-red-600 p-2 text-white hover:bg-red-700"
-                    title="Excluir"
-                    onClick={() => solicitarExclusao(teste, index + 1)}>
-                    <Trash2 size={16} />
-                  </button>
-                </div>
+                    <button
+                      className="rounded-md bg-red-600 p-2 text-white hover:bg-red-700"
+                      title="Excluir"
+                      onClick={() => solicitarExclusao(teste, index + 1)}>
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

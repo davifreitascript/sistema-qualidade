@@ -1,6 +1,7 @@
+import type { TesteTecido } from "../types/teste";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import type { TesteTecido } from "../types/teste";
+import { formatarData } from "./formatarData"
 
 export function exportarPDF(testes: TesteTecido[]) {
     if (testes.length === 0) {
@@ -38,7 +39,8 @@ export function exportarPDF(testes: TesteTecido[]) {
 
         body: testes.map((teste, index) => [
             index + 1,
-             teste.lote,
+            formatarData(teste.data),
+            teste.lote,
             teste.tear,
             teste.turma,
             teste.artigo,
@@ -55,13 +57,13 @@ export function exportarPDF(testes: TesteTecido[]) {
             fontSize: 8,
             cellPadding: 2,
             halign: "center",
-            valign: "middle"
+            valign: "middle",
         },
         headStyles: {
             fillColor: [203, 213, 225],
             textColor: [15, 23, 42],
             halign: "center",
-            valign: "middle",
+            valign: "middle"
         },
     });
 
