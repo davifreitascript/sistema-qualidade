@@ -50,7 +50,7 @@ export function TabelaFios({
 }: Props) {
 
   return (
-    <div className="flex flex-col gap-6 p-6 min-h-90 max-h-130 rounded-xl bg-white shadow">
+    <div className="flex flex-col gap-6 p-6 md:min-h-90 md:max-h-130 min-h-90 max-h-screen rounded-xl bg-white shadow">
 
       <div className="flex flex-col justify-between gap-3 md:flex-row">
         <h1 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Fios lançados</h1>
@@ -90,19 +90,19 @@ export function TabelaFios({
 
           <thead className="sticky top-0 z-50 shadow-sm bg-slate-300 border-slate-300">
             <tr>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">N°</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Data</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Lote</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Turma</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Extrusora</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Tipo</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Gramatura</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Resistência</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Tenacidade</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Alongamento</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Responsável</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Status</th>
-              <th className="text-lg theadFios px-8 py-8 whitespace-nowrap">Ações</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">N°</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Data</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Lote</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Turma</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Extrusora</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Tipo</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Gramatura</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Resistência</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Tenacidade</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Alongamento</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Responsável</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Status</th>
+              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Ações</th>
             </tr>
           </thead>
 
@@ -120,17 +120,17 @@ export function TabelaFios({
                 <tr
                   key={teste.uuid}>
 
-                  <td className="tbodyFios border-l-blue-300 font-bold">{index + 1}</td>
-                  <td className="tbodyFios">{formatarData(teste.data)}</td>
-                  <td className="tbodyFios">{teste.lote}</td>
-                  <td className="tbodyFios">{teste.turma}</td>
-                  <td className="tbodyFios">{teste.extrusora}</td>
-                  <td className="tbodyFios">{teste.tipoFio}</td>
-                  <td className="tbodyFios">{teste.gramatura}</td>
-                  <td className="tbodyFios">{teste.resistenciaFio}</td>
-                  <td className="tbodyFios">{teste.tenacidadeFio}</td>
-                  <td className="tbodyFios">{teste.alongamentoFio}</td>
-                  <td className="tbodyFios border-r-blue-300">{teste.responsavel_teste}</td>
+                  <td className="bodyTable border-l-blue-300 font-bold">{index + 1}</td>
+                  <td className="bodyTable">{formatarData(teste.data)}</td>
+                  <td className="bodyTable">{teste.lote}</td>
+                  <td className="bodyTable">{teste.turma}</td>
+                  <td className="bodyTable">{teste.extrusora}</td>
+                  <td className="bodyTable">{teste.tipoFio}</td>
+                  <td className="bodyTable">{teste.gramatura}</td>
+                  <td className="bodyTable">{teste.resistenciaFio}</td>
+                  <td className="bodyTable">{teste.tenacidadeFio}</td>
+                  <td className="bodyTable">{teste.alongamentoFio}</td>
+                  <td className="bodyTable border-r-blue-300">{teste.responsavel_teste}</td>
 
                   <td>
                     <div className="flex justify-center">

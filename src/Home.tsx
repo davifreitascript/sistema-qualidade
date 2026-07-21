@@ -1,18 +1,17 @@
 import type { FormTesteTecido } from "./types/teste";
 import { useState, useEffect } from "react";
-import { supabase } from "./lib/supabase";
-import { Link, useNavigate } from "react-router-dom";
+//import { supabase } from "./lib/supabase";
+//import { useNavigate } from "react-router-dom";
 import { formInicial } from "./types/teste";
 import { FormularioTeste } from "./components/FormularioTeste";
-import { obterDataAtual, formatarData } from "./utils/formatarData";
+import { obterDataAtual } from "./utils/formatarData";
 import { gerarLotePorData } from "./utils/gerarLote";
 import { salvarTesteLocal } from "./services/testes";
 import { CHAVE_FORMULARIO } from "./config/auth";
-import { Table2, LogOut } from "lucide-react";
+//import { Table2, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function Home() {
-  const navigate = useNavigate();
 
   const [form, setForm] = useState<FormTesteTecido>(() => {
     const hoje = obterDataAtual();
@@ -92,21 +91,21 @@ export default function Home() {
     }
   }
 
-  async function sair() {
+/*   async function sair() {
     sessionStorage.removeItem("sessaoAtiva");
     sessionStorage.removeItem(CHAVE_FORMULARIO);
 
     await supabase.auth.signOut();
 
     navigate("/login", { replace: true });
-  }
+  } */
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-100 p-3 md:p-6">
 
       <div className="flex md:flex-row flex-col-reverse items-center justify-between gap-4 py-2">
 
-        <div className="flex gap-2 w-full md:w-fit">
+        {/* <div className="flex gap-2 w-full md:w-fit">
           <div className="dataLote">
             <span className="block text-xs font-medium text-slate-500 select-none">
               Data:
@@ -124,9 +123,9 @@ export default function Home() {
               {form.lote || ""}
             </strong>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex gap-2 md:justify-center justify-between w-full md:w-fit">
+{/*         <div className="flex gap-2 md:justify-center justify-between w-full md:w-fit">
           
           <Link
             to="/testes"
@@ -140,7 +139,7 @@ export default function Home() {
             className="btn btn-red">
             <LogOut size={18} />
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="mx-auto w-full max-w-5xl">

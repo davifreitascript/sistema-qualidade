@@ -1,11 +1,8 @@
 import type { TesteTecido } from "../types/teste";
 import { useMemo, useState } from "react";
-import { supabase } from "../lib/supabase";
-import { useNavigate } from "react-router-dom";
 import { TabelaTestes } from "../components/TabelaTestes";
 import { ModalExcluir } from "../components/ModalExcluir";
 import { sincronizarTestes, excluirTeste } from "../services/testes";
-import { LogOut, Home } from "lucide-react"
 import toast from "react-hot-toast";
 
 export default function Testes() {
@@ -103,33 +100,8 @@ export default function Testes() {
     }
   }
 
-  const navigate = useNavigate();
-
-  async function sair() {
-    sessionStorage.removeItem("sessaoAtiva");
-    sessionStorage.removeItem("formulario-tecido");
-
-    await supabase.auth.signOut();
-
-    navigate("/login", { replace: true });
-  }
-
   return (
-    <main className="min-h-screen flex flex-col justify-center p-4 md:p-10 relative bg-slate-100">
-
-      <div className="flex justify-end items-center gap-2 absolute top-10 right-6">
-        <button
-          onClick={() => navigate("/")}
-          className="btn btn-blue flex items-center gap-2">
-          <Home size={18} />
-        </button>
-
-        <button
-          onClick={sair}
-          className="btn btn-red">
-          <LogOut size={18} />
-        </button>
-      </div>
+    <main className="h-screen flex flex-col justify-center p-2 bg-slate-100">
 
       <TabelaTestes
         testes={testes}
@@ -152,10 +124,6 @@ export default function Testes() {
           confirmar={confirmarExclusao}
         />
       )}
-
-      <footer className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-sm text-slate-500 select-none">
-        © {new Date().getFullYear()} Grupo Procópio
-      </footer>
     </main>
   );
 }

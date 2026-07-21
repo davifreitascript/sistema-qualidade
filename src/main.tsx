@@ -8,11 +8,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "./lib/supabase.ts";
 import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { TestesFio } from "./pages/TestesFio";
+import { Layout } from "./components/Layout.tsx"
 import Login from "./pages/Login";
 import Home from './Home.tsx'
 import Testes from "./pages/Testes.tsx";
 import LancamentoFio from "./pages/LancamentoFio.tsx"
-import  { TestesFio } from "./pages/TestesFio";
+import LancamentoTecido from "./pages/LancamentoTecido.tsx"
+import Dashboard from "./pages/Dashboard.tsx"
 import './index.css'
 
 function RotaProtegida({ children }: { children: React.ReactNode }) {
@@ -60,31 +63,64 @@ function RotaProtegida({ children }: { children: React.ReactNode }) {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
+
       <Routes>
         <Route
-          path="/login"
-          element={
-            <Login />
-          }
-        />
-
-        <Route
           path="/"
-          element={
-            <RotaProtegida>
-              <Home />
-            </RotaProtegida>
-          }
+          element={<Dashboard />}
         />
 
         <Route
-          path="/testes"
-          element={
-            <RotaProtegida>
-              <Testes />
-            </RotaProtegida>
-          }
-        />
+          path="/login"
+          element={<Login />} />
+
+        <Route
+          element={<Layout />}>
+
+          <Route
+            path="/"
+            element={
+              <RotaProtegida>
+                <Home />
+              </RotaProtegida>
+            }
+          />
+
+          <Route
+            path="/testes"
+            element={
+              <RotaProtegida>
+                <Testes />
+              </RotaProtegida>
+            }
+          />
+
+          <Route
+            path="/lancamento-tecido"
+            element={
+              <RotaProtegida>
+                <LancamentoTecido />
+              </RotaProtegida>
+            }
+          />
+
+          <Route
+            path="/lancamento-fio"
+            element={
+              <RotaProtegida>
+                <LancamentoFio />
+              </RotaProtegida>
+            }
+          />
+          <Route
+            path="/testes-fio"
+            element={
+              <RotaProtegida>
+                <TestesFio />
+              </RotaProtegida>
+            }
+          />
+        </Route>
 
         <Route
           path="*"
@@ -92,25 +128,6 @@ createRoot(document.getElementById("root")!).render(
             <Navigate to="/" replace />
           }
         />
-
-        <Route
-          path="/lancamento-fio"
-          element={
-            <RotaProtegida>
-              <LancamentoFio />
-            </RotaProtegida>
-          }
-        />
-
-        <Route
-          path="/tabela-fio"
-          element={
-            <RotaProtegida>
-              <TestesFio />
-            </RotaProtegida>
-          }
-        />
-
       </Routes>
 
       <Toaster

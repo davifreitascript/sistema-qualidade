@@ -44,19 +44,11 @@ input::-ms-clear {
     @apply h-13 w-full px-3 py-2 rounded-md border border-slate-300 select-none;
   }
 
-  .theadFios {
-    @apply bg-slate-300 border-slate-300
+  .headTable {
+    @apply text-lg px-8 py-8 whitespace-nowrap bg-blue-300
   }
 
-  .tbodyFios {
-    @apply px-8 py-4 border-b whitespace-nowrap bg-blue-300
+  .bodyTable {
+    @apply px-8 py-4  whitespace-nowrap bg-slate-100
   }
-}
-
-.theadTecidos {
-  @apply bg-slate-300 border-slate-300
-}
-
-.tbodyTecidos {
-  @apply px-8 py-4 border-b whitespace-nowrap bg-blue-300
 }
