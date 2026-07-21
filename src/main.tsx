@@ -1,63 +1,44 @@
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
+import "@fontsource/inter/400.css"; import "@fontsource/inter/500.css"; import "@fontsource/inter/600.css"; import "@fontsource/inter/700.css";
 import { StrictMode, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { supabase } from "./lib/supabase.ts";
 import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { TestesFio } from "./pages/TestesFio";
 import { Layout } from "./components/Layout.tsx"
 import Login from "./pages/Login";
-import Home from './Home.tsx'
+import { LayoutDashboard } from "./components/LayoutDashboard";
 import Testes from "./pages/Testes.tsx";
 import LancamentoFio from "./pages/LancamentoFio.tsx"
 import LancamentoTecido from "./pages/LancamentoTecido.tsx"
 import Dashboard from "./pages/Dashboard.tsx"
 import './index.css'
 
-function RotaProtegida({ children }: { children: React.ReactNode }) {
+export default function RotaProtegida() {
   const [carregando, setCarregando] = useState(true);
-  const [logado, setLogado] = useState(false);
+  const [autenticado, setAutenticado] = useState(false);
 
   useEffect(() => {
     async function verificarSessao() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      const { data } = await supabase.auth.getSession();
 
-      const sessaoAtiva = sessionStorage.getItem("sessaoAtiva");
+      const sessaoAtiva =
+        data.session &&
+        sessionStorage.getItem("sessaoAtiva") === "true";
 
-      if (!session || !sessaoAtiva) {
-        await supabase.auth.signOut();
-
-        setLogado(false);
-        setCarregando(false);
-        return;
-      }
-
-      setLogado(true);
+      setAutenticado(!!sessaoAtiva);
       setCarregando(false);
     }
 
-    void verificarSessao();
+    verificarSessao();
   }, []);
 
   if (carregando) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        Inicializando...
-      </div>
-    );
+    return null;
   }
 
-  if (!logado) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
+  return autenticado ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
 createRoot(document.getElementById("root")!).render(
@@ -65,69 +46,26 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
 
       <Routes>
-        <Route
-          path="/"
-          element={<Dashboard />}
-        />
+        <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/login"
-          element={<Login />} />
+        <Route element={<RotaProtegida />}>
 
-        <Route
-          element={<Layout />}>
+          {/* Dashboard */}
+          <Route element={<LayoutDashboard />}>
+            <Route
+              path="/"
+              element={<Dashboard />}
+            />
+          </Route>
 
-          <Route
-            path="/"
-            element={
-              <RotaProtegida>
-                <Home />
-              </RotaProtegida>
-            }
-          />
-
-          <Route
-            path="/testes"
-            element={
-              <RotaProtegida>
-                <Testes />
-              </RotaProtegida>
-            }
-          />
-
-          <Route
-            path="/lancamento-tecido"
-            element={
-              <RotaProtegida>
-                <LancamentoTecido />
-              </RotaProtegida>
-            }
-          />
-
-          <Route
-            path="/lancamento-fio"
-            element={
-              <RotaProtegida>
-                <LancamentoFio />
-              </RotaProtegida>
-            }
-          />
-          <Route
-            path="/testes-fio"
-            element={
-              <RotaProtegida>
-                <TestesFio />
-              </RotaProtegida>
-            }
-          />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/lancamento-tecido" element={<LancamentoTecido />} />
+            <Route path="/testes" element={<Testes />} />
+            <Route path="/lancamento-fio" element={<LancamentoFio />} />
+            <Route path="/testes-fio" element={<TestesFio />} />
+          </Route>
         </Route>
-
-        <Route
-          path="*"
-          element={
-            <Navigate to="/" replace />
-          }
-        />
       </Routes>
 
       <Toaster

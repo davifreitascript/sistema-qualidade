@@ -13,6 +13,12 @@ export function Sidebar({ fechar }: Props) {
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
+    const itemMenu = (rota: string) =>
+        `flex items-center gap-4 rounded-lg px-3 py-2 my-2 transition-all duration-200 ${pathname === rota
+            ? "bg-blue-600 text-white shadow-md"
+            : "text-slate-700 hover:bg-slate-100"
+        }`;
+
     async function sair() {
         fechar?.();
 
@@ -60,9 +66,9 @@ export function Sidebar({ fechar }: Props) {
                     </p>
 
                     <Link
-                        to="/"
+                        to="/lancamento-tecido"
                         onClick={() => fechar?.()}
-                        className="flex gap-3 rounded-lg px-3 py-2 hover:bg-gray-100"
+                        className={itemMenu("/lancamento-tecido")}
                     >
                         <ClipboardList size={18} />
                         Lançamento
@@ -71,7 +77,7 @@ export function Sidebar({ fechar }: Props) {
                     <Link
                         to="/testes"
                         onClick={() => fechar?.()}
-                        className="mt-2 flex gap-3 rounded-lg px-3 py-2 hover:bg-gray-100"
+                        className={itemMenu("/testes")}
                     >
                         <FileText size={18} />
                         Testes
@@ -88,7 +94,7 @@ export function Sidebar({ fechar }: Props) {
                     <Link
                         to="/lancamento-fio"
                         onClick={() => fechar?.()}
-                        className="flex gap-3 rounded-lg px-3 py-2 hover:bg-gray-100"
+                        className={itemMenu("/lancamento-fio")}
                     >
                         <Cable size={18} />
                         Lançamento
@@ -97,7 +103,7 @@ export function Sidebar({ fechar }: Props) {
                     <Link
                         to="/testes-fio"
                         onClick={() => fechar?.()}
-                        className="mt-2 flex gap-3 rounded-lg px-3 py-2 hover:bg-gray-100"
+                        className={itemMenu("/testes-fio")}
                     >
                         <Database size={18} />
                         Testes
