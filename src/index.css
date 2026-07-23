@@ -49,6 +49,6 @@ input::-ms-clear {
   }
 
   .bodyTable {
-    @apply px-8 py-4  whitespace-nowrap bg-slate-100
+    @apply px-8 py-4 whitespace-nowrap bg-slate-100
   }
 }

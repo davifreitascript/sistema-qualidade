@@ -101,7 +101,7 @@ export default function Testes() {
   }
 
   return (
-    <main className="h-150 flex flex-col justify-center p-2 bg-slate-100">
+    <main className="flex flex-col md:h-160 h-screen pt-4 bg-slate-100">
 
       <TabelaTestes
         testes={testes}

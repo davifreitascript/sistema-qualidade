@@ -2,7 +2,7 @@ import type { TesteTecido } from "../types/teste";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";
-import { Loader2, Check, Database, HardDrive, Pencil, Trash2 } from "lucide-react";
+import { Loader2, Check, Database, HardDrive, Trash2 } from "lucide-react";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
 
@@ -26,7 +26,7 @@ export function TabelaTestes({
   ordemAdicao,
   setOrdemAdicao,
   setFiltroLote,
-  editarTeste,
+  // editarTeste,
   solicitarExclusao,
   sincronizarBanco,
   statusSync,
@@ -58,10 +58,10 @@ export function TabelaTestes({
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6 min-h-90 max-h-130 rounded-xl bg-white shadow">
+    <div className="flex flex-col justify-center gap-6 p-4 min-h-90 max-h-full rounded-xl bg-white shadow">
 
-      <div className="flex flex-col justify-between gap-3 md:flex-row">
-        <h1 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Tecidos lançados</h1>
+      <div className="flex flex-col md:flex-row justify-between gap-4">
+        <h1 className="md:text-left text-center text-3xl md:text-4xl font-semibold">Tecidos lançados</h1>
 
         <div className="z-30 flex gap-4 justify-center items-center">
           <input
@@ -93,7 +93,7 @@ export function TabelaTestes({
         </div>
       </div>
 
-      <div className="relative z-10 max-h-105 overflow-auto rounded-lg border border-slate-300">
+      <div className="relative z-10 max-h-100 overflow-auto rounded-lg border border-slate-300">
         <table className="min-w-375 w-full border-collapse text-center align-middle">
           <thead className="sticky top-0 z-10">
             <tr className="bg-slate-300">
@@ -136,29 +136,28 @@ export function TabelaTestes({
 
                 <td className="bodyTable">
                   {teste.sincronizado ? (
-                    <span className="inline-flex items-center gap-2 font-medium text-green-600">
+                    <span className="inline-flex items-center gap-2 font-medium text-green-700">
                       <Check size={25} />
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-2 font-medium text-amber-600">
+                    <span className="inline-flex items-center gap-2 font-medium text-blue-600">
                       <HardDrive size={25} />
                     </span>
                   )}
                 </td>
 
                 <td>
-                  <div className="flex justify-center items-center gap-2 m-2">
-                    <button
+                  <div className="bodyTable flex gap-4">
+                    {/* <button
                       className="rounded-md bg-orange-400 p-2 text-white hover:bg-orange-500"
                       title="Editar"
                       onClick={() => editarTeste(teste)}>
 
                       <Pencil size={16} />
-                    </button>
+                    </button> */}
 
                     <button
                       className="rounded-md bg-red-600 p-2 text-white hover:bg-red-700"
-                      title="Excluir"
                       onClick={() => solicitarExclusao(teste, index + 1)}>
                       <Trash2 size={16} />
                     </button>

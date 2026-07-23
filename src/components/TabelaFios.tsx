@@ -1,6 +1,6 @@
 import type { TesteFio } from "../types/fio";
 import { formatarData } from "../utils/formatarData"
-import { Check, HardDrive, Pencil, Trash2 } from "lucide-react"
+import { Check, HardDrive, Trash2 } from "lucide-react"
 import { exportarCSVFio } from "../utils/exportarCSVFio";
 import { exportarPDFFio } from "../utils/exportarPDFFio";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
@@ -50,10 +50,10 @@ export function TabelaFios({
 }: Props) {
 
   return (
-    <div className="flex flex-col gap-6 p-6 md:min-h-90 md:max-h-130 min-h-90 max-h-screen rounded-xl bg-white shadow">
+    <div className="flex flex-col justify-center gap-6 p-4 md:p-4 min-h-90 md:h-full max-h-screen rounded-xl bg-white shadow">
 
-      <div className="flex flex-col justify-between gap-3 md:flex-row">
-        <h1 className="mb-4 md:text-left text-center text-3xl md:text-4xl font-semibold">Fios lançados</h1>
+      <div className="flex flex-col justify-between gap-4 md:flex-row">
+        <h1 className="md:text-left text-center text-3xl md:text-4xl font-semibold">Fios lançados</h1>
 
         <div className="z-30 flex gap-4 justify-center items-center">
           <input
@@ -132,34 +132,29 @@ export function TabelaFios({
                   <td className="bodyTable">{teste.alongamentoFio}</td>
                   <td className="bodyTable border-r-blue-300">{teste.responsavel_teste}</td>
 
+                  <td className="bodyTable">
+                  {teste.sincronizado ? (
+                    <span className="inline-flex items-center gap-2 font-medium text-green-600">
+                      <Check size={25} />
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 font-medium text-red-600">
+                      <HardDrive size={25} />
+                    </span>
+                  )}
+                </td>
+
                   <td>
-                    <div className="flex justify-center">
-                      {teste.sincronizado ? (
-                        <Check
-                          className="text-green-600"
-                          size={25}
-                        />
-                      ) : (
-                        <HardDrive
-                          className="text-orange-500"
-                          size={25}
-                        />
-                      )}
-                    </div>
-                  </td>
+                    <div className="bodyTable flex justify-center gap-2">
 
-                  <td className="p-2">
-                    <div className="flex justify-center gap-2">
-
-                      <button
+                      {/* <button
                         className="rounded-md bg-blue-600 p-2 text-white hover:bg-red-700"
                         title="Editar">
                         <Pencil size={16} />
-                      </button>
+                      </button> */}
 
                       <button
-                        className="rounded-md bg-red-600 p-2 text-white hover:bg-red-700"
-                        title="Excluir">
+                        className="rounded-md bg-red-600 p-2 text-white hover:bg-red-700">
                         <Trash2 size={16} />
                       </button>
                     </div>

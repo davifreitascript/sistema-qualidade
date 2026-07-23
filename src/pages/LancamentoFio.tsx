@@ -83,7 +83,7 @@ export default function Home() {
     }
 
     return (
-        <div className="flex min-h-screen flex-col bg-slate-100 p-3 md:p-6">
+        <div className="flex flex-col justify-center items-center pt-6 bg-slate-100">
 
             <div className="mx-auto w-full max-w-5xl">
                 <h1 className="my-8 text-center text-3xl font-bold text-slate-800 md:text-5xl select-none">Lançamento de fios</h1>
@@ -96,10 +96,6 @@ export default function Home() {
                     salvando={salvando}
                 />
             </div>
-
-            <footer className="m-6 text-center text-sm text-slate-500 select-none md:absolute md:bottom-4 md:left-1/2 md:m-0 md:-translate-x-1/2">
-                © {new Date().getFullYear()} Grupo Procópio
-            </footer>
         </div>
     );
 }

@@ -89,7 +89,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-100 p-3 md:p-6">
+    <div className="flex flex-col justify-center items-center pt-6 bg-slate-100">
 
       <div className="mx-auto w-full max-w-5xl">
         <h1 className="my-8 text-center font-bold text-slate-800 md:text-5xl text-3xl select-none">Lançamento de tecido</h1>

@@ -1,24 +1,22 @@
 import { Link } from "react-router-dom";
-import { PlusCircle, type LucideIcon } from "lucide-react";
+import type { ElementType } from "react";
+import { PlusCircle } from "lucide-react";
 
 type Props = {
   titulo: string;
   descricao: string;
-  Icone: LucideIcon;
+  Icone: ElementType;
   cor: "blue" | "emerald";
-
   lancamento: string;
   testes: string;
 };
 
 const cores = {
   blue: {
-    bg: "bg-blue-100",
     text: "text-blue-700",
   },
 
   emerald: {
-    bg: "bg-emerald-100",
     text: "text-emerald-700",
   },
 };
@@ -33,11 +31,11 @@ export function DashboardCard({
 }: Props) {
 
   return (
-    <div className="rounded-2xl  bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div className="rounded-2xl  bg-white p-4 md:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
 
-        <div className={`rounded-xl p-4 ${cores[cor].bg}`}>
+        <div className={`rounded-xl p-2`}>
 
           <Icone
             size={34}

@@ -1,5 +1,5 @@
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { House, ClipboardList, FileText, Cable, Database, LogOut } from "lucide-react";
+import { House, ClipboardList, Database, LogOut } from "lucide-react";
 import { supabase } from "../lib/supabase";
 import { CHAVE_FORMULARIO } from "../config/auth";
 import { formatarData, obterDataAtual } from "../utils/formatarData";
@@ -16,7 +16,7 @@ export function Sidebar({ fechar }: Props) {
     const itemMenu = (rota: string) =>
         `flex items-center gap-4 rounded-lg px-3 py-2 my-2 transition-all duration-200 ${pathname === rota
             ? "bg-blue-600 text-white shadow-md"
-            : "text-slate-700 hover:bg-slate-100"
+            : "text-slate-700 hover:bg-slate-200"
         }`;
 
     async function sair() {
@@ -35,8 +35,8 @@ export function Sidebar({ fechar }: Props) {
     return (
         <aside className="flex h-screen w-70 flex-col bg-white">
 
-            <div className="flex flex-col gap-4 p-4">
-                <h1 className="text-xl font-bold">Sistema Qualidade</h1>
+            <div className="flex flex-col gap-4 p-4 select-none">
+                <h1 className="text-xl font-bold">Alçatec</h1>
 
                 <div className="my-2 text-base md:block hidden">
                     <p><strong>Data:</strong> {formatarData(hoje)}</p>
@@ -79,7 +79,7 @@ export function Sidebar({ fechar }: Props) {
                         onClick={() => fechar?.()}
                         className={itemMenu("/testes")}
                     >
-                        <FileText size={18} />
+                        <Database size={18} />
                         Testes
                     </Link>
 
@@ -96,7 +96,7 @@ export function Sidebar({ fechar }: Props) {
                         onClick={() => fechar?.()}
                         className={itemMenu("/lancamento-fio")}
                     >
-                        <Cable size={18} />
+                        <ClipboardList size={18} />
                         Lançamento
                     </Link>
 
@@ -113,12 +113,11 @@ export function Sidebar({ fechar }: Props) {
 
             </nav>
 
-            <div className="p-4">
+            <div className="p-4 w-fit">
 
                 <button
                     onClick={sair}
-                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-red-600 hover:bg-red-50"
-                >
+                    className="flex w-full items-center gap-3 rounded-lg px-4 py-2 text-red-600 hover:bg-red-50">
                     <LogOut size={18} />
                     Sair
                 </button>
