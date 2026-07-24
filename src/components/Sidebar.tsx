@@ -111,13 +111,39 @@ export function Sidebar({ fechar }: Props) {
 
                 </div>
 
+                <div>
+
+                    <p className="mb-2 text-xs uppercase text-gray-400">
+                        Alças
+                    </p>
+
+                    <Link
+                        to="/lancamento-alcas"
+                        onClick={() => fechar?.()}
+                        className={itemMenu("/lancamento-alcas")}
+                    >
+                        <ClipboardList size={18} />
+                        Lançamento
+                    </Link>
+
+                    <Link
+                        to="/testes-alcas"
+                        onClick={() => fechar?.()}
+                        className={itemMenu("/testes-alcas")}
+                    >
+                        <Database size={18} />
+                        Testes
+                    </Link>
+
+                </div>
+
             </nav>
 
             <div className="p-4 w-fit">
 
                 <button
                     onClick={sair}
-                    className="flex w-full items-center gap-3 rounded-lg px-4 py-2 text-red-600 hover:bg-red-50">
+                    className="flex w-full items-center gap-3 rounded-lg px-4 py-2 text-red-600 hover:bg-red-50 cursor-pointer">
                     <LogOut size={18} />
                     Sair
                 </button>

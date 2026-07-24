@@ -7,11 +7,13 @@ import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { TestesFio } from "./pages/TestesFio";
 import { Layout } from "./components/Layout.tsx"
-import Login from "./pages/Login";
 import { LayoutDashboard } from "./components/LayoutDashboard";
-import Testes from "./pages/Testes.tsx";
+import Login from "./pages/Login";
 import LancamentoFio from "./pages/LancamentoFio.tsx"
 import LancamentoTecido from "./pages/LancamentoTecido.tsx"
+import LancamentoAlcas from "./pages/LancamentoAlcas.tsx"
+import Testes from "./pages/Testes.tsx";
+import TestesAlcas from "./pages/TestesAlcas.tsx";
 import Dashboard from "./pages/Dashboard.tsx"
 import './index.css'
 
@@ -50,12 +52,8 @@ createRoot(document.getElementById("root")!).render(
 
         <Route element={<RotaProtegida />}>
 
-          {/* Dashboard */}
           <Route element={<LayoutDashboard />}>
-            <Route
-              path="/"
-              element={<Dashboard />}
-            />
+            <Route path="/" element={<Dashboard />} />
           </Route>
 
           <Route element={<Layout />}>
@@ -64,6 +62,8 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/testes" element={<Testes />} />
             <Route path="/lancamento-fio" element={<LancamentoFio />} />
             <Route path="/testes-fio" element={<TestesFio />} />
+            <Route path="/lancamento-alcas" element={<LancamentoAlcas />} />
+            <Route path="/testes-alcas" element={<TestesAlcas />} />
           </Route>
         </Route>
       </Routes>

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { DashboardCard } from "../components/DashboardCard";
-import { Spool, Calendar, Clock } from "lucide-react";
+import { Spool, Calendar, Clock, Scissors } from "lucide-react";
 import { GiRolledCloth } from "react-icons/gi";
+
 
 export default function Dashboard() {
 
@@ -63,25 +64,37 @@ export default function Dashboard() {
                 <h1 className="text-4xl font-bold text-slate-800">Alçatec</h1>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-2 px-4 select-none">
+            <div className="flex w-full overflow-x-auto scroll-smooth snap-x snap-mandatory gap-4 px-4 pb-2 select-none md:justify-center md:overflow-visible scrollbar-hide">
 
-                <DashboardCard
-                    titulo="Tecidos"
-                    descricao="Controle de qualidade dos tecidos."
-                    Icone={GiRolledCloth}
-                    cor="blue"
-                    lancamento="/lancamento-tecido"
-                    testes="/testes"
-                />
+                <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto">
+                    <DashboardCard
+                        titulo="Tecidos"
+                        descricao=""
+                        Icone={GiRolledCloth}
+                        lancamento="/lancamento-tecido"
+                        testes="/testes"
+                    />
+                </div>
 
-                <DashboardCard
-                    titulo="Fios"
-                    descricao="Controle de qualidade dos fios."
-                    Icone={Spool}
-                    cor="emerald"
-                    lancamento="/lancamento-fio"
-                    testes="/testes-fio"
-                />
+                <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto">
+                    <DashboardCard
+                        titulo="Fios"
+                        descricao=""
+                        Icone={Spool}
+                        lancamento="/lancamento-fio"
+                        testes="/testes-fio"
+                    />
+                </div>
+
+                <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto">
+                    <DashboardCard
+                        titulo="Alças"
+                        descricao=""
+                        Icone={Scissors}
+                        lancamento="/lancamento-alcas"
+                        testes="/testes-alcas"
+                    />
+                </div>
             </div>
 
             <footer className="mt-6 text-center text-sm select-none md:absolute md:bottom-4 md:left-1/2 md:m-0 md:-translate-x-1/2 text-slate-500">
