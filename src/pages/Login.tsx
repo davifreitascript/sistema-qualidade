@@ -34,16 +34,16 @@ export default function Login() {
   return (
     <main className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
       <section className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
-        <h1 className="text-2xl font-bold text-center text-slate-900">Sistema de Qualidade</h1>
+        <h1 className="text-2xl font-bold text-center text-slate-900 select-none">Sistema de Qualidade</h1>
 
-        <p className="mt-2 text-sm text-center text-slate-500">
+        <p className="mt-2 text-sm text-center text-slate-500 select-none">
           Acesse sua conta para continuar
         </p>
 
         <form onSubmit={entrar} className="mt-8 space-y-5">
           <input
             type="email"
-            placeholder="E-mail"
+            placeholder="E-mail corporativo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
@@ -61,7 +61,7 @@ export default function Login() {
             <button
               type="button"
               onClick={() => setMostrarSenha(!mostrarSenha)}
-              className="absolute inset-y-0 right-3 flex items-center text-slate-500 hover:text-slate-700">
+              className="flex items-center absolute inset-y-0 right-3 text-slate-500 hover:text-blue-600">
 
               {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>

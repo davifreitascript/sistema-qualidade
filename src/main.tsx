@@ -12,8 +12,10 @@ import Login from "./pages/Login";
 import LancamentoFio from "./pages/LancamentoFio.tsx"
 import LancamentoTecido from "./pages/LancamentoTecido.tsx"
 import LancamentoAlcas from "./pages/LancamentoAlcas.tsx"
+import LancamentoCadarcos from "./pages/LancamentoCadarcos.tsx"
 import Testes from "./pages/Testes.tsx";
 import TestesAlcas from "./pages/TestesAlcas.tsx";
+import TestesCadarcos from "./pages/TestesCadarcos.tsx";
 import Dashboard from "./pages/Dashboard.tsx"
 import './index.css'
 
@@ -64,6 +66,8 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/testes-fio" element={<TestesFio />} />
             <Route path="/lancamento-alcas" element={<LancamentoAlcas />} />
             <Route path="/testes-alcas" element={<TestesAlcas />} />
+            <Route path="/lancamento-cadarcos" element={<LancamentoCadarcos />} />
+            <Route path="/testes-cadarcos" element={<TestesCadarcos />} />
           </Route>
         </Route>
       </Routes>

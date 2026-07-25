@@ -6,10 +6,8 @@ export function gerarLotePorData(data: string) {
   const dataSelecionada = new Date(ano, mes - 1, dia);
   dataSelecionada.setHours(0, 0, 0, 0);
 
-  // Segunda = 1 ... Domingo = 7
   const diaSemana = dataSelecionada.getDay() === 0 ? 7 : dataSelecionada.getDay();
 
-  // Primeira segunda-feira do ano
   const primeiraSegunda = new Date(ano, 0, 1);
   primeiraSegunda.setHours(0, 0, 0, 0);
 
@@ -19,7 +17,6 @@ export function gerarLotePorData(data: string) {
 
   let semana: number;
 
-  // Datas antes da primeira segunda pertencem à semana 1
   if (dataSelecionada < primeiraSegunda) {
     semana = 1;
   } else {

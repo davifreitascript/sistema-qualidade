@@ -9,7 +9,6 @@ type TesteBanco = {
     tear: string;
     artigo: string;
     gramatura: number | null;
-    batida_trama: number | null;
     responsavel_analise: string;
     responsavel_teste: string;
     observacoes: string | null;

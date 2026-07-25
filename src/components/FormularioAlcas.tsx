@@ -1,9 +1,10 @@
 import type { FormTesteAlcas } from "../types/alcas";
 import { useEffect } from "react";
-import { teares } from "../data/teares";
+//import { teares } from "../data/teares";
 import { gerarLotePorData } from "../utils/gerarLote";
-import Select from "react-select";
+//import Select from "react-select";
 import { obterDataAtual } from "../utils/formatarData"
+import { SelecaoTeares } from "./SelecaoTeares";
 
 type Props = {
   form: FormTesteAlcas;
@@ -42,12 +43,12 @@ export function FormularioAlcas({
     }));
   }
 
-  const opcoesTear = teares.map((tear) => ({
+/*   const opcoesTear = teares.map((tear) => ({
     value: tear,
     label: tear,
-  }));
+  })); */
 
-  const selectStyles = {
+/*   const selectStyles = {
     control: (base: any) => ({
       ...base,
       minHeight: "52px",
@@ -60,27 +61,27 @@ export function FormularioAlcas({
       borderRadius: "0.75rem",
       overflow: "hidden",
     }),
-  };
+  }; */
 
   return (
     <form
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-6">
 
         <div>
-          <Select
-            options={opcoesTear}
-            styles={selectStyles}
-            isSearchable={false}
-            placeholder="Tear"
-            value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
-            onChange={(opcao) =>
-              setForm((prev) => ({
-                ...prev,
-                tear: opcao?.value || "",
-              }))
+          <label className="block text-sm font-medium mb-2">
+            Teares
+          </label>
+
+          <SelecaoTeares
+            value={form.tear}
+            onChange={(tear) =>
+              setForm({
+                ...form,
+                tear,
+              })
             }
           />
         </div>

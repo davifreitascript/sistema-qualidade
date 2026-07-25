@@ -1,7 +1,7 @@
 export type FormTesteAlcas = {
   data: string;
   lote: string;
-  tear: string;
+  tear: string[];
   artigo: string;
   gramatura: string;
   batidaTrama: string;
@@ -19,7 +19,7 @@ export type TesteAlcas = FormTesteAlcas & {
 export const formInicial: FormTesteAlcas = {
   data: "",
   lote: "",
-  tear: "",
+  tear: [],
   artigo: "",
   gramatura: "",
   batidaTrama: "",

@@ -47,8 +47,7 @@ export default function LancamentoAlcas() {
     event.preventDefault();
 
     const obrigatorios = [
-      "tear",
-
+      "teares",
       "gramatura",
       "batidaTrama",
       "responsavel_analise",

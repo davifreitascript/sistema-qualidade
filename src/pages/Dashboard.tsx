@@ -57,14 +57,10 @@ export default function Dashboard() {
             </div>
 
             <div className="absolute top-4 right-4 md:block hidden text-xs font-mono select-none text-slate-600">
-                <span>beta 1.0.1</span>
+                <span>alpha 1.0.1</span>
             </div>
 
-            <div className="md:my-10 mt-20 select-none">
-                <h1 className="text-4xl font-bold text-slate-800">Alçatec</h1>
-            </div>
-
-            <div className="flex w-full overflow-x-auto scroll-smooth snap-x snap-mandatory gap-4 px-4 pb-2 select-none md:justify-center md:overflow-visible scrollbar-hide">
+            <div className="flex w-full overflow-x-auto scroll-smooth snap-x snap-mandatory gap-4 px-4 pb-2 select-none md:justify-center md:overflow-visible scrollbar-none">
 
                 <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto">
                     <DashboardCard
@@ -93,6 +89,16 @@ export default function Dashboard() {
                         Icone={Scissors}
                         lancamento="/lancamento-alcas"
                         testes="/testes-alcas"
+                    />
+                </div>
+
+                <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto">
+                    <DashboardCard
+                        titulo="Cadarços"
+                        descricao=""
+                        Icone={Scissors}
+                        lancamento="/lancamento-cadarcos"
+                        testes="/testes-cadarcos"
                     />
                 </div>
             </div>

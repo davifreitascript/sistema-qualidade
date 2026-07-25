@@ -6,7 +6,7 @@ type TesteBanco = {
     id: number;
     data: string;
     lote: string;
-    tear: string;
+    tear: string[];
     artigo: string;
     gramatura: number | null;
     batida_trama: number | null;
