@@ -6,11 +6,12 @@ type TesteBanco = {
     id: number;
     data: string;
     lote: string;
-    tear: string[];
     artigo: string;
-    gramatura: number | null;
+    tear: string[];
     batida_trama: number | null;
-    responsavel_analise: string;
+    gramatura: number | null;
+    media_resistencia: number;
+    media_tenacidade: number;
     responsavel_teste: string;
     observacoes: string | null;
 };
@@ -35,8 +36,9 @@ function converterTesteDoBanco(teste: TesteBanco): TesteAlcas {
         artigo: teste.artigo,
         gramatura: String(teste.gramatura ?? ""),
         batidaTrama: String(teste.batida_trama ?? ""),
-        responsavel_analise: teste.responsavel_analise,
-        responsavel_teste: teste.responsavel_teste,
+        mediaResistencia: String(teste.media_resistencia ?? ""),
+        mediaTenacidade: String(teste.media_tenacidade ?? ""),
+        responsavelTeste: teste.responsavel_teste,
         sincronizado: true,
     };
 }
@@ -55,12 +57,13 @@ export async function criarTeste(teste: TesteAlcas): Promise<TesteAlcas> {
             uuid: teste.uuid,
             data: teste.data,
             lote: teste.lote,
-            tear: teste.tear,
             artigo: teste.artigo,
-            gramatura: numeroOuNull(teste.gramatura),
+            tear: teste.tear,
             batida_trama: numeroOuNull(teste.batidaTrama),
-            responsavel_analise: teste.responsavel_analise,
-            responsavel_teste: teste.responsavel_teste,
+            gramatura: numeroOuNull(teste.gramatura),
+            resistencia: teste.mediaResistencia,
+            tenacidade: teste.mediaTenacidade,
+            responsavel_teste: teste.responsavelTeste,
         })
         .select()
         .single();
@@ -97,8 +100,7 @@ export async function sincronizarTestes(testes: TesteAlcas[]): Promise<number[]>
                 artigo: teste.artigo,
                 gramatura: numeroOuNull(teste.gramatura),
                 batida_trama: numeroOuNull(teste.batidaTrama),
-                responsavel_analise: teste.responsavel_analise,
-                responsavel_teste: teste.responsavel_teste,
+                responsavel_teste: teste.responsavelTeste,
                 criado_por: usuarioData.user.id,
             });
 

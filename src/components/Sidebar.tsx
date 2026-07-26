@@ -10,12 +10,18 @@ type Props = {
     fechar?: () => void;
 };
 
+type Menu = "tecidos" | "fios" | "alcas" | "cadarcos";
+
 export function Sidebar({ fechar }: Props) {
 
     const navigate = useNavigate();
+    const CHAVE_MENUS = "sidebar-menus";
 
-    function toggleMenu(menu: string) {
-        setMenuAberto(menuAberto === menu ? null : menu);
+    function toggleMenu(menu: Menu) {
+        setMenusAbertos((prev) => ({
+            ...prev,
+            [menu]: !prev[menu],
+        }));
     }
 
     const itemMenu = (rota: string) =>
@@ -24,7 +30,7 @@ export function Sidebar({ fechar }: Props) {
             : "text-slate-700 hover:bg-slate-200"
         }`;
 
-    const tituloMenu = (id: string, titulo: string) => (
+    const tituloMenu = (id: Menu, titulo: string) => (
         <button
             type="button"
             onClick={() => toggleMenu(id)}
@@ -32,7 +38,7 @@ export function Sidebar({ fechar }: Props) {
         >
             <span>{titulo}</span>
 
-            {menuAberto === id ? (
+            {menusAbertos[id as keyof typeof menusAbertos] ? (
                 <ChevronDown size={18} />
             ) : (
                 <ChevronRight size={18} />
@@ -40,47 +46,37 @@ export function Sidebar({ fechar }: Props) {
         </button>
     );
 
-    function obterMenuInicial(pathname: string) {
-        if (
-            pathname === "/lancamento-tecido" ||
-            pathname === "/testes"
-        ) {
-            return "tecidos";
-        }
-
-        if (
-            pathname === "/lancamento-fio" ||
-            pathname === "/testes-fio"
-        ) {
-            return "fios";
-        }
-
-        if (
-            pathname === "/lancamento-alcas" ||
-            pathname === "/testes-alcas"
-        ) {
-            return "alcas";
-        }
-
-        if (
-            pathname === "/lancamento-cadarcos" ||
-            pathname === "/testes-cadarcos"
-        ) {
-            return "cadarcos";
-        }
-
-        return null;
-    }
-
     const { pathname } = useLocation();
 
-    const [menuAberto, setMenuAberto] = useState<string | null>(() =>
-        obterMenuInicial(pathname)
-    );
+    const [menusAbertos, setMenusAbertos] = useState<Record<Menu, boolean>>(() => {
+        const salvo = sessionStorage.getItem(CHAVE_MENUS);
+
+        if (salvo) {
+            return JSON.parse(salvo);
+        }
+
+        return {
+            tecidos:
+                pathname === "/lancamento-tecido" ||
+                pathname === "/testes",
+
+            fios:
+                pathname === "/lancamento-fio" ||
+                pathname === "/testes-fio",
+
+            alcas:
+                pathname === "/lancamento-alcas" ||
+                pathname === "/testes-alcas",
+
+            cadarcos:
+                pathname === "/lancamento-cadarcos" ||
+                pathname === "/testes-cadarcos",
+        };
+    });
 
     useEffect(() => {
-        setMenuAberto(obterMenuInicial(pathname));
-    }, [pathname]);
+        sessionStorage.setItem(CHAVE_MENUS, JSON.stringify(menusAbertos));
+    }, [menusAbertos]);
 
     async function sair() {
         fechar?.();
@@ -128,7 +124,7 @@ export function Sidebar({ fechar }: Props) {
                         {tituloMenu("tecidos", "Tecidos")}
 
                         <div
-                            className={`overflow-hidden transition-all duration-300 cursor-pointer ${menuAberto === "tecidos"
+                            className={`overflow-hidden transition-all duration-300 cursor-pointer ${menusAbertos.tecidos
                                 ? "max-h-40 mt-2 opacity-100"
                                 : "max-h-0 opacity-0"
                                 }`}
@@ -161,7 +157,7 @@ export function Sidebar({ fechar }: Props) {
                         {tituloMenu("fios", "Fios")}
 
                         <div
-                            className={`overflow-hidden transition-all duration-300 ${menuAberto === "fios"
+                            className={`overflow-hidden transition-all duration-300 ${menusAbertos.fios
                                 ? "max-h-40 mt-2 opacity-100"
                                 : "max-h-0 opacity-0"
                                 }`}
@@ -194,7 +190,7 @@ export function Sidebar({ fechar }: Props) {
                         {tituloMenu("alcas", "Alças")}
 
                         <div
-                            className={`overflow-hidden transition-all duration-300 ${menuAberto === "alcas"
+                            className={`overflow-hidden transition-all duration-300 ${menusAbertos.alcas
                                 ? "max-h-40 mt-2 opacity-100"
                                 : "max-h-0 opacity-0"
                                 }`}
@@ -226,7 +222,7 @@ export function Sidebar({ fechar }: Props) {
                         {tituloMenu("cadarcos", "Cadarços")}
 
                         <div
-                            className={`overflow-hidden transition-all duration-300 ${menuAberto === "cadarcos"
+                            className={`overflow-hidden transition-all duration-300 ${menusAbertos.cadarcos
                                 ? "max-h-40 mt-2 opacity-100"
                                 : "max-h-0 opacity-0"
                                 }`}

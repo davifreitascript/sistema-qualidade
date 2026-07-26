@@ -1,10 +1,12 @@
 import type { TesteAlcas } from "../types/alcas";
 import { formatarData } from "../utils/formatarData";
-//import { exportarCSV } from "../utils/exportarCSV";
-//import { exportarPDF } from "../utils/exportarPDF";
+import { exportarCSVAlcas } from "../utils/exportarCSVAlcas";
+import { exportarPDFAlcas } from "../utils/exportarPDFAlcas";
 import { Check, HardDrive, Trash2 } from "lucide-react";
-//import { FaFileCsv, FaFilePdf } from "react-icons/fa";
+import { FaFileCsv, FaFilePdf } from "react-icons/fa";
+import { Database, Loader2 } from "lucide-react";
 import Select from "react-select";
+import toast from "react-hot-toast";
 
 type Props = {
   testes: TesteAlcas[];
@@ -26,6 +28,8 @@ export function TabelaAlcas({
   ordemAdicao,
   setOrdemAdicao,
   setFiltroLote,
+  sincronizarBanco,
+  statusSync,
   // editarTeste,
   solicitarExclusao,
 }: Props) {
@@ -54,6 +58,22 @@ export function TabelaAlcas({
       zIndex: 9999,
     }),
   };
+
+  async function copiarLinha(teste: TesteAlcas) {
+    const texto = `
+      Data: ${formatarData(teste.data)}
+      Lote: ${teste.lote}
+      Tear: ${teste.tear}
+      Artigo: ${teste.artigo}
+      Gramatura: ${teste.gramatura}
+      Batida Trama: ${teste.batidaTrama}
+      Resp. Teste: ${teste.responsavelTeste}
+    `.trim();
+
+    await navigator.clipboard.writeText(texto);
+
+    toast.success("Dados copiados para a área de transferência.");
+  }
 
   return (
     <div className="flex flex-col justify-center gap-6 p-4 min-h-90 max-h-full rounded-xl bg-white shadow">
@@ -102,7 +122,6 @@ export function TabelaAlcas({
               <th className="headTable">Artigo</th>
               <th className="headTable">Gramatura</th>
               <th className="headTable">Batida Trama</th>
-              <th className="headTable">Responsável Análise</th>
               <th className="headTable">Responsável Teste</th>
               <th className="headTable">Status</th>
               <th className="headTable px-8 py-8" colSpan={2}>Ações</th>
@@ -111,16 +130,15 @@ export function TabelaAlcas({
 
           <tbody>
             {testesFiltrados.map((teste, index) => (
-              <tr key={teste.uuid}>
+              <tr key={teste.uuid} onClick={() => copiarLinha(teste)} className="cursor-pointer transition-colors duration-150 hover:bg-blue-100">
                 <td className="bodyTable font-bold">{index + 1}</td>
                 <td className="bodyTable">{formatarData(teste.data)}</td>
                 <td className="bodyTable">{teste.lote}</td>
-                <td className="bodyTable">{teste.tear}</td>
+                <td className="bodyTable">{teste.tear.join("/")}</td>
                 <td className="bodyTable">{teste.artigo}</td>
                 <td className="bodyTable">{teste.gramatura}</td>
                 <td className="bodyTable">{teste.batidaTrama}</td>
-                <td className="bodyTable">{teste.responsavel_analise}</td>
-                <td className="bodyTable">{teste.responsavel_teste}</td>
+                <td className="bodyTable">{teste.responsavelTeste}</td>
 
                 <td className="bodyTable">
                   {teste.sincronizado ? (
@@ -161,7 +179,7 @@ export function TabelaAlcas({
 
       <div className="flex justify-center md:justify-end items-center gap-4">
 
-        {/* <div className="flex">
+        <div className="flex">
           <button
             onClick={sincronizarBanco}
             disabled={statusSync === "loading"}
@@ -191,19 +209,19 @@ export function TabelaAlcas({
             </div>
 
           </button>
-        </div> */}
+        </div>
 
-        {/* <button
-          onClick={() => exportarCSV(testesFiltrados)}
+        <button
+          onClick={() => exportarCSVAlcas(testesFiltrados)}
           className="btn btn-blue">
           <FaFileCsv size={18} />
         </button>
 
         <button
-          onClick={() => exportarPDF(testesFiltrados)}
+          onClick={() => exportarPDFAlcas(testesFiltrados)}
           className="btn btn-red">
           <FaFilePdf size={18} />
-        </button> */}
+        </button>
       </div>
     </div>
   );

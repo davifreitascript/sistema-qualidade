@@ -43,25 +43,8 @@ export default function LancamentoAlcas() {
   const [salvando, setSalvando] = useState(false);
 
 
-  async function salvarTeste(event: React.SyntheticEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const obrigatorios = [
-      "teares",
-      "gramatura",
-      "batidaTrama",
-      "responsavel_analise",
-      "responsavel_teste"
-    ];
-
-    const invalidos = obrigatorios.filter(
-      (campo) => !form[campo as keyof FormTesteAlcas]
-    );
-
-    if (invalidos.length > 0) {
-      toast.error("Preencha os campos obrigatórios.");
-      return;
-    }
+  async function salvarTeste(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
 
     setSalvando(true);
 

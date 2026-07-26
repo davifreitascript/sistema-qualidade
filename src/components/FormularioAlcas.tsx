@@ -1,8 +1,8 @@
 import type { FormTesteAlcas } from "../types/alcas";
 import { useEffect } from "react";
-//import { teares } from "../data/teares";
+import { tiposAlcas } from "../data/tiposAlcas";
 import { gerarLotePorData } from "../utils/gerarLote";
-//import Select from "react-select";
+import Select from "react-select";
 import { obterDataAtual } from "../utils/formatarData"
 import { SelecaoTeares } from "./SelecaoTeares";
 
@@ -43,12 +43,12 @@ export function FormularioAlcas({
     }));
   }
 
-/*   const opcoesTear = teares.map((tear) => ({
-    value: tear,
-    label: tear,
-  })); */
+  const opcoesArtigos = tiposAlcas.map((artigo) => ({
+    value: artigo,
+    label: artigo,
+  }));
 
-/*   const selectStyles = {
+  const selectStyles = {
     control: (base: any) => ({
       ...base,
       minHeight: "52px",
@@ -61,19 +61,93 @@ export function FormularioAlcas({
       borderRadius: "0.75rem",
       overflow: "hidden",
     }),
-  }; */
+  };
 
   return (
     <form
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <div>
-          <label className="block text-sm font-medium mb-2">
-            Teares
-          </label>
+        <div className="flex flex-col gap-4">
+
+          <div>
+            <Select
+              options={opcoesArtigos}
+              styles={selectStyles}
+              isSearchable={false}
+              placeholder="Artigo"
+              value={opcoesArtigos.find(opcao => opcao.value === form.artigo) ?? null}
+              onChange={(opcao) =>
+                setForm((prev) => ({
+                  ...prev,
+                  artigo: opcao?.value ?? "",
+                }))
+              }
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              type="text"
+              min="0"
+              step="0.01"
+              name="batidaTrama"
+              placeholder="Batida de Trama"
+              value={form.batidaTrama}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              type="number"
+              min="0"
+              step="0.01"
+              name="gramatura"
+              placeholder="Média gramatura"
+              value={form.gramatura}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              type="number"
+              min="0"
+              step="0.01"
+              name="resistencia"
+              placeholder="Média resistência"
+              value={form.mediaResistencia}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              name="responsavel_teste"
+              placeholder="Controlista"
+              value={form.responsavelTeste}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div className="flex justify-center items-center rounded-lg md:col-start-4">
+            <button
+              type="submit"
+              disabled={salvando}
+              className="btn-blue w-full h-full py-2 rounded-md font-semibold text-white cursor-pointer">
+              {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
+            </button>
+          </div>
+        </div>
+
+        <div className="md:col-span-1 space-y-4 rounded-lg">
 
           <SelecaoTeares
             value={form.tear}
@@ -84,61 +158,6 @@ export function FormularioAlcas({
               })
             }
           />
-        </div>
-
-        <div>
-          <input
-            className="input"
-            type="number"
-            min="0"
-            step="0.01"
-            name="gramatura"
-            placeholder="Gramatura"
-            value={form.gramatura}
-            onChange={atualizarCampo}
-          />
-        </div>
-
-        <div>
-          <input
-            className="input"
-            type="number"
-            min="0"
-            step="0.01"
-            name="batidaTrama"
-            placeholder="Batida de Trama"
-            value={form.batidaTrama}
-            onChange={atualizarCampo}
-          />
-        </div>
-
-        <div>
-          <input
-            className="input"
-            name="responsavel_analise"
-            placeholder="Resp. análise"
-            value={form.responsavel_analise}
-            onChange={atualizarCampo}
-          />
-        </div>
-
-        <div>
-          <input
-            className="input"
-            name="responsavel_teste"
-            placeholder="Resp. teste"
-            value={form.responsavel_teste}
-            onChange={atualizarCampo}
-          />
-        </div>
-
-        <div className="flex justify-center items-center rounded-lg md:col-start-4">
-          <button
-            type="submit"
-            disabled={salvando}
-            className="btn-blue w-full h-full py-2 rounded-md font-semibold text-white cursor-pointer">
-            {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
-          </button>
         </div>
       </div>
     </form>

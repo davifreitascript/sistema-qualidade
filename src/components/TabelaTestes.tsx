@@ -118,7 +118,7 @@ export function TabelaTestes({
 
           <tbody>
             {testesFiltrados.map((teste, index) => (
-              <tr key={teste.uuid}>
+              <tr key={teste.uuid} className="transition-colors duration-50 hover:bg-blue-100 cursor-default">
                 <td className="bodyTable font-bold">{index + 1}</td>
                 <td className="bodyTable">{formatarData(teste.data)}</td>
                 <td className="bodyTable">{teste.lote}</td>

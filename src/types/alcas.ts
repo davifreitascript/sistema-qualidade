@@ -1,12 +1,13 @@
 export type FormTesteAlcas = {
   data: string;
   lote: string;
-  tear: string[];
   artigo: string;
-  gramatura: string;
+  tear: string[];
   batidaTrama: string;
-  responsavel_analise: string;
-  responsavel_teste: string;
+  gramatura: string;
+  mediaResistencia: string;
+  mediaTenacidade: string;
+  responsavelTeste: string;
 };
 
 export type TesteAlcas = FormTesteAlcas & {
@@ -19,10 +20,11 @@ export type TesteAlcas = FormTesteAlcas & {
 export const formInicial: FormTesteAlcas = {
   data: "",
   lote: "",
-  tear: [],
   artigo: "",
-  gramatura: "",
+  tear: [],
   batidaTrama: "",
-  responsavel_analise: "",
-  responsavel_teste: ""
+  gramatura: "",
+  mediaResistencia: "",
+  mediaTenacidade: "",
+  responsavelTeste: ""
 };
