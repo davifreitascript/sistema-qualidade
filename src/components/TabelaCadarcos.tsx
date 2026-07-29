@@ -59,7 +59,7 @@ export function TabelaCadarcos({
     <div className="flex flex-col justify-center gap-6 p-4 min-h-90 max-h-full rounded-xl bg-white shadow">
 
       <div className="flex flex-col md:flex-row justify-between gap-4">
-        <h1 className="md:text-left text-center text-3xl md:text-4xl font-semibold">CAdarços lançadas</h1>
+        <h1 className="md:text-left text-center text-3xl md:text-4xl font-semibold">Cadarços lançados</h1>
 
         <div className="z-30 flex gap-4 justify-center items-center">
           <input
@@ -104,7 +104,7 @@ export function TabelaCadarcos({
               <th className="headTable">Responsável Análise</th>
               <th className="headTable">Responsável Teste</th>
               <th className="headTable">Status</th>
-              <th className="headTable px-8 py-8" colSpan={2}>Ações</th>
+              <th className="headTable" colSpan={2}>Ações</th>
             </tr>
           </thead>
 

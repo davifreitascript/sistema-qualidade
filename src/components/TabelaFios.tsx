@@ -90,19 +90,19 @@ export function TabelaFios({
 
           <thead className="sticky top-0 z-50 shadow-sm bg-slate-300 border-slate-300">
             <tr>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">N°</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Data</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Lote</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Turma</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Extrusora</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Tipo</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Gramatura</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Resistência</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Tenacidade</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Alongamento</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Responsável</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Status</th>
-              <th className="text-lg headTable px-8 py-8 whitespace-nowrap">Ações</th>
+              <th className="headTable">N°</th>
+              <th className="headTable">Data</th>
+              <th className="headTable">Lote</th>
+              <th className="headTable">Turma</th>
+              <th className="headTable">Extrusora</th>
+              <th className="headTable">Tipo</th>
+              <th className="headTable">Gramatura</th>
+              <th className="headTable">Resistência</th>
+              <th className="headTable">Tenacidade</th>
+              <th className="headTable">Alongamento</th>
+              <th className="headTable">Responsável</th>
+              <th className="headTable">Status</th>
+              <th className="headTable">Ações</th>
             </tr>
           </thead>
 
@@ -110,9 +110,7 @@ export function TabelaFios({
 
             {testes.length === 0 ? (
               <tr>
-                <td
-                  colSpan={13}
-                  className="py-10 text-center text-slate-500">Nenhum teste cadastrado.</td>
+                <td colSpan={13}className="py-10 text-center text-slate-500">Nenhum teste cadastrado.</td>
               </tr>
             ) : (
 
@@ -181,9 +179,6 @@ export function TabelaFios({
           <FaFilePdf size={18} />
         </button>
       </div>
-
-      {testes.length === 0 && (<p className="mt-4 text-slate-500">Nenhum teste lançado ainda.</p>)}
-
     </div>
   );
 }

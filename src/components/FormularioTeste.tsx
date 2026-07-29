@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { artigosPorTipo } from "../data/artigos";
 import { teares } from "../data/teares";
 import { gerarLotePorData } from "../utils/gerarLote";
+import { obterDataAtual } from "../utils/formatarData";
+import { navegarComSetas } from "../utils/navegarComSetas";
 import Select from "react-select";
-import { obterDataAtual } from "../utils/formatarData"
 
 type Props = {
   form: FormTesteTecido;
@@ -82,6 +83,7 @@ export function FormularioTeste({
 
   return (
     <form
+      onKeyDown={navegarComSetas}
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 

@@ -28,7 +28,7 @@ export function TestesFio() {
   }, []);
 
   return (
-    <main className="flex flex-col md:h-160 h-screen pt-4 bg-slate-100">
+    <main className="flex flex-col md:max-h-160 md:min-h-100 pt-6 bg-slate-100">
 
       <TabelaFios
         testes={testes}

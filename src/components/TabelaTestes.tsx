@@ -112,7 +112,7 @@ export function TabelaTestes({
               <th className="headTable">Responsável Análise</th>
               <th className="headTable">Responsável Teste</th>
               <th className="headTable">Status</th>
-              <th className="headTable px-8 py-8" colSpan={2}>Ações</th>
+              <th className="headTable" colSpan={2}>Ações</th>
             </tr>
           </thead>
 

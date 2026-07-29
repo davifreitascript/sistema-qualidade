@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { DashboardCard } from "../components/DashboardCard";
-import { Spool, Calendar, Clock, Scissors } from "lucide-react";
-import { GiRolledCloth } from "react-icons/gi";
+import { Calendar, Clock, Scissors } from "lucide-react";
+import { IoUnlinkSharp } from "react-icons/io5";
+import { GiRolledCloth, GiWireCoil  } from "react-icons/gi";
 
 
 export default function Dashboard() {
@@ -76,7 +77,7 @@ export default function Dashboard() {
                     <DashboardCard
                         titulo="Fios"
                         descricao=""
-                        Icone={Spool}
+                        Icone={GiWireCoil}
                         lancamento="/lancamento-fio"
                         testes="/testes-fio"
                     />
@@ -96,7 +97,7 @@ export default function Dashboard() {
                     <DashboardCard
                         titulo="Cadarços"
                         descricao=""
-                        Icone={Scissors}
+                        Icone={IoUnlinkSharp}
                         lancamento="/lancamento-cadarcos"
                         testes="/testes-cadarcos"
                     />

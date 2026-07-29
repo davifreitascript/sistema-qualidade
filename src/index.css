@@ -45,7 +45,7 @@ input::-ms-clear {
   }
 
   .headTable {
-    @apply text-lg px-8 py-8 whitespace-nowrap bg-blue-300;
+    @apply text-lg px-6 py-4 whitespace-nowrap bg-blue-300;
   }
 
   .bodyTable {

@@ -5,6 +5,7 @@ import { extrusoras } from "../data/extrusoras";
 import { gerarLotePorData } from "../utils/gerarLote";
 import { obterDataAtual } from "../utils/formatarData"
 import { fiosPorTipo } from "../data/fios";
+import { navegarComSetas } from "../utils/navegarComSetas";
 import Select from "react-select";
 
 type Props = {
@@ -86,6 +87,7 @@ export function FormularioTesteFio({
 
   return (
     <form
+    onKeyDown={navegarComSetas}
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 

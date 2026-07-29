@@ -2,9 +2,10 @@ import type { FormTesteAlcas } from "../types/alcas";
 import { useEffect } from "react";
 import { tiposAlcas } from "../data/tiposAlcas";
 import { gerarLotePorData } from "../utils/gerarLote";
-import Select from "react-select";
 import { obterDataAtual } from "../utils/formatarData"
 import { SelecaoTeares } from "./SelecaoTeares";
+import { navegarComSetas } from "../utils/navegarComSetas";
+import Select from "react-select";
 
 type Props = {
   form: FormTesteAlcas;
@@ -65,10 +66,24 @@ export function FormularioAlcas({
 
   return (
     <form
+      onKeyDown={navegarComSetas}
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div className="md:col-span-1 space-y-4 rounded-lg">
+
+          <SelecaoTeares
+            value={form.tear}
+            onChange={(tear) =>
+              setForm({
+                ...form,
+                tear,
+              })
+            }
+          />
+        </div>
 
         <div className="flex flex-col gap-4">
 
@@ -145,19 +160,6 @@ export function FormularioAlcas({
               {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
             </button>
           </div>
-        </div>
-
-        <div className="md:col-span-1 space-y-4 rounded-lg">
-
-          <SelecaoTeares
-            value={form.tear}
-            onChange={(tear) =>
-              setForm({
-                ...form,
-                tear,
-              })
-            }
-          />
         </div>
       </div>
     </form>
