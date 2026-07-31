@@ -1,7 +1,7 @@
 import type { FormTesteCadarcos } from "../types/cadarcos";
 import { useEffect } from "react";
-// import { artigosPorTipo } from "../data/artigos";
-import { teares } from "../data/teares";
+import { SelecaoTearesCadarcos } from "./SelecaoTearesCadarcos";
+import { tiposCadarcos } from "../data/tiposCadarcos";
 import { gerarLotePorData } from "../utils/gerarLote";
 import { obterDataAtual } from "../utils/formatarData"
 import { navegarComSetas } from "../utils/navegarComSetas"
@@ -44,9 +44,9 @@ export function FormularioCadarcos({
     }));
   }
 
-  const opcoesTear = teares.map((tear) => ({
-    value: tear,
-    label: tear,
+  const opcoesCadarcos = tiposCadarcos.map((tipo) => ({
+    value: tipo,
+    label: tipo,
   }));
 
   const selectStyles = {
@@ -62,73 +62,105 @@ export function FormularioCadarcos({
       borderRadius: "0.75rem",
       overflow: "hidden",
     }),
+    option: (base: any) => ({
+      ...base,
+      fontSize: "13px",
+    }),
   };
 
   return (
     <form
-    onKeyDown={navegarComSetas}
+      onKeyDown={navegarComSetas}
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 
-        <div>
-          <Select
-            options={opcoesTear}
-            styles={selectStyles}
-            isSearchable={false}
-            placeholder="Tear"
-            value={opcoesTear.find((opcao) => opcao.value === form.tear) || null}
-            onChange={(opcao) =>
-              setForm((prev) => ({
-                ...prev,
-                tear: opcao?.value || "",
-              }))
+        <div className="flex flex-col gap-3">
+          <div>
+            <Select
+              options={opcoesCadarcos}
+              styles={selectStyles}
+              isSearchable={false}
+              placeholder="Artigo"
+              value={opcoesCadarcos.find(opcao => opcao.value === form.artigo) || null}
+              onChange={(opcao) =>
+                setForm(prev => ({
+                  ...prev,
+                  artigo: opcao?.value || "",
+                }))
+              }
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              type="number"
+              min="0"
+              step="0.01"
+              name="batidaTrama"
+              placeholder="Batida de Trama"
+              value={form.batidaTrama}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              type="number"
+              min="0"
+              step="0.01"
+              name="gramatura"
+              placeholder="Gramatura"
+              value={form.gramatura}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              name="responsavel_analise"
+              placeholder="Resp. análise"
+              value={form.responsavel_analise}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div>
+            <input
+              className="input"
+              name="responsavel_teste"
+              placeholder="Resp. teste"
+              value={form.responsavel_teste}
+              onChange={atualizarCampo}
+            />
+          </div>
+
+          <div className="flex justify-center items-center rounded-lg md:col-start-4">
+            <button
+              type="submit"
+              disabled={salvando}
+              className="btn-blue w-full h-full py-2 rounded-md font-semibold text-white cursor-pointer">
+              {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
+            </button>
+          </div>
+        </div>
+
+        <div className="md:col-span-1 rounded-lg">
+          <SelecaoTearesCadarcos
+            value={form.tear}
+            onChange={(tear) =>
+              setForm({
+                ...form,
+                tear,
+              })
             }
           />
         </div>
 
-        <div>
-          <input
-            className="input"
-            type="number"
-            min="0"
-            step="0.01"
-            name="gramatura"
-            placeholder="Gramatura"
-            value={form.gramatura}
-            onChange={atualizarCampo}
-          />
-        </div>
-
-        <div>
-          <input
-            className="input"
-            name="responsavel_analise"
-            placeholder="Resp. análise"
-            value={form.responsavel_analise}
-            onChange={atualizarCampo}
-          />
-        </div>
-
-        <div>
-          <input
-            className="input"
-            name="responsavel_teste"
-            placeholder="Resp. teste"
-            value={form.responsavel_teste}
-            onChange={atualizarCampo}
-          />
-        </div>
-
-        <div className="flex justify-center items-center rounded-lg md:col-start-4">
-          <button
-            type="submit"
-            disabled={salvando}
-            className="btn-blue w-full h-full py-2 rounded-md font-semibold text-white cursor-pointer">
-            {salvando ? "Salvando..." : testeEditandoId ? "Salvar alterações" : "Salvar teste"}
-          </button>
-        </div>
       </div>
     </form>
   );

@@ -6,8 +6,9 @@ type TesteBanco = {
     id: number;
     data: string;
     lote: string;
-    tear: string;
+    tear: string[];
     artigo: string;
+    batidaTrama: string;
     gramatura: number | null;
     responsavel_analise: string;
     responsavel_teste: string;
@@ -32,6 +33,7 @@ function converterTesteDoBanco(teste: TesteBanco): TesteCadarcos {
         lote: teste.lote,
         tear: teste.tear,
         artigo: teste.artigo,
+        batidaTrama: teste.batidaTrama,
         gramatura: String(teste.gramatura ?? ""),
         responsavel_analise: teste.responsavel_analise,
         responsavel_teste: teste.responsavel_teste,
@@ -131,13 +133,13 @@ export function salvarTesteLocal(form: FormTesteCadarcos): TesteCadarcos {
     };
 
     const testesSalvos: TesteCadarcos[] = JSON.parse(
-        localStorage.getItem("testes-tecido") || "[]"
+        localStorage.getItem("testes-cadarcos") || "[]"
     );
 
     testesSalvos.unshift(novoTeste);
 
     localStorage.setItem(
-        "testes-tecido",
+        "testes-cadarcos",
         JSON.stringify(testesSalvos)
     );
 
@@ -146,7 +148,7 @@ export function salvarTesteLocal(form: FormTesteCadarcos): TesteCadarcos {
 
 export function excluirTesteLocal(uuid: string) {
     const testes: TesteCadarcos[] = JSON.parse(
-        localStorage.getItem("testes-tecido") || "[]"
+        localStorage.getItem("testes-cadarcos") || "[]"
     );
 
     const novosTestes = testes.filter(
@@ -154,7 +156,7 @@ export function excluirTesteLocal(uuid: string) {
     );
 
     localStorage.setItem(
-        "testes-tecido",
+        "testes-cadarcos",
         JSON.stringify(novosTestes)
     );
 }

@@ -1,4 +1,4 @@
-import type { TesteTecido } from "../types/teste";
+import type { TesteTecido } from "../types/tecidos";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
 import { exportarPDF } from "../utils/exportarPDF";

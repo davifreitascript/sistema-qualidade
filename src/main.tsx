@@ -5,15 +5,15 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom
 import { supabase } from "./lib/supabase.ts";
 import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/react"
-import { TestesFio } from "./pages/TestesFio";
-import { Layout } from "./components/Layout.tsx"
-import { LayoutDashboard } from "./components/LayoutDashboard";
+import Layout from "./components/Layout.tsx"
+import LayoutDashboard from "./components/LayoutDashboard";
 import Login from "./pages/Login";
-import LancamentoFio from "./pages/LancamentoFio.tsx"
 import LancamentoTecido from "./pages/LancamentoTecido.tsx"
+import LancamentoFio from "./pages/LancamentoFio.tsx"
 import LancamentoAlcas from "./pages/LancamentoAlcas.tsx"
 import LancamentoCadarcos from "./pages/LancamentoCadarcos.tsx"
-import Testes from "./pages/Testes.tsx";
+import TestesTecidos from "./pages/TestesTecidos.tsx";
+import TestesFio from "./pages/TestesFio";
 import TestesAlcas from "./pages/TestesAlcas.tsx";
 import TestesCadarcos from "./pages/TestesCadarcos.tsx";
 import Dashboard from "./pages/Dashboard.tsx"
@@ -61,7 +61,7 @@ createRoot(document.getElementById("root")!).render(
           <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/lancamento-tecido" element={<LancamentoTecido />} />
-            <Route path="/testes" element={<Testes />} />
+            <Route path="/testes" element={<TestesTecidos />} />
             <Route path="/lancamento-fio" element={<LancamentoFio />} />
             <Route path="/testes-fio" element={<TestesFio />} />
             <Route path="/lancamento-alcas" element={<LancamentoAlcas />} />

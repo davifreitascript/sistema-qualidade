@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { MobileHeader } from "./MobileHeader";
 
-export function Layout() {
+export default function Layout() {
   const [menuAberto, setMenuAberto] = useState(false);
 
   return (

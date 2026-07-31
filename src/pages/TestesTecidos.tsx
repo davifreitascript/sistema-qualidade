@@ -1,8 +1,8 @@
-import type { TesteTecido } from "../types/teste";
+import type { TesteTecido } from "../types/tecidos";
 import { useMemo, useState } from "react";
 import { TabelaTestes } from "../components/TabelaTestes";
 import { ModalExcluir } from "../components/ModalExcluir";
-import { sincronizarTestes, excluirTeste } from "../services/testes";
+import { sincronizarTestes, excluirTeste } from "../services/tecidos";
 import toast from "react-hot-toast";
 
 export default function Testes() {

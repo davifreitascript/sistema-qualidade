@@ -1,12 +1,12 @@
-import type { FormTesteTecido } from "./types/teste";
+import type { FormTesteTecido } from "./types/tecidos";
 import { useState, useEffect } from "react";
 //import { supabase } from "./lib/supabase";
 //import { useNavigate } from "react-router-dom";
-import { formInicial } from "./types/teste";
-import { FormularioTeste } from "./components/FormularioTeste";
+import { formInicial } from "./types/tecidos";
+import { FormularioTeste } from "./components/FormularioTecido";
 import { obterDataAtual } from "./utils/formatarData";
 import { gerarLotePorData } from "./utils/gerarLote";
-import { salvarTesteLocal } from "./services/testes";
+import { salvarTesteLocal } from "./services/tecidos";
 import { CHAVE_FORMULARIO } from "./config/auth";
 //import { Table2, LogOut } from "lucide-react";
 import toast from "react-hot-toast";

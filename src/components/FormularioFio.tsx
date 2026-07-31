@@ -1,10 +1,10 @@
-import type { FormTesteFio } from "../types/fio";
-import type { TipoFio } from "../data/fios"
+import type { FormTesteFio } from "../types/fios";
+import type { TipoFio } from "../data/tiposFios"
 import { useEffect } from "react";
 import { extrusoras } from "../data/extrusoras";
 import { gerarLotePorData } from "../utils/gerarLote";
 import { obterDataAtual } from "../utils/formatarData"
-import { fiosPorTipo } from "../data/fios";
+import { fiosPorTipo } from "../data/tiposFios";
 import { navegarComSetas } from "../utils/navegarComSetas";
 import Select from "react-select";
 

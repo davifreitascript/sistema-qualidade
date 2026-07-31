@@ -1,4 +1,4 @@
-import type { FormTesteFio, TesteFio } from "../types/fio";
+import type { FormTesteFio, TesteFio } from "../types/fios";
 
 export function salvarTesteFioLocal(form: FormTesteFio): TesteFio {
   const novoTeste: TesteFio = {

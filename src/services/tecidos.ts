@@ -1,5 +1,5 @@
 import { supabase } from "../lib/supabase";
-import type { FormTesteTecido, TesteTecido, TipoTecido } from "../types/teste";
+import type { FormTesteTecido, TesteTecido, TipoTecido } from "../types/tecidos";
 
 type TesteBanco = {
     uuid: string;

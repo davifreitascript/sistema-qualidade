@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { tiposAlcas } from "../data/tiposAlcas";
 import { gerarLotePorData } from "../utils/gerarLote";
 import { obterDataAtual } from "../utils/formatarData"
-import { SelecaoTeares } from "./SelecaoTeares";
+import { SelecaoTeares } from "./SelecaoTearesAlcas";
 import { navegarComSetas } from "../utils/navegarComSetas";
 import Select from "react-select";
 
@@ -73,7 +73,6 @@ export function FormularioAlcas({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div className="md:col-span-1 space-y-4 rounded-lg">
-
           <SelecaoTeares
             value={form.tear}
             onChange={(tear) =>

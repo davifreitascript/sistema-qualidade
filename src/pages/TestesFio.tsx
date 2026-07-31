@@ -1,8 +1,8 @@
-import type { TesteFio } from "../types/fio";
+import type { TesteFio } from "../types/fios";
 import { useEffect, useState, useMemo } from "react";
 import { TabelaFios } from "../components/TabelaFios";
 
-export function TestesFio() {
+export default function TestesFio() {
   const [testes, setTestes] = useState<TesteFio[]>([]);
   const [filtroLote, setFiltroLote] = useState("");
   const [ordemAdicao, setOrdemAdicao] = useState<"recente" | "antigo">("recente");

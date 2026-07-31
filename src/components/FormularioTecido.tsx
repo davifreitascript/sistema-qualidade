@@ -1,7 +1,7 @@
-import type { FormTesteTecido, TipoTecido } from "../types/teste";
+import type { FormTesteTecido, TipoTecido } from "../types/tecidos";
 import { useEffect } from "react";
-import { artigosPorTipo } from "../data/artigos";
-import { teares } from "../data/teares";
+import { artigosPorTipo } from "../data/artigosTecidos";
+import { teares } from "../data/tearesTecidos";
 import { gerarLotePorData } from "../utils/gerarLote";
 import { obterDataAtual } from "../utils/formatarData";
 import { navegarComSetas } from "../utils/navegarComSetas";

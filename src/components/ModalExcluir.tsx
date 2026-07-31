@@ -1,4 +1,4 @@
-import type { TesteTecido } from "../types/teste";
+import type { TesteTecido } from "../types/tecidos";
 
 type Props = {
   teste: TesteTecido;

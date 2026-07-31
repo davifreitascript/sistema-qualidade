@@ -1,4 +1,4 @@
-import type { TipoTecido } from "../types/teste";
+import type { TipoTecido } from "../types/tecidos";
 
 export const artigosPorTipo: Record<TipoTecido,
   { codigo: string; nome: string }[]

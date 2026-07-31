@@ -1,4 +1,4 @@
-import type { TipoFio } from "../data/fios";
+import type { TipoFio } from "../data/tiposFios";
 
 export function fio() {
   

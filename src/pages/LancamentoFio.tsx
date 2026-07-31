@@ -1,6 +1,6 @@
-import type { FormTesteFio } from "../types/fio";
+import type { FormTesteFio } from "../types/fios";
 import { useState, useEffect } from "react";
-import { formInicialFio } from "../types/fio";
+import { formInicialFio } from "../types/fios";
 import { FormularioTesteFio } from "../components/FormularioFio";
 import { salvarTesteFioLocal } from "../services/fios";
 import { obterDataAtual } from "../utils/formatarData";

@@ -1,4 +1,4 @@
-import type { TesteFio } from "../types/fio";
+import type { TesteFio } from "../types/fios";
 import { formatarData } from "../utils/formatarData"
 import { Check, HardDrive, Trash2 } from "lucide-react"
 import { exportarCSVFio } from "../utils/exportarCSVFio";

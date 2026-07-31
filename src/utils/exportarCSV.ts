@@ -1,4 +1,4 @@
-import type { TesteTecido } from "../types/teste";
+import type { TesteTecido } from "../types/tecidos";
 
 export function exportarCSV(testes: TesteTecido[]) {
   if (testes.length === 0) {
