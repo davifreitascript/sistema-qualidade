@@ -5,6 +5,7 @@ import { exportarPDF } from "../utils/exportarPDF";
 import { Loader2, Check, Database, HardDrive, Trash2 } from "lucide-react";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
+import toast from "react-hot-toast";
 
 type Props = {
   testes: TesteTecido[];
@@ -56,6 +57,28 @@ export function TabelaTestes({
       zIndex: 9999,
     }),
   };
+
+  async function copiarLinha(teste: TesteTecido) {
+    const texto = `
+      Data: ${formatarData(teste.data)}
+      Lote: ${teste.lote}
+      Tear: ${teste.tear}
+      Turma: ${teste.turma}
+      Artigo: ${teste.artigo}
+      Gramatura: ${teste.gramatura}
+      BatidaTrama: ${teste.batidaTrama}
+      BatidaUrdume: ${teste.batidaUrdume}
+      ResistenciaTrama: ${teste.resistenciaTrama}
+      ResistenciaUrdume: ${teste.resistenciaUrdume}
+      ResistenciaUrdume: ${teste.resistenciaReforco}
+      ResponsavelAnalise: ${teste.responsavel_analise}
+      ResponsavelTeste: ${teste.responsavel_teste}
+    `.trim();
+
+    await navigator.clipboard.writeText(texto);
+
+    toast.success("Dados copiados para a área de transferência.");
+  }
 
   return (
     <div className="flex flex-col justify-center gap-6 p-4 min-h-90 max-h-full rounded-xl bg-white shadow">
@@ -118,7 +141,7 @@ export function TabelaTestes({
 
           <tbody>
             {testesFiltrados.map((teste, index) => (
-              <tr key={teste.uuid} className="transition-colors duration-50 hover:bg-blue-100 cursor-default">
+              <tr key={teste.uuid}  onClick={() => copiarLinha(teste)} className="transition-colors duration-50 hover:bg-blue-50 cursor-default">
                 <td className="bodyTable font-bold">{index + 1}</td>
                 <td className="bodyTable">{formatarData(teste.data)}</td>
                 <td className="bodyTable">{teste.lote}</td>

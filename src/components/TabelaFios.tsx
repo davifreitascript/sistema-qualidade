@@ -5,6 +5,7 @@ import { exportarCSVFio } from "../utils/exportarCSVFio";
 import { exportarPDFFio } from "../utils/exportarPDFFio";
 import { FaFileCsv, FaFilePdf } from "react-icons/fa";
 import Select from "react-select";
+import toast from "react-hot-toast";
 
 type Props = {
   testes: TesteFio[];
@@ -39,6 +40,25 @@ const selectStyles = {
     zIndex: 9999,
   }),
 };
+
+async function copiarLinha(teste: TesteFio) {
+  const texto = `
+      Data: ${formatarData(teste.data)}
+      Lote: ${teste.lote}
+      Extrusora: ${teste.extrusora}
+      Turma: ${teste.turma}
+      TipoFio: ${teste.tipoFio}
+      Gramatura: ${teste.gramatura}
+      Gramatura: ${teste.resistenciaFio}
+      Gramatura: ${teste.tenacidadeFio}
+      Gramatura: ${teste.alongamentoFio}
+      ResponsavelTeste: ${teste.responsavel_teste}
+    `.trim();
+
+  await navigator.clipboard.writeText(texto);
+
+  toast.success("Dados copiados para a área de transferência.");
+}
 
 export function TabelaFios({
   testes,
@@ -110,13 +130,13 @@ export function TabelaFios({
 
             {testes.length === 0 ? (
               <tr>
-                <td colSpan={13}className="py-10 text-center text-slate-500">Nenhum teste cadastrado.</td>
+                <td colSpan={13} className="py-10 text-center text-slate-500">Nenhum teste cadastrado.</td>
               </tr>
             ) : (
 
               testes.map((teste, index) => (
                 <tr
-                  key={teste.uuid}>
+                  key={teste.uuid} onClick={() => copiarLinha(teste)} className="transition-colors duration-50 hover:bg-blue-50 cursor-default">
 
                   <td className="bodyTable border-l-blue-300 font-bold">{index + 1}</td>
                   <td className="bodyTable">{formatarData(teste.data)}</td>
@@ -131,25 +151,19 @@ export function TabelaFios({
                   <td className="bodyTable border-r-blue-300">{teste.responsavel_teste}</td>
 
                   <td className="bodyTable">
-                  {teste.sincronizado ? (
-                    <span className="inline-flex items-center gap-2 font-medium text-green-600">
-                      <Check size={25} />
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-2 font-medium text-red-600">
-                      <HardDrive size={25} />
-                    </span>
-                  )}
-                </td>
+                    {teste.sincronizado ? (
+                      <span className="inline-flex items-center gap-2 font-medium text-green-600">
+                        <Check size={25} />
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-2 font-medium text-red-600">
+                        <HardDrive size={25} />
+                      </span>
+                    )}
+                  </td>
 
                   <td>
                     <div className="bodyTable flex justify-center gap-2">
-
-                      {/* <button
-                        className="rounded-md bg-blue-600 p-2 text-white hover:bg-red-700"
-                        title="Editar">
-                        <Pencil size={16} />
-                      </button> */}
 
                       <button
                         className="rounded-md bg-red-600 p-2 text-white hover:bg-red-700">

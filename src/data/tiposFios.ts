@@ -12,7 +12,15 @@ export const fiosPorTipo = {
   ],
 
   "FITA RÁFIA": [
-    "600 DEN BC"
+    "540 DEN BC",
+    "600 DEN BC",
+    "630 DEN BC",
+    "675 DEN BC",
+    "875 DEN BC",
+    "900 DEN BC",
+    "1620 DEN BC",
+    "1860 DEN BC",
+    "2350 DEN BC",
   ],
 } as const;
 

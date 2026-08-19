@@ -42,7 +42,7 @@ export function DashboardCard({
         <div className="w-full">
         <Link
           to={lancamento}
-          className="flex items-center justify-between md:w-50 rounded-lg border border-slate-200 p-4 transition hover:bg-blue-200">
+          className="flex items-center justify-between md:w-50 rounded-lg border cursor-default border-slate-200 p-4 transition hover:bg-blue-200">
             <span>Novo lançamento</span>
             <PlusCircle size={18} />
         </Link>
@@ -51,7 +51,7 @@ export function DashboardCard({
         <div className="w-full">
         <Link
           to={testes}
-          className="flex items-center justify-between md:w-50 rounded-xl border border-slate-200 p-4 transition-all hover:bg-blue-200">
+          className="flex items-center justify-between md:w-50 rounded-xl border cursor-default border-slate-200 p-4 transition-all hover:bg-blue-200">
             <span>Tabela de testes</span>
             <PlusCircle size={18} />
         </Link>

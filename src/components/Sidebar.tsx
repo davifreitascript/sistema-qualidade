@@ -1,7 +1,7 @@
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react"
-import { House, ClipboardList, Database, LogOut, ChevronDown, ChevronRight } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import { House, ClipboardList, Database, LogOut, ChevronDown } from "lucide-react";
 import { CHAVE_FORMULARIO } from "../config/auth";
 import { formatarData, obterDataAtual } from "../utils/formatarData";
 import { gerarLotePorData } from "../utils/gerarLote";
@@ -38,11 +38,11 @@ export function Sidebar({ fechar }: Props) {
         >
             <span>{titulo}</span>
 
-            {menusAbertos[id as keyof typeof menusAbertos] ? (
-                <ChevronDown size={18} />
-            ) : (
-                <ChevronRight size={18} />
-            )}
+            <ChevronDown
+                size={18}
+                className={`transition-transform duration-300 ${menusAbertos[id] ? "rotate-0" : "-rotate-90"
+                    }`}
+            />
         </button>
     );
 
@@ -109,7 +109,7 @@ export function Sidebar({ fechar }: Props) {
                 <Link
                     to="/"
                     onClick={() => fechar?.()}
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 ${pathname === "/"
+                    className={`flex items-center gap-3 rounded-lg px-3 py-2 cursor-default ${pathname === "/"
                         ? "bg-blue-300"
                         : "hover:bg-gray-100"
                         }`}
@@ -124,7 +124,7 @@ export function Sidebar({ fechar }: Props) {
                         {tituloMenu("tecidos", "Tecidos")}
 
                         <div
-                            className={`overflow-hidden transition-all duration-300 cursor-pointer ${menusAbertos.tecidos
+                            className={`overflow-hidden transition-all duration-300 cursor-default ${menusAbertos.tecidos
                                 ? "max-h-40 mt-2 opacity-100"
                                 : "max-h-0 opacity-0"
                                 }`}
@@ -132,7 +132,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/lancamento-tecido"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/lancamento-tecido")}
+                                className={itemMenu("/lancamento-tecido") + " cursor-default"}
                             >
                                 <ClipboardList size={18} />
                                 Lançamento
@@ -141,7 +141,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/testes"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/testes")}
+                                className={itemMenu("/testes") + " cursor-default"}
                             >
                                 <Database size={18} />
                                 Testes
@@ -165,7 +165,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/lancamento-fio"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/lancamento-fio")}
+                                className={itemMenu("/lancamento-fio") + " cursor-default"}
                             >
                                 <ClipboardList size={18} />
                                 Lançamento
@@ -174,7 +174,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/testes-fio"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/testes-fio")}
+                                className={itemMenu("/testes-fio")  + " cursor-default"}
                             >
                                 <Database size={18} />
                                 Testes
@@ -198,7 +198,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/lancamento-alcas"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/lancamento-alcas")}
+                                className={itemMenu("/lancamento-alcas") + " cursor-default"}
                             >
                                 <ClipboardList size={18} />
                                 Lançamento
@@ -207,7 +207,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/testes-alcas"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/testes-alcas")}
+                                className={itemMenu("/testes-alcas") + " cursor-default"}
                             >
                                 <Database size={18} />
                                 Testes
@@ -222,7 +222,7 @@ export function Sidebar({ fechar }: Props) {
                         {tituloMenu("cadarcos", "Cadarços")}
 
                         <div
-                            className={`overflow-hidden transition-all duration-300 ${menusAbertos.cadarcos
+                            className={`overflow-hidden transition-all duration-300 cursor-default ${menusAbertos.cadarcos
                                 ? "max-h-40 mt-2 opacity-100"
                                 : "max-h-0 opacity-0"
                                 }`}
@@ -230,7 +230,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/lancamento-cadarcos"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/lancamento-cadarcos")}
+                                className={itemMenu("/lancamento-cadarcos") + " cursor-default"}
                             >
                                 <ClipboardList size={18} />
                                 Lançamento
@@ -239,7 +239,7 @@ export function Sidebar({ fechar }: Props) {
                             <Link
                                 to="/testes-cadarcos"
                                 onClick={() => fechar?.()}
-                                className={itemMenu("/testes-cadarcos")}
+                                className={itemMenu("/testes-cadarcos")  + " cursor-default"}
                             >
                                 <Database size={18} />
                                 Testes
@@ -254,7 +254,7 @@ export function Sidebar({ fechar }: Props) {
 
                 <button
                     onClick={sair}
-                    className="flex w-full items-center gap-3 rounded-lg px-4 py-2 text-red-600 hover:bg-red-50 cursor-pointer">
+                    className="flex w-full items-center gap-3 rounded-lg px-4 py-2 text-red-600 hover:bg-red-50 cursor-default">
                     <LogOut size={18} />
                     Sair
                 </button>
