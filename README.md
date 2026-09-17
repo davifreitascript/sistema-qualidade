@@ -36,5 +36,3 @@ O objetivo é substituir o processo manual realizado em planilhas, centralizando
 ## Status do projeto
 
 🚧 Em desenvolvimento.
-
-Este projeto está sendo desenvolvido como uma solução interna para digitalização e modernização do processo de controle de qualidade da Alçatec.
