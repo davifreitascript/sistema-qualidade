@@ -1,6 +1,6 @@
-# Sistema de Qualidade - Alçatec
+# Sistema de Qualidade - Nexora Technologies
 
-Sistema web desenvolvido para otimizar o processo de registro e gerenciamento dos ensaios realizados no laboratório de controle de qualidade da Alçatec.
+Sistema web fictício desenvolvido para otimizar o processo de registro e gerenciamento dos ensaios realizados no laboratório de controle de qualidade.
 
 O objetivo é substituir o processo manual realizado em planilhas, centralizando as informações em uma interface intuitiva, responsiva e preparada para futuras integrações com banco de dados e autenticação de usuários.
 
@@ -10,25 +10,21 @@ O objetivo é substituir o processo manual realizado em planilhas, centralizando
 - Geração automática do lote a partir da data
 - Seleção dinâmica de artigos por tipo de tecido
 - Cadastro de informações do ensaio (gramatura, batidas, resistências, etc.)
-- Edição e exclusão de lançamentos
+- Exclusão de lançamentos
 - Busca por lote
 - Exportação dos registros em CSV e PDF
-- Armazenamento local (Local Storage)
+- Armazenamento local (Local Storage) e na nuvem (Supabase)
 - Interface responsiva para desktop e dispositivos móveis
 
 ## Tecnologias utilizadas
 
 - React
 - TypeScript
-- Vite
 - Tailwind CSS
-- jsPDF
-- jsPDF AutoTable
-- Lucide React
 
 ## Objetivos futuros
 
-- Banco de dados PostgreSQL
+- Persistência de dados com PostgreSQL via Supabase ✅
 - API em Node.js
 - Sistema de autenticação e níveis de acesso
 - Dashboard com indicadores de qualidade
