@@ -1,38 +1,39 @@
-# Sistema de Qualidade - Nexora Technologies
+# Quality System - Nexora Technologies
 
-Sistema web fictício desenvolvido para otimizar o processo de registro e gerenciamento dos ensaios realizados no laboratório de controle de qualidade.
+A fictional web-based system developed to streamline the process of recording and managing tests conducted in the quality control laboratory.
 
-O objetivo é substituir o processo manual realizado em planilhas, centralizando as informações em uma interface intuitiva, responsiva e preparada para futuras integrações com banco de dados e autenticação de usuários.
+The goal is to replace the manual process currently handled via spreadsheets by centralizing information within an intuitive, responsive interface designed to support future integrations with databases and user authentication systems.
 
-## Funcionalidades
+## Features
 
-- Cadastro de testes de tecido
-- Geração automática do lote a partir da data
-- Seleção dinâmica de artigos por tipo de tecido
-- Cadastro de informações do ensaio (gramatura, batidas, resistências, etc.)
-- Exclusão de lançamentos
-- Busca por lote
-- Exportação dos registros em CSV e PDF
-- Armazenamento local (Local Storage) e na nuvem (Supabase)
-- Interface responsiva para desktop e dispositivos móveis
+- Fabric test registration
+- Automatic batch generation based on date
+- Dynamic item selection by fabric type
+- Test data entry (basis weight, picks, strength, etc.)
+- Record deletion
+- Batch search
+- Record export to CSV and PDF
+- Local and cloud storage (Supabase)
+- Responsive interface for desktop and mobile devices
 
-## Tecnologias utilizadas
+## Technologies used
 
 - React
 - TypeScript
 - Tailwind CSS
 
-## Objetivos futuros
+## Future goals
 
-- Persistência de dados com PostgreSQL via Supabase ✅
-- API em Node.js
-- Sistema de autenticação e níveis de acesso
-- Dashboard com indicadores de qualidade
-- Cadastro de artigos e parâmetros de referência
-- Aprovação automática dos ensaios
-- Histórico completo dos testes
-- Relatórios avançados
+- Data persistence with PostgreSQL via Supabase ✅
+- Node.js API
+- Authentication and access level system
+- Dashboard with quality indicators
+- Registration of articles and reference parameters
+- Automatic test approval
+- Complete test history
+- Advanced reports
 
-## Status do projeto
 
-🚧 Em desenvolvimento.
+## Project status
+
+🚧 Under development.
