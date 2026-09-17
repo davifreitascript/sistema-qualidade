@@ -118,8 +118,8 @@ export function TabelaCadarcos({
                 <td className="bodyTable">{teste.tear}</td>
                 <td className="bodyTable">{teste.artigo}</td>
                 <td className="bodyTable">{teste.gramatura}</td>
-                <td className="bodyTable">{teste.responsavelAnalise}</td>
-                <td className="bodyTable">{teste.responsavelTeste}</td>
+                <td className="bodyTable">{teste.responsavel_analise}</td>
+                <td className="bodyTable">{teste.responsavel_teste}</td>
 
                 <td className="bodyTable">
                   {teste.sincronizado ? (

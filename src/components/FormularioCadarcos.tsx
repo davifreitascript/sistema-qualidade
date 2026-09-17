@@ -125,7 +125,7 @@ export function FormularioCadarcos({
               className="input"
               name="responsavelAnalise"
               placeholder="Resp. análise"
-              value={form.responsavelAnalise}
+              value={form.responsavel_analise}
               onChange={atualizarCampo}
             />
           </div>
@@ -135,7 +135,7 @@ export function FormularioCadarcos({
               className="input"
               name="responsavelTeste"
               placeholder="Resp. teste"
-              value={form.responsavelTeste}
+              value={form.responsavel_teste}
               onChange={atualizarCampo}
             />
           </div>
