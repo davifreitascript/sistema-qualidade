@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FormTesteFio } from "../types/fios";
 import type { TipoFio } from "../data/tiposFios"
 import { useEffect } from "react";
@@ -5,6 +6,7 @@ import { extrusoras } from "../data/extrusoras";
 import { gerarLotePorData } from "../utils/gerarLote";
 import { obterDataAtual } from "../utils/formatarData"
 import { fiosPorTipo } from "../data/tiposFios";
+import { corFio } from "../data/corFio";
 import { navegarComSetas } from "../utils/navegarComSetas";
 import Select from "react-select";
 
@@ -62,6 +64,11 @@ export function FormularioTesteFio({
     label: item,
   }));
 
+  const corDoFio = corFio.map((item) => ({
+    value: item,
+    label: item
+  }))
+
   const selectStyles = {
     control: (base: any) => ({
       ...base,
@@ -87,7 +94,7 @@ export function FormularioTesteFio({
 
   return (
     <form
-    onKeyDown={navegarComSetas}
+      onKeyDown={navegarComSetas}
       onSubmit={salvarTeste}
       className="md:mt-15 rounded-xl bg-white p-6 shadow">
 
@@ -159,15 +166,31 @@ export function FormularioTesteFio({
             placeholder="Título DNE"
             value={
               opcoesFio.find(
-                (opcao) => opcao.value === form.fio
+                (opcao) => opcao.value === form.tituloDne
               ) || null
             }
             onChange={(opcao) =>
               setForm((prev) => ({
                 ...prev,
-                fio: opcao?.value || "",
+                tituloDne: opcao?.value || "",
               }))
             }
+          />
+        </div>
+
+        <div>
+          <Select
+            options={corDoFio}
+            styles={selectStyles}
+            isSearchable={false}
+            placeholder="Cor do fio"
+            value={ corDoFio.find((opcao) => opcao.value === form.cor) || null }
+            onChange={(opcao) => {
+              setForm((prev) => ({
+                ...prev,
+                corType: opcao?.value || "",
+              }));
+            }}
           />
         </div>
 

@@ -5,8 +5,8 @@ export type FormTesteCadarcos = {
   batidaTrama: string;
   artigo: string;
   gramatura: string;
-  responsavel_analise: string;
-  responsavel_teste: string;
+  responsavelAnalise: string;
+  responsavelTeste: string;
 };
 
 export type TesteCadarcos = FormTesteCadarcos & {
@@ -23,6 +23,6 @@ export const formInicial: FormTesteCadarcos = {
   batidaTrama: "",
   artigo: "",
   gramatura: "",
-  responsavel_analise: "",
-  responsavel_teste: ""
+  responsavelAnalise: "",
+  responsavelTeste: ""
 };

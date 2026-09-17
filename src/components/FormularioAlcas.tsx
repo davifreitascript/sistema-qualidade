@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FormTesteAlcas } from "../types/alcas";
 import { useEffect } from "react";
 import { tiposAlcas } from "../data/tiposAlcas";
@@ -72,18 +73,6 @@ export function FormularioAlcas({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <div className="md:col-span-1 space-y-4 rounded-lg">
-          <SelecaoTeares
-            value={form.tear}
-            onChange={(tear) =>
-              setForm({
-                ...form,
-                tear,
-              })
-            }
-          />
-        </div>
-
         <div className="flex flex-col gap-4">
 
           <div>
@@ -134,7 +123,7 @@ export function FormularioAlcas({
               type="number"
               min="0"
               step="0.01"
-              name="resistencia"
+              name="mediaResistencia"
               placeholder="Média resistência"
               value={form.mediaResistencia}
               onChange={atualizarCampo}
@@ -144,7 +133,7 @@ export function FormularioAlcas({
           <div>
             <input
               className="input"
-              name="responsavel_teste"
+              name="responsavelTeste"
               placeholder="Controlista"
               value={form.responsavelTeste}
               onChange={atualizarCampo}
@@ -160,6 +149,19 @@ export function FormularioAlcas({
             </button>
           </div>
         </div>
+
+        <div className="md:col-span-1 space-y-4 rounded-lg">
+          <SelecaoTeares
+            value={form.tear}
+            onChange={(tear) =>
+              setForm({
+                ...form,
+                tear,
+              })
+            }
+          />
+        </div>
+
       </div>
     </form>
   );

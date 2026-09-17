@@ -157,7 +157,7 @@ export default function Home() {
       </div>
 
       <footer className="m-6 text-center text-sm text-slate-500 select-none md:absolute md:bottom-4 md:left-1/2 md:m-0 md:-translate-x-1/2">
-        © {new Date().getFullYear()} Grupo Procópio
+        © {new Date().getFullYear()} Nexora Technologies
       </footer>
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FormTesteCadarcos } from "../types/cadarcos";
 import { useEffect } from "react";
 import { SelecaoTearesCadarcos } from "./SelecaoTearesCadarcos";
@@ -122,9 +123,9 @@ export function FormularioCadarcos({
           <div>
             <input
               className="input"
-              name="responsavel_analise"
+              name="responsavelAnalise"
               placeholder="Resp. análise"
-              value={form.responsavel_analise}
+              value={form.responsavelAnalise}
               onChange={atualizarCampo}
             />
           </div>
@@ -132,9 +133,9 @@ export function FormularioCadarcos({
           <div>
             <input
               className="input"
-              name="responsavel_teste"
+              name="responsavelTeste"
               placeholder="Resp. teste"
-              value={form.responsavel_teste}
+              value={form.responsavelTeste}
               onChange={atualizarCampo}
             />
           </div>

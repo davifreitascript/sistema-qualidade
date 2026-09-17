@@ -95,9 +95,9 @@ export function Sidebar({ fechar }: Props) {
         <aside className="flex h-screen w-70 flex-col bg-white overflow-y-auto">
 
             <div className="flex flex-col gap-4 p-4 select-none">
-                <h1 className="text-xl font-bold">Alçatec</h1>
+                <h1 className="text-lg font-bold">Nexora Technologies</h1>
 
-                <div className="my-2 text-base md:block hidden">
+                <div className="my-2 text-sm md:block hidden">
                     <p><strong>Data:</strong> {formatarData(hoje)}</p>
 
                     <p><strong>Lote:</strong> {gerarLotePorData(hoje)}</p>

@@ -164,7 +164,7 @@ export default function Login() {
         </form>
 
         <p className="mt-8 text-center text-xs text-slate-400 select-none">
-          © Grupo Procópio
+          © Nexora Technologies
         </p>
       </section>
     </main>

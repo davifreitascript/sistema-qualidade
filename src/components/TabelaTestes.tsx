@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { TesteTecido } from "../types/tecidos";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSV } from "../utils/exportarCSV";
@@ -121,21 +122,21 @@ export function TabelaTestes({
           <thead className="sticky top-0 z-10">
             <tr className="bg-slate-300">
               <th className="headTable">N°</th>
-              <th className="headTable">Data</th>
-              <th className="headTable">Lote</th>
-              <th className="headTable">Tear</th>
-              <th className="headTable">Turma</th>
-              <th className="headTable">Artigo</th>
-              <th className="headTable">Gramatura</th>
-              <th className="headTable">Batida Trama</th>
-              <th className="headTable">Batida Urdume</th>
-              <th className="headTable">Resistência Trama</th>
-              <th className="headTable">Resistência Urdume</th>
-              <th className="headTable">Resistência Reforço</th>
-              <th className="headTable">Responsável Análise</th>
-              <th className="headTable">Responsável Teste</th>
-              <th className="headTable">Status</th>
-              <th className="headTable" colSpan={2}>Ações</th>
+              <th className="headTable">DATA</th>
+              <th className="headTable">LOTE</th>
+              <th className="headTable">TEAR</th>
+              <th className="headTable">TURMA</th>
+              <th className="headTable">ARTIGO</th>
+              <th className="headTable">GRAMATURA</th>
+              <th className="headTable">BATIDA TRAMA</th>
+              <th className="headTable">BATIDA URDUME</th>
+              <th className="headTable">RESISTÊNCIA TRAMA</th>
+              <th className="headTable">RESISTÊNCIA URDUME</th>
+              <th className="headTable">RESISTÊNCIA REFORÇO</th>
+              <th className="headTable">RESPONSÁVEL ANÁLISE</th>
+              <th className="headTable">RESPONSÁVEL TESTE</th>
+              <th className="headTable">STATUS</th>
+              <th className="headTable" colSpan={2}>AÇÕES</th>
             </tr>
           </thead>
 

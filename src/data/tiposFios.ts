@@ -1,26 +1,29 @@
 export const fiosPorTipo = {
   "FIO DOBRADO": [
-    "2450 DEN BC"
+    "2450 DEN",
+    "2700 DEN"
   ],
 
   "FIO FIBRILADO": [
-    "1800 DEN BC"
+    "1350 DEN",
+    "1800 DEN"
   ],
 
   "FIO MULTI": [
-    "930 MT NATURAL"
+    "930 MT"
   ],
 
   "FITA RÁFIA": [
-    "540 DEN BC",
-    "600 DEN BC",
-    "630 DEN BC",
-    "675 DEN BC",
-    "875 DEN BC",
-    "900 DEN BC",
-    "1620 DEN BC",
-    "1860 DEN BC",
-    "2350 DEN BC",
+    "540 DEN",
+    "600 DEN",
+    "630 DEN",
+    "675 DEN",
+    "780 DEN",
+    "875 DEN",
+    "900 DEN",
+    "1620 DEN",
+    "1860 DEN",
+    "2350 DEN",
   ],
 } as const;
 

@@ -58,7 +58,7 @@ export default function Dashboard() {
             </div>
 
             <div className="absolute top-4 right-4 md:block hidden text-xs font-mono select-none text-slate-600">
-                <span>alpha 1.0.1</span>
+                <span>alpha 1.0</span>
             </div>
 
             <div className="flex w-full overflow-x-auto scroll-smooth snap-x snap-mandatory gap-4 px-4 pb-2 select-none md:justify-center md:overflow-visible scrollbar-none">
@@ -104,8 +104,8 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <footer className="mt-6 text-center text-sm select-none md:absolute md:bottom-4 md:left-1/2 md:m-0 md:-translate-x-1/2 text-slate-500">
-                © {new Date().getFullYear()} Grupo Procópio
+            <footer className="mt-6 text-center text-sm select-none absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-500">
+                © {new Date().getFullYear()} Nexora Technologies
             </footer>
 
         </div>

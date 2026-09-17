@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { TesteFio } from "../types/fios";
 import { formatarData } from "../utils/formatarData"
 import { Check, HardDrive, Trash2 } from "lucide-react"
@@ -48,6 +49,7 @@ async function copiarLinha(teste: TesteFio) {
       Extrusora: ${teste.extrusora}
       Turma: ${teste.turma}
       TipoFio: ${teste.tipoFio}
+      TituloDne: ${teste.tituloDne}
       Gramatura: ${teste.gramatura}
       Gramatura: ${teste.resistenciaFio}
       Gramatura: ${teste.tenacidadeFio}
@@ -111,18 +113,19 @@ export function TabelaFios({
           <thead className="sticky top-0 z-50 shadow-sm bg-slate-300 border-slate-300">
             <tr>
               <th className="headTable">N°</th>
-              <th className="headTable">Data</th>
-              <th className="headTable">Lote</th>
-              <th className="headTable">Turma</th>
-              <th className="headTable">Extrusora</th>
-              <th className="headTable">Tipo</th>
-              <th className="headTable">Gramatura</th>
-              <th className="headTable">Resistência</th>
-              <th className="headTable">Tenacidade</th>
-              <th className="headTable">Alongamento</th>
-              <th className="headTable">Responsável</th>
-              <th className="headTable">Status</th>
-              <th className="headTable">Ações</th>
+              <th className="headTable">DATA</th>
+              <th className="headTable">LOTE</th>
+              <th className="headTable">TURMA</th>
+              <th className="headTable">EXTRUSORA</th>
+              <th className="headTable">TIPO</th>
+              <th className="headTable">TÍTULO DNE</th>
+              <th className="headTable">GRAMATURA</th>
+              <th className="headTable">RESISTÊNCIA</th>
+              <th className="headTable">TENACIDADE</th>
+              <th className="headTable">ALONGAMENTO</th>
+              <th className="headTable">RESPONSÁVEL</th>
+              <th className="headTable">STATUS</th>
+              <th className="headTable">AÇÕES</th>
             </tr>
           </thead>
 
@@ -144,6 +147,7 @@ export function TabelaFios({
                   <td className="bodyTable">{teste.turma}</td>
                   <td className="bodyTable">{teste.extrusora}</td>
                   <td className="bodyTable">{teste.tipoFio}</td>
+                  <td className="bodyTable">{teste.tituloDne}</td>
                   <td className="bodyTable">{teste.gramatura}</td>
                   <td className="bodyTable">{teste.resistenciaFio}</td>
                   <td className="bodyTable">{teste.tenacidadeFio}</td>

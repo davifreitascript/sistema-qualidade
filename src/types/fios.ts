@@ -1,16 +1,14 @@
 import type { TipoFio } from "../data/tiposFios";
 
-export function fio() {
-  
-}
-
 export type FormTesteFio = {
   lote: string;
   data: string;
   turma: string;
   extrusora: string;
   tipoFio: TipoFio | "";
-   fio: string;
+  fio: string;
+  tituloDne: string;
+  cor: string;
   gramatura: string;
   resistenciaFio: string;
   tenacidadeFio: string;
@@ -31,7 +29,9 @@ export const formInicialFio: FormTesteFio = {
   turma: "",
   extrusora: "",
   tipoFio: "",
-   fio: "",
+  fio: "",
+  tituloDne: "",
+  cor: "",
   gramatura: "",
   resistenciaFio: "",
   tenacidadeFio: "",

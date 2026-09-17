@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { TesteAlcas } from "../types/alcas";
 import { formatarData } from "../utils/formatarData";
 import { exportarCSVAlcas } from "../utils/exportarCSVAlcas";
@@ -67,6 +68,7 @@ export function TabelaAlcas({
       Artigo: ${teste.artigo}
       Gramatura: ${teste.gramatura}
       Batida Trama: ${teste.batidaTrama}
+      Média Resistência: ${teste.mediaResistencia}
       Resp. Teste: ${teste.responsavelTeste}
     `.trim();
 
@@ -116,15 +118,16 @@ export function TabelaAlcas({
           <thead className="sticky top-0 z-10">
             <tr className="bg-slate-300">
               <th className="headTable">N°</th>
-              <th className="headTable">Data</th>
-              <th className="headTable">Lote</th>
-              <th className="headTable">Tear</th>
-              <th className="headTable">Artigo</th>
-              <th className="headTable">Gramatura</th>
-              <th className="headTable">Batida Trama</th>
-              <th className="headTable">Responsável Teste</th>
-              <th className="headTable">Status</th>
-              <th className="headTable" colSpan={2}>Ações</th>
+              <th className="headTable">DATA</th>
+              <th className="headTable">LOTE</th>
+              <th className="headTable">TEAR</th>
+              <th className="headTable">ARTIGO</th>
+              <th className="headTable">GRAMATURA</th>
+              <th className="headTable">BATIDA TRAMA</th>
+              <th className="headTable">MÉDIA RESISTÊNCIA</th>
+              <th className="headTable">RESPONSÁVEL TESTE</th>
+              <th className="headTable">STATUS</th>
+              <th className="headTable" colSpan={2}>AÇÕES</th>
             </tr>
           </thead>
 
@@ -138,6 +141,7 @@ export function TabelaAlcas({
                 <td className="bodyTable">{teste.artigo}</td>
                 <td className="bodyTable">{teste.gramatura}</td>
                 <td className="bodyTable">{teste.batidaTrama}</td>
+                <td className="bodyTable">{teste.mediaResistencia}</td>
                 <td className="bodyTable">{teste.responsavelTeste}</td>
 
                 <td className="bodyTable">
