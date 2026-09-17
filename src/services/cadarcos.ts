@@ -35,8 +35,8 @@ function converterTesteDoBanco(teste: TesteBanco): TesteCadarcos {
         artigo: teste.artigo,
         batidaTrama: teste.batidaTrama,
         gramatura: String(teste.gramatura ?? ""),
-        responsavel_analise: teste.responsavel_analise,
-        responsavel_teste: teste.responsavel_teste,
+        responsavelAnalise: teste.responsavel_analise,
+        responsavelTeste: teste.responsavel_teste,
         sincronizado: true,
     };
 }
@@ -58,8 +58,8 @@ export async function criarTeste(teste: TesteCadarcos): Promise<TesteCadarcos> {
             tear: teste.tear,
             artigo: teste.artigo,
             gramatura: numeroOuNull(teste.gramatura),
-            responsavel_analise: teste.responsavel_analise,
-            responsavel_teste: teste.responsavel_teste,
+            responsavel_analise: teste.responsavelAnalise,
+            responsavel_teste: teste.responsavelTeste,
         })
         .select()
         .single();
@@ -95,8 +95,8 @@ export async function sincronizarTestes(testes: TesteCadarcos[]): Promise<number
                 tear: teste.tear,
                 artigo: teste.artigo,
                 gramatura: numeroOuNull(teste.gramatura),
-                responsavel_analise: teste.responsavel_analise,
-                responsavel_teste: teste.responsavel_teste,
+                responsavel_analise: teste.responsavelAnalise,
+                responsavel_teste: teste.responsavelTeste,
                 criado_por: usuarioData.user.id,
             });
 
@@ -179,8 +179,9 @@ export async function excluirTeste(
     if (sincronizado) {
         try {
             await excluirTesteBanco(uuid);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
-
+            // tratamento de erro
         }
     }
 

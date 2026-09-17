@@ -205,8 +205,9 @@ export async function excluirTeste(
     if (sincronizado) {
         try {
             await excluirTesteBanco(uuid);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
-
+            // tratamento de erro
         }
     }
 
